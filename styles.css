@@ -38,7 +38,7 @@
 [hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
 body { margin: 0; }
-html[data-intro-pending] { background: var(--paper); }
+html[data-intro-pending] { background: #151321; }
 html[data-intro-pending] body > :not(dialog[open]) { visibility: hidden; }
 img { display: block; max-width: 100%; }
 a { color: inherit; }

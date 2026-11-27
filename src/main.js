@@ -3,7 +3,9 @@ import { mountReadingProgress } from "./progress.js";
 import { mountDeck } from "./deck.js";
 
 const invitation = document.documentElement;
-const preview = invitation.hasAttribute("data-wedding-media")
+const hasMedia = invitation.hasAttribute("data-wedding-media");
+const initialIntro = hasMedia && !location.hash;
+const preview = hasMedia
   ? await import("../private-preview/preview.js").catch(() => null)
   : null;
 
@@ -12,6 +14,5 @@ const audio = new Audio();
 const deck = mountDeck(preview?.tracks, audio);
 mountAlbum({ onChapter: deck.select, onOpen: deck.setBookOpen, tracks: preview?.tracks });
 mountReadingProgress();
-const initialIntro = invitation.hasAttribute("data-intro-pending");
 if (preview) preview.mount({ audio, deck, initialIntro });
 else invitation.removeAttribute("data-intro-pending");
