@@ -100,10 +100,6 @@ export const mountAlbum = ({ onChapter, onOpen }) => {
 
   const links = chapters.map(createIndexLink);
   const cards = chapters.map(createChapter);
-  const tracklist = index.closest("details");
-  if (tracklist && matchMedia("(max-width: 720px), (pointer: coarse) and (max-aspect-ratio: 4/5)").matches) {
-    tracklist.open = false;
-  }
   index.append(...links);
   container.append(...cards);
 
