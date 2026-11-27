@@ -185,18 +185,18 @@ html[data-opening-scene] .opening-scene {
 .cover__couple span, .back-cover__couple span { color: #e3b978; }
 .cover__date { display: grid; gap: 0.1rem; font-size: clamp(0.82rem, 1.4vw, 1.05rem); }
 .cover__date span { color: #ecd3c9; font: 600 0.91rem/1.15 var(--display); }
-.cover__actions { display: flex; flex-wrap: wrap; gap: 0.25rem 1.15rem; }
-.cover__entry, .cover__album-link {
+.cover__entry {
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
-  font: 600 1.12rem/1.15 var(--display);
+  padding: 0.55rem 0.95rem;
+  background: var(--paper);
+  color: var(--ink);
+  font: 800 1.12rem/1.15 var(--display);
+  text-decoration: none;
 }
-.cover__entry { padding: 0.55rem 0.95rem; background: var(--paper); color: var(--ink); font-weight: 800; text-decoration: none; }
 .cover__entry:hover { background: #efd3c7; }
 .cover__entry:focus-visible { outline-color: var(--paper); }
-.cover__album-link { text-underline-offset: 0.2em; }
-.cover__actions .scene-replay-entry { color: inherit; }
 
 .album-section {
   --edge-walk-height: clamp(1.85rem, 4vw, 3.3rem);

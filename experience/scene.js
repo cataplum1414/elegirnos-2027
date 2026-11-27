@@ -78,13 +78,6 @@ export const mount = ({ audio, deck }) => {
   style.rel = "stylesheet";
   style.href = asset("scene.css");
 
-  const opener = document.createElement("button");
-  opener.type = "button";
-  opener.className = "scene-replay-entry";
-  opener.textContent = "Ver la escena";
-  opener.hidden = true;
-  document.querySelector(".cover__actions").append(opener);
-
   const dialog = document.createElement("dialog");
   dialog.className = "chase";
   dialog.setAttribute("aria-labelledby", "chase-title");
@@ -310,7 +303,6 @@ export const mount = ({ audio, deck }) => {
     launch();
   });
   window.addEventListener("hashchange", () => { if (entryActive) cancelEntry(); });
-  opener.addEventListener("click", () => presentEntry({ focus: true }));
   const moveScene = direction => {
     const target = sceneStep(elapsed, direction);
     if (!dialog.open || target === null) return;
@@ -357,7 +349,6 @@ export const mount = ({ audio, deck }) => {
   });
 
   style.addEventListener("load", () => {
-    opener.hidden = false;
     if (root.hasAttribute("data-opening-scene")) presentEntry();
     void firstFrame.decode().catch(() => { firstFrame.hidden = true; }).then(() => {
       frameReady = true;
