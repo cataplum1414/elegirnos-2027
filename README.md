@@ -1,6 +1,6 @@
 # Los muchachos se les casan — Jeisson & Ornella
 
-Invitación de boda en español colombiano. Abre la funda de vinilo para hojear los ocho capítulos del cancionero, organizados en lados A y B. Dale vuelta al disco para ver los detalles de la boda en la contraportada.
+Invitación de boda en español colombiano, diseñada como un estuche de CD de los años noventa. Abre el estuche para hojear los ocho capítulos del cancionero, organizados en lados A y B. Dale vuelta al disco para ver los detalles de la boda en la contraportada.
 
 ## Enlace público
 
@@ -25,7 +25,7 @@ Si la copia contiene material de revisión, ejecuta `node private-preview/serve.
 - `styles.css`: identidad visual, responsive, foco visible y movimiento reducido.
 - `src/data/chapters.js`: catálogo musical y textos narrativos.
 - `src/album.js`: apertura de la funda y navegación accesible por el cancionero.
-- `src/deck.js`: estado del tocadiscos y controles de las pistas en la edición privada.
+- `src/deck.js`: animación del CD y controles de las pistas en la edición privada.
 - `src/progress.js`: progreso de lectura.
 - `src/main.js`: inicialización e interacción de portada.
 
@@ -33,4 +33,4 @@ La edición pública enlaza a búsquedas musicales en Spotify. En la edición pr
 
 El orden musical y los textos narrativos son una propuesta editorial pendiente de validación por la pareja antes de la publicación definitiva.
 
-La fotografía de Bogotá tiene sus créditos y licencia en el pie de página. Las fuentes Barlow Condensed y Source Serif 4 se sirven desde `assets/fonts/` con sus licencias OFL.
+La portada y el arte del cancionero se sirven desde `assets/`. La fotografía de Bogotá tiene sus créditos y licencia en la contraportada. Las fuentes Barlow Condensed y Source Serif 4 se sirven desde `assets/fonts/` con sus licencias OFL.

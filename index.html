@@ -45,18 +45,16 @@
       <div class="record-edition">
         <section class="cover" id="portada" aria-labelledby="cover-title">
           <div class="cover__object">
-            <span class="cover__record" aria-hidden="true"></span>
             <div class="cover__copy">
-              <span class="cover__spine" aria-hidden="true">Jeisson &amp; Ornella</span>
-              <p class="cover__edition">Invitación de boda</p>
+              <p class="cover__edition">Jeisson &amp; Ornella · Invitación de boda</p>
               <h1 class="cover__title" id="cover-title">Los muchachos <span>se les casan</span></h1>
-              <p class="cover__duo">Jeisson <span>&amp;</span> Ornella</p>
               <p class="cover__date"><span>Fecha tentativa</span> Mayo o junio de 2027</p>
               <div class="cover__actions">
                 <a class="cover__entry" href="#historia" aria-controls="historia">Abrir el disco</a>
                 <a class="cover__album-link" href="#celebracion">Detalles de la boda</a>
               </div>
             </div>
+            <span class="cover__spine" aria-hidden="true">Los muchachos se les casan</span>
           </div>
         </section>
 
@@ -67,16 +65,11 @@
           </div>
           <div class="album-layout">
             <div class="listening-station">
-              <p class="record-label">Los muchachos se les casan <span>Jeisson &amp; Ornella</span></p>
-              <div class="turntable" id="turntable" aria-hidden="true">
-                <div class="turntable__plate">
-                  <div class="turntable__disc">
-                    <span class="turntable__label">J&amp;O<small id="record-side">Lado A</small></span>
-                  </div>
+              <div class="cd-tray" id="disc-tray" aria-hidden="true">
+                <div class="cd-tray__disc">
+                  <div class="cd-tray__label">Los muchachos<br>se les casan</div>
+                  <small id="record-side">Lado A</small>
                 </div>
-                <div class="turntable__pivot"></div>
-                <span class="turntable__arm"></span>
-                <span class="turntable__light"></span>
               </div>
               <div class="deck-controls" id="deck-controls" hidden>
                 <button type="button" id="deck-play">Activar música</button>
@@ -90,24 +83,27 @@
               </details>
             </div>
             <div class="album-reader">
-              <h2 class="album-reader__title" id="album-title" tabindex="-1">Cancionero</h2>
-              <p class="chapter-status" id="chapter-status" role="status" aria-live="polite"></p>
-              <div class="chapters" id="chapters"></div>
-              <nav class="chapter-controls" aria-label="Páginas del libreto">
-                <a class="chapter-control" id="chapter-previous" href="#capitulo-1" hidden>
-                  <span aria-hidden="true">←</span> Página anterior
-                </a>
-                <a class="chapter-control chapter-control--next" id="chapter-next" href="#capitulo-2" hidden>
-                  Página siguiente <span aria-hidden="true">→</span>
-                </a>
-                <a class="chapter-control chapter-control--next" id="chapter-back-cover" href="#celebracion" hidden>
-                  Dar vuelta al disco <span aria-hidden="true">↻</span>
-                </a>
-              </nav>
+              <div class="booklet">
+                <header class="booklet__heading">
+                  <h2 class="album-reader__title" id="album-title" tabindex="-1">Cancionero</h2>
+                  <p class="chapter-status" id="chapter-status" role="status" aria-live="polite"></p>
+                </header>
+                <div class="chapters" id="chapters"></div>
+                <nav class="chapter-controls" aria-label="Páginas del libreto">
+                  <a class="chapter-control" id="chapter-previous" href="#capitulo-1" hidden>
+                    <span aria-hidden="true">←</span> Página anterior
+                  </a>
+                  <a class="chapter-control chapter-control--next" id="chapter-next" href="#capitulo-2" hidden>
+                    Página siguiente <span aria-hidden="true">→</span>
+                  </a>
+                  <a class="chapter-control chapter-control--next" id="chapter-back-cover" href="#celebracion" hidden>
+                    Dar vuelta al disco <span aria-hidden="true">↻</span>
+                  </a>
+                </nav>
+              </div>
             </div>
             <div class="album-flap" aria-hidden="true"><span>Los muchachos se les casan</span></div>
           </div>
-
         </section>
 
         <section class="back-cover" id="celebracion" aria-labelledby="celebration-title" hidden>

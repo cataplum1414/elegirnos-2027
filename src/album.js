@@ -37,7 +37,7 @@ const createChapter = (chapter, index) => {
   article.setAttribute("aria-labelledby", `chapter-title-${number}`);
   article.hidden = number !== 1;
 
-  const art = createElement("div", "chapter-art");
+  const art = createElement("figure", "chapter-art");
   art.dataset.side = chapter.side.slice(-1);
   if (number === 8) {
     const image = document.createElement("img");
@@ -46,7 +46,7 @@ const createChapter = (chapter, index) => {
     image.loading = "lazy";
     art.append(image);
   }
-  const cut = createElement("span", "chapter-art__caption", `${art.dataset.side}${(index % 4) + 1}`);
+  const cut = createElement("figcaption", "chapter-art__caption", `${art.dataset.side}${(index % 4) + 1}`);
   cut.setAttribute("aria-hidden", "true");
   art.append(cut);
 
@@ -173,7 +173,7 @@ export const mountAlbum = ({ onChapter, onOpen }) => {
     event.preventDefault();
     activate(requestedIndex, { updateHash: true });
     cards[activeIndex].querySelector("h3").focus({ preventScroll: true });
-    status.scrollIntoView({ block: index.contains(link) ? "start" : "nearest" });
+    status.scrollIntoView({ block: "nearest" });
   };
 
   index.addEventListener("click", navigateFromLink);

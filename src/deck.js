@@ -1,5 +1,5 @@
 export const mountDeck = (tracks = {}, audio = new Audio()) => {
-  const table = document.getElementById("turntable");
+  const tray = document.getElementById("disc-tray");
   const side = document.getElementById("record-side");
   const controls = document.getElementById("deck-controls");
   const play = document.getElementById("deck-play");
@@ -25,9 +25,7 @@ export const mountDeck = (tracks = {}, audio = new Audio()) => {
     range.disabled = !hasDuration || !audio.seekable.length || audio.seekable.end(audio.seekable.length - 1) === 0;
     range.value = String(Math.round(progress * 1000));
     range.setAttribute("aria-valuetext", `${Math.round(progress * 100)} % de la canción`);
-    table.style.setProperty("--tracking", `${progress * 30}deg`);
-    table.toggleAttribute("data-playing", playing);
-    table.toggleAttribute("data-cued", !intro && (playing || (Boolean(source) && audio.currentTime > 0 && !audio.ended)));
+    tray.toggleAttribute("data-playing", playing);
     mute.setAttribute("aria-pressed", String(audio.muted));
     play.textContent = !enabled ? "Activar música" : !source ? "Desactivar música" : playing ? "Pausar" : "Reproducir";
   };
