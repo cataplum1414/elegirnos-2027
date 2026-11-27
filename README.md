@@ -1,4 +1,4 @@
-# ELEGIRNOS — Ornella & Jeisson
+# ELEGIRNOS — Jeisson & Ornella
 
 Invitación web estática en español colombiano, concebida como un álbum de ocho capítulos. Esta primera iteración prioriza la portada, la navegación narrativa y el acceso directo a la información del evento.
 
@@ -19,7 +19,7 @@ Abre `http://localhost:8000`. El servidor es necesario para cargar los módulos 
 ## Estructura
 
 - `index.html`: estructura y contenido de portada, capítulos, celebración y regalos.
-- `favicon.svg`: monograma O&J para la pestaña del navegador.
+- `favicon.svg`: monograma J&O para la pestaña del navegador.
 - `styles.css`: identidad visual, responsive, foco visible y movimiento reducido.
 - `src/data/chapters.js`: catálogo musical y textos narrativos.
 - `src/album.js`: generación y navegación accesible de capítulos.

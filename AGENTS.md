@@ -1,8 +1,8 @@
-# ELEGIRNOS — Ornella & Jeisson
+# ELEGIRNOS — Jeisson & Ornella
 ## Objetivo
 Invitación web matrimonial interactiva, mayo o junio de 2027 (fecha exacta, lugar, hora y vestimenta pendientes). Español colombiano. Experiencia de álbum conceptual, no plantilla matrimonial convencional.
 ## Dirección artística
-Negro obsidiana #101012, borgoña #590F24, grafito, plata y marfil #F2EFE7. Tipografía editorial, fotografía real analógica 35 mm, estética cinematográfica urbana y alternativa. Sin pastel, flores ni corazones decorativos. Monograma O&J, vinilo, lados A/B. Frase: Coincidir fue el comienzo. Elegirnos, nuestra decisión.
+Negro obsidiana #101012, borgoña #590F24, grafito, plata y marfil #F2EFE7. Tipografía editorial, fotografía real analógica 35 mm, estética cinematográfica urbana y alternativa. Sin pastel, flores ni corazones decorativos. Monograma J&O, vinilo, lados A/B. Frase: Coincidir fue el comienzo. Elegirnos, nuestra decisión.
 ## Narrativa y orden musical
 1. Antes de ti — Diamante Eléctrico: prólogo, caminos individuales.
 2. Coincidir — Macaco: encuentro.
