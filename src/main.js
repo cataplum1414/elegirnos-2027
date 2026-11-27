@@ -1,15 +1,14 @@
 import { mountAlbum } from "./album.js";
 import { mountReadingProgress } from "./progress.js";
+import { mountDeck } from "./deck.js";
 
-mountAlbum();
+const isLocalPreview = ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname)
+  && new URLSearchParams(location.search).has("previa");
+const preview = isLocalPreview
+  ? await import("../private-preview/preview.js").catch(() => null)
+  : null;
+
+const deck = mountDeck(preview?.tracks);
+mountAlbum({ onChapter: deck.select });
 mountReadingProgress();
-
-const recordLink = document.querySelector(".record-link");
-if (recordLink) {
-  recordLink.addEventListener("click", () => {
-    recordLink.classList.remove("is-turning");
-    void recordLink.offsetWidth;
-    recordLink.classList.add("is-turning");
-    window.setTimeout(() => recordLink.classList.remove("is-turning"), 1200);
-  });
-}
+preview?.mount({ pauseAlbum: deck.pause });

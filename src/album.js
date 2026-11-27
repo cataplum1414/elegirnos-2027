@@ -38,15 +38,24 @@ const createChapter = (chapter, index) => {
   article.hidden = number !== 1;
 
   const art = createElement("div", "chapter-art");
-  art.dataset.chapter = String(number);
-  art.setAttribute("aria-hidden", "true");
-  art.append(createElement("span", "chapter-art__caption", `${chapter.side} · corte ${String(number).padStart(2, "0")}`));
+  art.dataset.side = chapter.side.slice(-1);
+  if (number === 8) {
+    const image = document.createElement("img");
+    image.src = "./assets/bogota.jpg";
+    image.alt = "El centro de Bogotá de noche, bajo la lluvia";
+    image.loading = "lazy";
+    art.append(image);
+  }
+  const cut = createElement("span", "chapter-art__caption", `${art.dataset.side}${(index % 4) + 1}`);
+  cut.setAttribute("aria-hidden", "true");
+  art.append(cut);
 
   const story = createElement("div", "chapter-story");
   story.append(createElement("p", "chapter-label", chapter.chapter));
 
   const title = createElement("h3", "chapter-title", chapter.title);
   title.id = `chapter-title-${number}`;
+  title.tabIndex = -1;
   story.append(title);
   story.append(createElement("p", "chapter-artist", chapter.artist));
   story.append(createElement("p", "chapter-copy", chapter.story));
@@ -63,12 +72,13 @@ const createIndexLink = (chapter, index) => {
   link.setAttribute("aria-label", `Capítulo ${number}: ${chapter.title}, ${chapter.chapter}`);
   if (index === 0) link.setAttribute("aria-current", "step");
 
-  link.append(createElement("span", "chapter-index__number", String(number).padStart(2, "0")));
+  const cut = `${chapter.side.slice(-1)}${(index % 4) + 1}`;
+  link.append(createElement("span", "chapter-index__number", cut));
   link.append(createElement("span", "chapter-index__title", chapter.title));
   return link;
 };
 
-export const mountAlbum = () => {
+export const mountAlbum = ({ onChapter }) => {
   const index = document.getElementById("chapter-index");
   const container = document.getElementById("chapters");
   const status = document.getElementById("chapter-status");
@@ -82,10 +92,11 @@ export const mountAlbum = () => {
   index.append(...links);
   container.append(...cards);
 
-  let activeIndex = 0;
+  let activeIndex = -1;
 
   const activate = (requestedIndex, { updateHash = false, animate = true } = {}) => {
     const nextIndex = Math.max(0, Math.min(chapters.length - 1, requestedIndex));
+    if (nextIndex === activeIndex) return;
     activeIndex = nextIndex;
 
     cards.forEach((card, cardIndex) => {
@@ -94,10 +105,7 @@ export const mountAlbum = () => {
     });
 
     const activeCard = cards[activeIndex];
-    if (animate) {
-      void activeCard.offsetWidth;
-      activeCard.classList.add("is-entering");
-    }
+    if (animate) activeCard.classList.add("is-entering");
 
     links.forEach((link, linkIndex) => {
       if (linkIndex === activeIndex) {
@@ -109,24 +117,27 @@ export const mountAlbum = () => {
 
     const chapter = chapters[activeIndex];
     const label = String(activeIndex + 1).padStart(2, "0");
-    status.textContent = `${chapter.side} · capítulo ${label} de ${String(chapters.length).padStart(2, "0")}`;
+    status.textContent = `${chapter.side} · página ${label} de ${String(chapters.length).padStart(2, "0")}`;
 
     previous.href = `#capitulo-${Math.max(1, activeIndex)}`;
     previous.hidden = activeIndex === 0;
     next.href = `#capitulo-${Math.min(chapters.length, activeIndex + 2)}`;
     next.hidden = activeIndex === chapters.length - 1;
 
-    if (updateHash) history.replaceState(null, "", `#capitulo-${activeIndex + 1}`);
+    if (updateHash) history.pushState(null, "", `#capitulo-${activeIndex + 1}`);
+    onChapter(chapter, activeIndex + 1);
   };
 
   const navigateFromLink = (event) => {
     const link = event.target.closest('a[href^="#capitulo-"]');
-    if (!link) return;
+    if (!link || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
 
     const requestedIndex = Number(link.getAttribute("href").slice("#capitulo-".length)) - 1;
     if (!Number.isInteger(requestedIndex) || requestedIndex < 0 || requestedIndex >= chapters.length) return;
     event.preventDefault();
     activate(requestedIndex, { updateHash: true });
+    cards[activeIndex].querySelector("h3").focus({ preventScroll: true });
+    if (index.contains(link)) status.scrollIntoView({ block: "start" });
   };
 
   index.addEventListener("click", navigateFromLink);
@@ -149,15 +160,18 @@ export const mountAlbum = () => {
     links[destination].focus();
   });
 
-  const initialChapter = window.location.hash.match(/^#capitulo-(\d+)$/);
-  if (initialChapter) {
-    const requestedIndex = Number(initialChapter[1]) - 1;
-    if (requestedIndex >= 0 && requestedIndex < chapters.length) {
-      activate(requestedIndex, { animate: false });
-      requestAnimationFrame(() => cards[requestedIndex].scrollIntoView({ block: "center" }));
-      return;
-    }
-  }
+  const openHash = () => {
+    const match = location.hash.match(/^#capitulo-(\d+)$/);
+    const requestedIndex = Number(match?.[1]) - 1;
+    if (!Number.isInteger(requestedIndex) || requestedIndex < 0 || requestedIndex >= chapters.length) return false;
+    activate(requestedIndex, { animate: false });
+    return true;
+  };
 
-  activate(0, { animate: false });
+  if (openHash()) {
+    requestAnimationFrame(() => status.scrollIntoView({ block: "start" }));
+  } else {
+    activate(0, { animate: false });
+  }
+  window.addEventListener("hashchange", openHash);
 };

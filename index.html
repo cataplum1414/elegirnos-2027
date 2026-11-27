@@ -28,9 +28,7 @@
     </div>
 
     <header class="site-header">
-      <a class="monogram" href="#portada" aria-label="Elegirnos, volver a la portada">
-        <span>J</span><span class="monogram__slash" aria-hidden="true">/</span><span>O</span>
-      </a>
+      <a class="monogram" href="#portada" aria-label="Elegirnos, volver a la portada">J&amp;O</a>
       <nav class="site-nav" aria-label="Navegación principal">
         <a href="#historia">Historia</a>
         <a href="#celebracion">Boda</a>
@@ -42,56 +40,61 @@
     <main id="contenido">
       <section class="cover" id="portada" aria-labelledby="cover-title">
         <div class="cover__copy">
-          <p class="cover__edition">Una invitación · 2027</p>
-          <h1 class="cover__title" id="cover-title">Elegirnos<span>.</span></h1>
-          <p class="cover__names">Jeisson <span>&amp;</span> Ornella</p>
+          <p class="cover__edition">Invitación de boda</p>
+          <h1 class="cover__title" id="cover-title">Elegirnos</h1>
+          <p class="cover__names">Jeisson &amp; Ornella</p>
           <p class="cover__line">Coincidir fue el comienzo.<br>Elegirnos, nuestra decisión.</p>
           <p class="cover__date">Fecha tentativa · mayo o junio de 2027</p>
-          <a class="text-link cover__entry" href="#historia">
-            Abrir el álbum
-            <svg aria-hidden="true" viewBox="0 0 20 12" width="20" height="12">
-              <path d="M1 6h17M13 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.3" />
-            </svg>
-          </a>
+          <a class="cover__entry" href="#historia">Abrir el álbum <span aria-hidden="true">↘</span></a>
         </div>
 
-        <div class="cover__artwork">
-          <span class="cover__spine cover__spine--top" aria-hidden="true">J&amp;O</span>
-          <a class="record-link" href="#historia" aria-label="Abrir el álbum de ocho capítulos">
-            <span class="record" aria-hidden="true">
-              <span class="record__label"><span>J&amp;O</span></span>
-              <span class="record__hole"></span>
-            </span>
-            <span class="sr-only">Abrir el álbum</span>
-          </a>
-          <span class="cover__spine cover__spine--bottom" aria-hidden="true">LADO A — LADO B</span>
-        </div>
-        <p class="cover__edge-note" aria-hidden="true">Coincidir fue el comienzo</p>
+        <figure class="cover__artwork">
+          <img src="./assets/turntable.jpg" alt="Un disco de vinilo junto a un tocadiscos" width="4896" height="3264" fetchpriority="high">
+          <figcaption>Lados A y B <span>Edición 2027</span></figcaption>
+        </figure>
       </section>
 
       <section class="album-section section-wrap" id="historia" aria-labelledby="album-title">
         <div class="section-heading">
           <div>
-            <p class="section-kicker">Lado A / Lado B</p>
-            <h2 id="album-title">Ocho canciones.<br>Una historia.</h2>
+            <h2 id="album-title">El álbum</h2>
           </div>
-          <p class="section-heading__note">Un recorrido por los capítulos que nos trajeron hasta aquí.</p>
         </div>
 
         <div class="album-layout">
-          <nav class="chapter-index" id="chapter-index" aria-label="Índice de los ocho capítulos"></nav>
+          <div class="listening-station">
+            <div class="turntable" id="turntable" aria-hidden="true">
+              <div class="turntable__plate">
+                <div class="turntable__disc">
+                  <span class="turntable__label">J&amp;O<small id="record-side">Lado A</small></span>
+                </div>
+              </div>
+              <div class="turntable__pivot"></div>
+              <span class="turntable__arm"></span>
+              <span class="turntable__light"></span>
+            </div>
+            <div class="deck-controls" id="deck-controls" hidden>
+              <button type="button" id="deck-play">Activar música</button>
+              <button type="button" id="deck-mute" aria-pressed="false">Silencio</button>
+              <input id="deck-position" type="range" min="0" max="1000" value="0" aria-label="Posición en la canción" disabled>
+              <p id="deck-status" class="deck-status" role="status"></p>
+            </div>
+            <details class="tracklist" open>
+              <summary>Lista de canciones</summary>
+              <nav class="chapter-index" id="chapter-index" aria-label="Índice de los ocho capítulos"></nav>
+            </details>
+          </div>
           <div class="album-reader">
             <p class="chapter-status" id="chapter-status" role="status" aria-live="polite"></p>
             <div class="chapters" id="chapters"></div>
-            <div class="chapter-controls" aria-label="Navegación entre capítulos">
-              <a class="chapter-control chapter-control--previous" id="chapter-previous" href="#capitulo-1">
-                <span aria-hidden="true">←</span> Anterior
+            <nav class="chapter-controls" aria-label="Páginas del libreto">
+              <a class="chapter-control" id="chapter-previous" href="#capitulo-1" hidden>
+                <span aria-hidden="true">←</span> Página anterior
               </a>
-              <a class="chapter-control chapter-control--next" id="chapter-next" href="#capitulo-2">
-                Siguiente <span aria-hidden="true">→</span>
+              <a class="chapter-control chapter-control--next" id="chapter-next" href="#capitulo-2" hidden>
+                Página siguiente <span aria-hidden="true">→</span>
               </a>
-            </div>
-            <p class="album-note">Cada canción se abre en Spotify solo si quieres escucharla.</p>
+            </nav>
           </div>
         </div>
 
@@ -152,7 +155,11 @@
 
     <footer class="site-footer">
       <a class="footer-mark" href="#portada">Jeisson <span>&amp;</span> Ornella</a>
-      <p>2027</p>
+      <details class="photo-credits">
+        <summary>Créditos de imágenes</summary>
+        <p><a href="https://commons.wikimedia.org/wiki/File:Top_view_of_a_turntable_(Unsplash).jpg">Tocadiscos, Mink Mingle</a> · <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+        <p><a href="https://commons.wikimedia.org/wiki/File:Lluvia_en_el_Centro_Internacional_de_Bogot%C3%A1_por_la_noche.JPG">Bogotá, Peter Angritt</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Recorte en pantalla.</p>
+      </details>
       <a class="footer-top" href="#portada">Volver a la portada <span aria-hidden="true">↑</span></a>
     </footer>
   </body>
