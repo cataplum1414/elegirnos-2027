@@ -13,15 +13,20 @@
         && new URLSearchParams(location.search).has("previa");
       if (localPreview || invitation.dataset.invitationEdition === "private") {
         invitation.dataset.weddingMedia = "";
-        if (!location.hash) {
+        if (!location.hash || location.hash === "#portada") {
           invitation.dataset.openingScene = "";
-          setTimeout(() => invitation.removeAttribute("data-opening-scene"), 10000);
+          window.addEventListener("error", event => {
+            if (event.target?.id === "invitation-entry") invitation.removeAttribute("data-opening-scene");
+          }, true);
+          window.addEventListener("click", event => {
+            if (event.target?.id === "opening-skip") invitation.dataset.openingSkip = "";
+          }, true);
         }
       }
     </script>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <link rel="stylesheet" href="./styles.css">
-    <script type="module" src="./src/main.js"></script>
+    <script type="module" id="invitation-entry" src="./src/main.js"></script>
     <noscript>
       <style>
         #celebracion[hidden] { display: block !important; }
@@ -32,7 +37,7 @@
   <body>
     <div class="opening-scene">
       <p role="status">Preparando la escena de Jeisson y Ornella…</p>
-      <button type="button" id="opening-skip">Ir al estuche</button>
+      <button type="button" id="opening-skip">Ir al sobre</button>
     </div>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
 

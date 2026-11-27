@@ -14,10 +14,13 @@ mountReadingProgress();
 
 if (hasMedia) {
   const releaseOpening = () => invitation.removeAttribute("data-opening-scene");
-  document.getElementById("opening-skip")?.addEventListener("click", () => {
-    releaseOpening();
-    document.querySelector(".cover__entry")?.focus({ preventScroll: true });
-  }, { once: true });
+  const skipOpening = new Promise(resolve => {
+    if (invitation.hasAttribute("data-opening-skip")) {
+      resolve("skip");
+      return;
+    }
+    document.getElementById("opening-skip")?.addEventListener("click", () => resolve("skip"), { once: true });
+  });
   if (invitation.hasAttribute("data-opening-scene")) {
     window.addEventListener("hashchange", releaseOpening, { once: true });
   }
@@ -26,7 +29,7 @@ if (hasMedia) {
     Object.assign(tracks, preview.tracks);
     album?.updateTrackLinks(tracks);
     deck.updateTracks();
-    preview.mount({ audio, deck });
+    preview.mount({ audio, deck, skipOpening });
   } else {
     releaseOpening();
   }
