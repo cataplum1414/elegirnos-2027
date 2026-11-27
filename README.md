@@ -1,6 +1,6 @@
 # Los muchachos se les casan — Jeisson & Ornella
 
-Invitación de boda en español colombiano, diseñada como un estuche de CD de los años noventa. Abre el estuche para hojear los ocho capítulos del cancionero, organizados en lados A y B. Dale vuelta al disco para ver los detalles de la boda en la contraportada.
+Invitación de boda en español colombiano, diseñada como un estuche de CD de los años noventa. La edición privada abre con una escena animada. Al abrir el estuche se pueden hojear los ocho capítulos del cancionero, organizados en lados A y B. Al darle vuelta aparecen los detalles de la boda en la contraportada.
 
 ## Enlace público
 

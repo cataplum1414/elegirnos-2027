@@ -13,11 +13,21 @@ const album = mountAlbum({ onChapter: deck.select, onOpen: deck.setBookOpen });
 mountReadingProgress();
 
 if (hasMedia) {
+  const releaseOpening = () => invitation.removeAttribute("data-opening-scene");
+  document.getElementById("opening-skip")?.addEventListener("click", () => {
+    releaseOpening();
+    document.querySelector(".cover__entry")?.focus({ preventScroll: true });
+  }, { once: true });
+  if (invitation.hasAttribute("data-opening-scene")) {
+    window.addEventListener("hashchange", releaseOpening, { once: true });
+  }
   const preview = await import("../private-preview/preview.js").catch(() => null);
   if (preview) {
     Object.assign(tracks, preview.tracks);
     album?.updateTrackLinks(tracks);
     deck.updateTracks();
     preview.mount({ audio, deck });
+  } else {
+    releaseOpening();
   }
 }

@@ -13,6 +13,10 @@
         && new URLSearchParams(location.search).has("previa");
       if (localPreview || invitation.dataset.invitationEdition === "private") {
         invitation.dataset.weddingMedia = "";
+        if (!location.hash) {
+          invitation.dataset.openingScene = "";
+          setTimeout(() => invitation.removeAttribute("data-opening-scene"), 10000);
+        }
       }
     </script>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
@@ -26,6 +30,10 @@
     </noscript>
   </head>
   <body>
+    <div class="opening-scene">
+      <p role="status">Preparando la escena de Jeisson y Ornella…</p>
+      <button type="button" id="opening-skip">Ir al estuche</button>
+    </div>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
     <div
@@ -46,8 +54,9 @@
         <section class="cover" id="portada" aria-labelledby="cover-title">
           <div class="cover__object">
             <div class="cover__copy">
-              <p class="cover__edition">Jeisson &amp; Ornella · Invitación de boda</p>
+              <p class="cover__edition">Invitación de boda</p>
               <h1 class="cover__title" id="cover-title">Los muchachos <span>se les casan</span></h1>
+              <p class="cover__couple">Jeisson <span>&amp;</span> Ornella</p>
               <p class="cover__date"><span>Fecha tentativa</span> Mayo o junio de 2027</p>
               <div class="cover__actions">
                 <a class="cover__entry" href="#historia" aria-controls="historia">Abrir el disco</a>
@@ -111,57 +120,53 @@
             <a href="#historia">Volver al cancionero</a>
             <a href="#portada">Volver a la portada</a>
           </nav>
-          <div class="celebration-section section-wrap">
-              <div class="section-heading">
-                <div>
-                  <p class="section-kicker">Contraportada</p>
-                  <h2 id="celebration-title" tabindex="-1">Nos casamos.</h2>
-                </div>
-                <p class="section-heading__note">Queremos compartir contigo el comienzo de esta nueva etapa.</p>
-              </div>
-
-              <dl class="event-details">
-                <div class="event-details__date">
-                  <dt>Fecha tentativa</dt>
-                  <dd>Mayo o junio<br>de 2027</dd>
-                </div>
-                <div>
-                  <dt>Fecha exacta</dt>
-                  <dd>Por confirmar</dd>
-                </div>
-                <div>
-                  <dt>Lugar y hora</dt>
-                  <dd>Por confirmar</dd>
-                </div>
-                <div>
-                  <dt>Vestimenta</dt>
-                  <dd>Por confirmar</dd>
-                </div>
-              </dl>
-              <div class="attendance-note" id="asistencia" tabindex="-1" aria-labelledby="attendance-title">
+          <div class="back-cover__insert">
+            <header class="back-cover__hero">
+              <p class="back-cover__couple">Jeisson <span>&amp;</span> Ornella</p>
+              <h2 id="celebration-title" tabindex="-1">Nos casamos.</h2>
+              <p class="back-cover__line">Coincidir fue el comienzo.<br>Elegirnos, nuestra decisión.</p>
+              <p class="back-cover__message">Queremos que estés con nosotros en esta nueva parte de la historia.</p>
+            </header>
+            <div class="back-cover__notes">
+              <section aria-labelledby="event-title">
+                <h3 id="event-title">La celebración</h3>
+                <dl class="event-details">
+                  <div class="event-details__date">
+                    <dt>Fecha tentativa</dt>
+                    <dd>Mayo o junio de 2027</dd>
+                  </div>
+                  <div>
+                    <dt>Fecha exacta</dt>
+                    <dd>Por confirmar</dd>
+                  </div>
+                  <div>
+                    <dt>Lugar y hora</dt>
+                    <dd>Por confirmar</dd>
+                  </div>
+                  <div>
+                    <dt>Vestimenta</dt>
+                    <dd>Por confirmar</dd>
+                  </div>
+                </dl>
+              </section>
+              <section class="attendance-note" id="asistencia" tabindex="-1" aria-labelledby="attendance-title">
                 <h3 id="attendance-title">Confirmación de asistencia</h3>
                 <p>Se habilitará cuando tengamos los detalles definitivos.</p>
-              </div>
+              </section>
+              <section class="gifts-section" id="regalos" aria-labelledby="gifts-title">
+                <h3 id="gifts-title">Lo que viene</h3>
+                <p>Una nueva aventura académica y de vida en España.</p>
+                <div class="gifts-copy">
+                  <p>El mejor regalo será contar contigo en nuestra celebración. Si además deseas tener un detalle con nosotros, agradeceremos que sea en forma de lluvia de sobres.</p>
+                  <p class="gifts-copy__aside">Nuestras maletas tienen un límite de peso.<br>Nuestros sueños, no.</p>
+                  <p>La lluvia de sobres es opcional. Compartiremos las opciones cuando estén definidas.</p>
+                </div>
+              </section>
+            </div>
           </div>
 
-          <section class="gifts-section section-wrap" id="regalos" aria-labelledby="gifts-title">
-            <div class="section-heading">
-              <div>
-                <p class="section-kicker">Epílogo</p>
-                <h2 id="gifts-title">Lo que viene.</h2>
-              </div>
-              <p class="section-heading__note">Una nueva aventura académica y de vida en España.</p>
-            </div>
-
-            <div class="gifts-copy">
-              <p>El mejor regalo será contar contigo en nuestra celebración. Si además deseas tener un detalle con nosotros, agradeceremos que sea en forma de lluvia de sobres.</p>
-              <p class="gifts-copy__aside">Nuestras maletas tienen un límite de peso.<br>Nuestros sueños, no.</p>
-              <p class="event-note">La lluvia de sobres es opcional. Compartiremos las opciones cuando estén definidas.</p>
-            </div>
-          </section>
-
           <footer class="site-footer">
-            <a class="footer-mark" href="#portada">Jeisson <span>&amp;</span> Ornella</a>
+            <a class="footer-mark" href="#portada">Los muchachos se les casan</a>
             <nav aria-label="Detalles de la boda" class="footer-nav">
               <a href="#asistencia">Asistencia</a>
               <a href="#regalos">Regalos</a>
