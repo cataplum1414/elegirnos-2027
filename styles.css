@@ -603,16 +603,59 @@ html[data-opening-scene] .opening-scene {
     grid-template-columns: minmax(0, 1fr);
     background: repeating-linear-gradient(0deg, #1c1c21 0 2px, #787881 2px 3px, #303033 3px 5px);
   }
-  .listening-station { display: grid; grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr); gap: 0.38rem 0.62rem; align-items: start; }
-  .cd-tray { grid-row: 1; grid-column: 1; }
-  .cd-tray__label { font-size: clamp(0.64rem, 2.17vw, 1.45rem); }
-  .tracklist { grid-column: 2; grid-row: 1; margin-top: 0; }
-  .tracklist summary { min-height: 1.95rem; padding: 0.3rem 0; font-size: clamp(1.02rem, 2.3vw, 1.36rem); }
-  .deck-controls { grid-column: 1 / -1; margin-top: 0; gap: 0.34rem 0.4rem; }
+  .listening-station {
+    display: grid;
+    grid-template:
+      "disc controls" auto
+      "index controls" 1fr / clamp(4.85rem, 22vw, 6.7rem) minmax(0, 1fr);
+    gap: 0.45rem 0.65rem;
+    align-items: start;
+    padding: 0.6rem;
+  }
+  .listening-station:has(.tracklist[open]) {
+    grid-template-areas: "disc controls" "index index";
+  }
+  .cd-tray { grid-area: disc; }
+  .cd-tray__label {
+    inset: 28% 6% auto;
+    font-size: clamp(0.36rem, 1.45vw, 0.63rem);
+    white-space: nowrap;
+  }
+  .cd-tray small { font-size: clamp(0.33rem, 1.25vw, 0.55rem); }
+  .tracklist { grid-area: index; margin-top: 0; }
+  .tracklist summary {
+    min-height: 2.75rem;
+    align-content: center;
+    padding: 0.26rem 0;
+    font-size: clamp(0.94rem, 2.3vw, 1.2rem);
+  }
+  .deck-controls {
+    grid-area: controls;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 0;
+    gap: 0.25rem 0.4rem;
+  }
+  .deck-controls button { padding-inline: 0.28rem; font-size: 1rem; line-height: 1.05; }
+  .deck-navigation [aria-hidden="true"] { display: none; }
+  .deck-controls input { grid-column: 1 / -1; min-height: 1.5rem; }
+  .deck-status { font-size: 0.94rem; }
   .chapter-index { gap: 0 0.25rem; }
   .chapter-index__link { gap: 0.22rem; min-height: 1.7rem; padding: 0.35rem 0.15rem; font-size: clamp(0.83rem, 2.38vw, 1.37rem); }
-  .chapter-card { grid-template-columns: minmax(0, 0.66fr) minmax(0, 1.34fr); }
-  .chapter-copy { font-size: clamp(1rem, 2.2vw, 1.42rem); }
+  .booklet { padding: 0.65rem; }
+  .booklet__heading { padding-bottom: 0.4rem; }
+  .chapter-card {
+    display: flow-root;
+    padding-block: 0.55rem;
+  }
+  .chapter-art {
+    float: left;
+    width: clamp(3.75rem, 18vw, 6rem);
+    min-height: 0;
+    margin: 0 0.65rem 0.25rem 0;
+  }
+  .chapter-story { display: block; }
+  .chapter-story > * + * { margin-block-start: 0.26rem; }
+  .chapter-copy { clear: both; max-width: none; font-size: clamp(1rem, 2.2vw, 1.42rem); line-height: 1.4; }
   .album-flap { inset-block-start: auto; width: 100%; height: 55%; transform-origin: top center; }
   .album-section.is-unfolding .album-flap { animation-name: unwrap-album-stacked; }
   .back-cover__insert { grid-template-columns: minmax(0, 1fr); }
@@ -624,7 +667,11 @@ html[data-opening-scene] .opening-scene {
 }
 
 @media (max-width: 360px) {
-  .chapter-card { grid-template-columns: minmax(0, 0.6fr) minmax(0, 1.4fr); }
+  .listening-station { padding: 0.5rem; }
+  .booklet__heading { column-gap: 0.6rem; }
+  .chapter-card { padding-block: 0.42rem; }
+  .album-reader__title { font-size: 1.8rem; }
+  .chapter-status { font-size: 0.95rem; }
   .chapter-controls { font-size: 0.92em; }
 }
 

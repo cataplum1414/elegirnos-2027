@@ -5,6 +5,10 @@
   --edge-walk-height: clamp(4.35rem, 11vw, 6.15rem);
 }
 
+@media (max-width: 720px), (pointer: coarse) and (max-aspect-ratio: 4/5) {
+  .album-section { --edge-walk-height: clamp(2rem, 9vw, 3.5rem); }
+}
+
 .album-reader .chapter-status {
   scroll-margin-block-start: calc(var(--edge-walk-height) + 1.4rem);
 }
