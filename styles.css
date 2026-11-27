@@ -566,7 +566,10 @@ html[data-opening-scene] .opening-scene {
 .photo-credits p { margin-top: 0.35rem; font-size: 0.85rem; }
 
 @media (max-width: 720px), (pointer: coarse) and (max-aspect-ratio: 4/5) {
-  .album-section { --edge-walk-height: clamp(1.8rem, 6.3vw, 3.65rem); }
+  .album-section {
+    --edge-walk-height: clamp(1.8rem, 6.3vw, 3.65rem);
+    padding-block-end: max(2.75rem, calc(env(safe-area-inset-bottom, 0px) + 1rem));
+  }
   .cover__object { width: min(100%, 49rem); min-height: min(76svh, 34rem); }
   .cover__copy {
     background: linear-gradient(90deg, #19141aee 2%, #19141a7b 58%, transparent 92%),
