@@ -44,7 +44,7 @@ export const chapters = Object.freeze([
   },
   {
     title: "Bailarás con alegría",
-    artist: "Diamante Eléctrico",
+    artist: "Los Chichos",
     chapter: "La celebración",
     side: "Lado B",
     story: "Queremos bailar, brindar y celebrar con las personas que forman parte de nuestras vidas."

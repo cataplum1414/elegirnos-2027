@@ -10,7 +10,7 @@ Negro obsidiana #101012, borgoña #590F24, grafito, plata y marfil #F2EFE7. Tipo
 4. Miel — Lauri García: intimidad cotidiana.
 5. Cuando quieras llegar — Diamante Eléctrico: distancia.
 6. Creo en ti — Reik: promesa.
-7. Bailarás con alegría — Diamante Eléctrico: celebración.
+7. Bailarás con alegría — Los Chichos: celebración.
 8. Suéltame, Bogotá — Diamante Eléctrico: futuro compartido en España.
 Orden editorial propuesto; confirmar títulos/artistas y significado personal antes de publicación definitiva. Textos originales, no letras. Usar reproductores oficiales con activación voluntaria; no copiar audio protegido. Propuesta de primer baile: Antes de ti, no confirmado.
 ## Experiencia
