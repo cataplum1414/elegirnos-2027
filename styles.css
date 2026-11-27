@@ -123,8 +123,19 @@ html[data-opening-scene] .opening-scene {
   display: grid;
   min-height: 100svh;
   place-items: center;
+  align-content: center;
+  gap: clamp(1rem, 3svh, 1.85rem);
   padding: var(--case-gutter);
   color: var(--paper);
+}
+.cover__note {
+  max-width: 42ch;
+  margin-inline: 0.45rem;
+  color: #f2e1cf;
+  font-size: clamp(1.02rem, 2.35vw, 1.24rem);
+  line-height: 1.45;
+  text-align: center;
+  text-wrap: pretty;
 }
 .cover__object {
   position: relative;
