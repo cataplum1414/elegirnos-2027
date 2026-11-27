@@ -1,10 +1,11 @@
 import { mountMotion } from "./scene-motion.js";
-import { ceremony, sceneAt, sceneStep } from "./scene-story.js";
+import { ceremony, fade, sceneAt, sceneStep } from "./scene-story.js";
 import { mountEnvelope } from "./envelope.js";
 
 const asset = file => new URL(file, import.meta.url).href;
-const march = asset("marcha.m4a");
-const finale = asset("encuentro.m4a");
+const score = asset("musica-de-la-intro.m4a");
+// Media time at the first full phrase of the instrumental envelope loop.
+const ambienceStart = 76.8;
 const storyRate = 0.80;
 const art = {
   premiere: asset("intro-entradas-cine.webp"),
@@ -44,10 +45,9 @@ const stage = `
     <img class="chase__runner chase__runner--jei chase__idle" src="${art.jei}" alt="">
     <canvas class="chase__run-frame chase__run-frame--jei" width="640" height="544"></canvas>
     <i class="chase__throw chase__throw--kiss" hidden><i></i></i>
-    <i class="chase__throw chase__throw--star" hidden><i></i></i>
+    <i class="chase__throw chase__throw--kiss" hidden><i></i></i>
     <i class="chase__throw chase__throw--burst chase__throw--kiss" hidden><i></i></i>
     <p class="chase__comic" hidden></p>
-    <span class="chase__key"></span>
     <img class="chase__cut-in chase__cut-in--jei" src="${art.jeiClose}" alt="">
     <img class="chase__cut-in chase__cut-in--premiere" src="${art.premiere}" alt="" fetchpriority="high">
     <div class="chase__setup">
@@ -66,10 +66,8 @@ const stage = `
     <div class="chase__birds"><i></i><i></i><i></i></div>
     <div class="chase__stardust"><i></i><i></i><i></i><i></i><i></i></div>
     <img class="chase__cut-in chase__cut-in--proposal" src="${art.proposal}" alt="" fetchpriority="low">
-    <p class="chase__proposal">¿Te quieres casar conmigo?</p>
     <div class="chase__ring-cut"><img src="${art.ring}" alt="" fetchpriority="low"></div>
     <img class="chase__cut-in chase__cut-in--letter" src="${art.letter}" alt="" fetchpriority="low">
-    <p class="chase__subtitle" hidden></p>
   </div>`;
 
 export const mount = ({ audio, deck }) => {
@@ -88,6 +86,7 @@ export const mount = ({ audio, deck }) => {
         <h2 id="chase-title">Jeisson <span>&amp;</span> Ornella</h2>
       </header>
       ${stage}
+      <div class="chase__caption-line"><p class="chase__subtitle" hidden></p></div>
       <footer class="chase__footer">
         <p class="chase__announcement" role="status"></p>
         <nav class="chase__navigation" aria-label="Recorrido de escenas">
@@ -129,7 +128,9 @@ export const mount = ({ audio, deck }) => {
   let frameReady = false;
   let entryAttempt = 0;
   let audioNotice;
-  const envelope = mountEnvelope(document.getElementById("portada"), {
+  let holdingScore = false;
+  const cover = document.getElementById("portada");
+  const envelope = mountEnvelope(cover, {
     canPlaySound: () => musicWanted && heardMusic
   });
 
@@ -144,14 +145,11 @@ export const mount = ({ audio, deck }) => {
 
   const startMusic = async () => {
     const pending = ++attempt;
-    const meeting = elapsed >= ceremony.meet;
-    const url = meeting ? finale : march;
-    const position = (elapsed - (meeting ? ceremony.meet : 0)) / storyRate;
+    const position = elapsed / storyRate;
     audioOffset = null;
-    if (audio.src !== url) audio.src = url;
+    if (audio.src !== score) audio.src = score;
     else if (audio.error) audio.load();
-    if (Math.abs(audio.currentTime - position) > 0.3 && audio.seekable.length &&
-        position <= audio.seekable.end(audio.seekable.length - 1)) audio.currentTime = position;
+    if (Math.abs(audio.currentTime - position) > 0.12) audio.currentTime = position;
     try {
       await audio.play();
       if (pending !== attempt) return false;
@@ -170,20 +168,12 @@ export const mount = ({ audio, deck }) => {
     }
   };
 
-  const volume = () => {
-    const fading = elapsed >= ceremony.dissolve;
-    const nearCatch = elapsed < ceremony.meet && elapsed >= ceremony.meet - 1.1;
-    if (fading) return Math.max(0, (ceremony.end - elapsed) / (ceremony.end - ceremony.dissolve));
-    if (nearCatch) return (ceremony.meet - elapsed) / 1.1;
-    return elapsed < ceremony.meet ? 1 : Math.min(1, elapsed - ceremony.meet + 0.08);
-  };
-
   const describe = () => {
     const moment = sceneAt(elapsed);
     if (beat === moment.name) return;
     beat = moment.name;
     screen.dataset.beat = beat;
-    status.textContent = moment.description;
+    status.textContent = [moment.description, moment.caption].filter(Boolean).join(" ");
     subtitle.textContent = moment.caption;
     subtitle.hidden = !moment.caption;
     previous.disabled = sceneStep(elapsed, -1) === null;
@@ -198,8 +188,7 @@ export const mount = ({ audio, deck }) => {
     const step = Math.min(100, now - lastTick) * storyRate / 1000;
     elapsed += step;
     lastTick = now;
-    const currentCue = before < ceremony.meet ? march : finale;
-    if (musicWanted && audioOffset !== null && !audio.paused && audio.currentSrc === currentCue && audio.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+    if (musicWanted && audioOffset !== null && !audio.paused && audio.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
       const musicTime = audio.currentTime * storyRate + audioOffset;
       const correction = (musicTime - elapsed) * 0.16;
       elapsed = Math.max(before, elapsed + Math.min(2 * step, Math.max(-step, correction)));
@@ -213,11 +202,8 @@ export const mount = ({ audio, deck }) => {
     describe();
     if (elapsed >= ceremony.dissolve) {
       if (before < ceremony.dissolve) envelope.present();
-      dialog.style.setProperty("--exit-opacity", String(volume()));
-    }
-    if (musicWanted) {
-      audio.volume = volume();
-      if (before < ceremony.meet && elapsed >= ceremony.meet) void startMusic();
+      const opacity = 1 - fade(elapsed, ceremony.dissolve, ceremony.end - ceremony.dissolve);
+      dialog.style.setProperty("--exit-opacity", String(opacity));
     }
     frame = requestAnimationFrame(tick);
   };
@@ -236,7 +222,7 @@ export const mount = ({ audio, deck }) => {
     pause.textContent = "Pausar escena";
     draw(0);
     describe();
-    audio.volume = volume();
+    audio.volume = 1;
   };
 
   const presentEntry = ({ focus = false } = {}) => {
@@ -246,7 +232,7 @@ export const mount = ({ audio, deck }) => {
     silentEntry.hidden = true;
     entryStatus.textContent = frameReady ? "" : "Preparando la escena…";
     audio.preload = "auto";
-    if (audio.src !== march) audio.src = march;
+    if (audio.src !== score) audio.src = score;
     if (focus) document.getElementById("opening-title").focus({ preventScroll: true });
   };
 
@@ -312,7 +298,6 @@ export const mount = ({ audio, deck }) => {
     draw(elapsed);
     describe();
     if (musicWanted && !paused) {
-      audio.volume = volume();
       void startMusic();
     }
   };
@@ -340,13 +325,29 @@ export const mount = ({ audio, deck }) => {
   dialog.addEventListener("close", () => {
     const completed = elapsed >= ceremony.end;
     cancelAnimationFrame(frame);
-    stopMusic();
-    audio.preload = originalPreload;
-    audio.volume = 1;
-    deck.endIntro({ withSound: completed && musicWanted && heardMusic });
+    holdingScore = completed && musicWanted && heardMusic;
+    if (!holdingScore) releaseScore({ withSound: false });
     if (completed) envelope.present({ focus: true });
     else presentEntry({ focus: true });
   });
+
+  const releaseScore = ({ withSound = true } = {}) => {
+    holdingScore = false;
+    stopMusic();
+    audio.preload = originalPreload;
+    deck.endIntro({ withSound });
+  };
+  audio.addEventListener("ended", () => {
+    if (!holdingScore) return;
+    audio.currentTime = ambienceStart;
+    void audio.play().catch(() => {});
+  });
+  cover.querySelector(".cover__entry").addEventListener("click", event => {
+    if (holdingScore && !event.metaKey && !event.ctrlKey && !event.altKey && !event.shiftKey) releaseScore();
+  });
+  new MutationObserver(() => {
+    if (holdingScore && cover.hidden) releaseScore();
+  }).observe(cover, { attributes: true, attributeFilter: ["hidden"] });
 
   style.addEventListener("load", () => {
     if (root.hasAttribute("data-opening-scene")) presentEntry();

@@ -191,24 +191,7 @@ html:has(.chase[open]) { overflow: hidden; }
   box-shadow: 0 0 1.85rem #f0ad583c, 0 0 0 2px #db9f5d91;
 }
 
-.chase__key {
-  --flight: var(--key-flight, 0);
-  --key-target-x: calc(var(--guardian-x, 54%) + 0.045 * var(--guardian-size));
-  --key-target-y: calc(var(--guardian-base) + 0.394 * var(--guardian-size));
-  position: absolute;
-  bottom: calc((1 - var(--flight)) * (var(--floor) + var(--character-height) * 0.68)
-    + var(--flight) * var(--key-target-y) + var(--key-arc, 0) * 11cqh);
-  left: calc((1 - var(--flight)) * (var(--orne-x, 37%) + var(--character-height) * 0.41)
-    + var(--flight) * var(--key-target-x));
-  width: clamp(2.1rem, 7.2cqw, 4.15rem);
-  aspect-ratio: 1;
-  opacity: var(--key-opacity, 0);
-  translate: -50% 50%;
-  rotate: calc(var(--flight) * 128deg);
-  filter: drop-shadow(0 0 0.55rem #f9b856ac);
-}
-
-.chase__key::before, .chase__fallen-key::before {
+.chase__fallen-key::before {
   position: absolute;
   inset: 0;
   clip-path: polygon(50% 0, 62% 34%, 100% 38%, 70% 63%, 81% 100%, 50% 78%, 18% 100%, 29% 63%, 0 38%, 38% 34%);
@@ -268,19 +251,17 @@ html:has(.chase[open]) { overflow: hidden; }
   background: radial-gradient(ellipse at center, #ffe9a8be, #d18a3f52 42%, transparent 75%);
 }
 
-.chase__subtitle {
-  position: absolute;
-  z-index: 3;
-  inset: auto 0 2.3%;
-  width: fit-content;
-  max-width: calc(100% - 1.3rem);
-  margin-inline: auto;
-  padding: 0.22rem 0.66rem;
+.chase__caption-line {
+  display: grid;
+  min-height: 2.8em;
+  align-content: center;
+  padding: 0.2rem 0.5rem;
+  border-bottom: 1px solid #d3a37635;
   color: #fff2d5;
-  background: #161018e8;
   font: 600 clamp(1rem, 2.35vw, 1.4rem)/1.2 var(--display);
   text-align: center;
 }
+.chase__subtitle { text-wrap: balance; }
 
 .chase__speed {
   position: absolute;
@@ -329,7 +310,7 @@ html:has(.chase[open]) { overflow: hidden; }
 
 .chase__run-frame--jei, .chase__idle.chase__runner--jei {
   --rise: var(--jei-rise, 0);
-  --tilt: calc(-9deg * var(--jump, 0) + 6deg * var(--duck, 0) - 13deg * var(--skid, 0) - 7deg * var(--brake, 0));
+  --tilt: calc(-3deg * var(--jump, 0) + 6deg * var(--duck, 0) - 13deg * var(--skid, 0) - 7deg * var(--brake, 0));
   filter: brightness(0.88) saturate(0.85) drop-shadow(0 -2px 2px #87a8ca62) drop-shadow(0 0.4rem 0.2rem #08080f);
 }
 
@@ -433,11 +414,6 @@ html:has(.chase[open]) { overflow: hidden; }
   clip-path: polygon(50% 27%, 66% 10%, 88% 14%, 100% 34%, 93% 60%, 50% 94%, 7% 60%, 0% 34%, 12% 14%, 34% 10%);
 }
 
-.chase__throw--star::before {
-  background: linear-gradient(140deg, #fff7c6 20%, #e6ab53 75%);
-  clip-path: polygon(50% 0, 61% 33%, 100% 37%, 71% 62%, 82% 100%, 50% 78%, 18% 100%, 29% 62%, 0 37%, 39% 33%);
-}
-
 .chase__throw--burst::after {
   position: absolute;
   inset: -49% -35% 51% 36%;
@@ -501,22 +477,6 @@ html:has(.chase[open]) { overflow: hidden; }
 .chase__stardust i:nth-child(4) { --x: 84%; --y: 62%; --glint-delay: 730ms; }
 .chase__stardust i:nth-child(5) { --x: 75%; --y: 23%; --glint-delay: 1150ms; }
 [data-caught] .chase__stardust i { animation: chase-glint 3s ease-in-out var(--glint-delay) both; }
-
-.chase__proposal {
-  position: absolute;
-  inset: 10% 5% auto auto;
-  max-width: 14ch;
-  color: #fff4db;
-  font: 400 clamp(2rem, 5.2vw, 4.25rem)/1.02 var(--serif);
-  letter-spacing: -0.045em;
-  text-align: right;
-  text-wrap: balance;
-  text-shadow: 0 2px 1px #4b251e, 0 2px 14px #331b22;
-  opacity: 0;
-  transform: translateY(0.45rem);
-  transition: opacity 650ms ease, transform 650ms ease;
-}
-[data-proposing] .chase__proposal { opacity: 1; transform: translateY(0); }
 
 .chase__ring-cut {
   position: absolute;
@@ -588,11 +548,10 @@ html:has(.chase[open]) { overflow: hidden; }
 @media (max-width: 620px) {
   .chase__screen {
     --floor: 14%;
-    height: clamp(14rem, 58svh, 29rem);
+    height: clamp(14rem, 53svh, 29rem);
   }
   .chase__scenery--space { object-position: 48% 77%; }
   .chase__scenery--castle { object-position: 50% 75%; }
-  .chase__proposal { inset: 10% 6% auto; max-width: none; text-align: center; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -600,5 +559,5 @@ html:has(.chase[open]) { overflow: hidden; }
   .chase__scenery--space, .chase__cut-in { transform: none; }
   .chase__speed, .chase__birds, .chase__stardust, .chase__dust, .chase__searchlight { display: none; }
   .chase__runner, .chase__ring-cut::after { animation: none !important; }
-  .chase__proposal, .chase__ring-cut, .chase__ring-cut img { transition: none; }
+  .chase__ring-cut, .chase__ring-cut img { transition: none; }
 }

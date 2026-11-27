@@ -39,8 +39,8 @@ export const mountEnvelope = (cover, { canPlaySound }) => {
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const effect = document.createElement("audio");
   effect.preload = "none";
-  effect.src = new URL("./apertura-lacre.wav", import.meta.url).href;
-  effect.volume = 0.72;
+  effect.src = new URL("./apertura-lacre.m4a", import.meta.url).href;
+  effect.volume = 0.84;
   let finishTimer;
 
   const finish = ({ focus = true } = {}) => {

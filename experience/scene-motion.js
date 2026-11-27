@@ -34,23 +34,25 @@ export const mountMotion = (screen, reducedMotion) => {
     const guardianReaction = fade(seconds, 12.94, 0.28) * (1 - fade(seconds, 14.38, 0.34));
     const consolePortrait = fade(elapsed, consoleCue - 0.53, 0.43) * (1 - fade(elapsed, openingLead + 2.33, 0.34));
     const jeiPortrait = Math.max(consolePortrait, guardianReaction);
-    const fairyPortrait = fade(elapsed, ceremony.portrait, 0.55) * (1 - fade(elapsed, ceremony.court, 0.85));
+    const fairyPortrait = fade(elapsed, ceremony.portrait - 0.18, 0.92);
     const magic = fade(elapsed, ceremony.meet - 0.18, 1.4);
     const run = still && !caught ? 0 : travel;
-    const pursuit = mix(22, 37, run);
+    const handoff = fade(afterKey, 15.40, 2.65);
+    const pursuit = mix(22, 37, run) + 13 * handoff;
     const lead = mix(59, 74, run);
     const gag = gags.find(({ launch, end }) => !still && seconds >= launch && seconds < end);
     const reaction = gag ? bump((seconds - (gag.hit - 0.30)) / (gag.end - gag.hit + 0.3)) : 0;
     const toss = gag ? 1 - fade(seconds, gag.launch, 0.45) : bump((afterKey - 15.08) / 0.97);
-    const jump = gag?.action === "jump" ? reaction : 0;
+    const jump = gag?.action === "jump" ? bump((seconds - gag.hit + 0.19) / 0.67) : 0;
     const stride = strideTime(seconds) - (brakeStart + brakeLength / 2);
     const jeiPhase = still ? 1 : 1 + stride * 12.6;
     const ornePhase = still ? 1 : 4 + stride * 13.6;
     const rest = still ? Number(seconds >= brakeStart + brakeLength) : fade(seconds, 13.32, 0.65);
     const duckPose = still ? 0 : fade(seconds, 4.42, 0.15) * (1 - fade(seconds, 5.12, 0.18));
-    const throwPose = still ? 0 : fade(afterKey, 15.27, 0.13) * (1 - fade(afterKey, 15.93, 0.19));
+    const reach = fade(afterKey, 17.20, 0.43) * (1 - fade(afterKey, 19.21, 0.38));
+    const approach = fade(afterKey, 15.33, 0.25) * (1 - fade(afterKey, 17.20, 0.35));
 
-    screen.style.setProperty("--jei-x", `${lead + (gag?.action === "skid" ? 3 * reaction : 0)}%`);
+    screen.style.setProperty("--jei-x", `${lead + 1.5 * jump + (gag?.action === "skid" ? 3 * reaction : 0)}%`);
     screen.style.setProperty("--orne-x", `${pursuit}%`);
     screen.style.setProperty("--pan", `${-9 * run}%`);
     screen.style.setProperty("--pace", String(still || caught ? 0 : (0.34 + 0.48 * bump(travel)) * (1 - brake)));
@@ -64,11 +66,10 @@ export const mountMotion = (screen, reducedMotion) => {
     screen.style.setProperty("--skid", String(gag?.action === "skid" ? reaction : 0));
     screen.style.setProperty("--toss", String(toss));
     screen.style.setProperty("--brake", String(still ? 0 : brake * (1 - rest)));
-    screen.style.setProperty("--jei-rise", String(still ? 0 : 0.20 * jump));
+    screen.style.setProperty("--jei-rise", String(still ? 0 : 0.07 * jump));
     screen.toggleAttribute("data-caught", caught);
     screen.toggleAttribute("data-court", elapsed >= ceremony.court);
     screen.toggleAttribute("data-dust", !still && ((brake > 0.18 && seconds < 14.7) || (gag?.action === "skid" && reaction > 0.25)));
-    screen.toggleAttribute("data-proposing", elapsed >= ceremony.proposal);
     screen.toggleAttribute("data-ring", elapsed >= ceremony.ringIn && elapsed < ceremony.ringOut);
     if (gag) screen.dataset.gag = gag.action;
     else delete screen.dataset.gag;
@@ -92,7 +93,7 @@ export const mountMotion = (screen, reducedMotion) => {
     });
 
     showJei(jeiPhase, rest, duckPose);
-    showOrne(ornePhase, rest, throwPose);
+    showOrne(ornePhase + 8 * handoff, rest * (1 - approach), still ? 0 : reach);
     drawStory(screen, elapsed, still);
   };
 };

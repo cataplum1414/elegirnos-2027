@@ -29,12 +29,12 @@ const scenes = [
   { start: afterOpening(2.76), name: "ship", caption: "Ornella · ¡Agáchate, Jeisson!", description: "Una nave de carga sobrevuela el corredor mientras Ornella intenta alcanzar a Jeisson. Él se agacha para dejarla pasar." },
   { start: afterOpening(7.94), name: "guardian", caption: "Jeisson · Sin la estrella no puedo abrir la sala.", description: "Un robot gigante bloquea la entrada del cine. Jeisson frena y busca la llave en su bolsillo." },
   { start: afterOpening(keyPlan), name: "key-plan", caption: "Ornella · La estrella va en el pecho del guardián. Así abriré la sala.", description: "En primer plano, Ornella muestra la llave y señala la ranura del guardián." },
-  { start: afterKey(15.36), name: "key", caption: "", description: "Ornella lanza la estrella hacia la ranura." },
+  { start: afterKey(15.36), name: "key", caption: "", description: "Ornella se acerca al guardián y coloca la llave en la ranura." },
   { start: afterKey(18.56), name: "path", caption: "", description: "La estrella enciende al guardián y abre la sala. Ornella le ofrece la mano a Jeisson." },
   { start: ceremony.meet, name: "gate", caption: "Ornella · Este final lo vemos juntos.", description: "La Marcha Imperial da paso a la música de cuento. Ornella y Jeisson cruzan las puertas doradas y salen unos pájaros." },
   { start: ceremony.lookOut, name: "castle", caption: "", description: "Las puertas se abren a un castillo de cuento con torres de piedra y ventanas iluminadas." },
   { start: ceremony.portrait, name: "princess", caption: "", description: "Ornella se vuelve hacia Jeisson con su vestido rosado de princesa." },
-  { start: ceremony.proposal, name: "proposal", caption: "Jeisson · Quería preguntártelo en nuestra propia película.", description: "En el castillo, Jeisson se arrodilla con su traje de príncipe y le ofrece el anillo de rubí a Ornella, vestida de rosa." },
+  { start: ceremony.proposal, name: "proposal", caption: "Jeisson · ¿Te quieres casar conmigo?", description: "En el castillo, Jeisson se arrodilla con su traje de príncipe y le ofrece el anillo de rubí a Ornella, vestida de rosa." },
   { start: ceremony.ringIn, name: "ruby", caption: "", description: "El rubí brilla en la caja que Jeisson llevaba escondida." },
   { start: ceremony.reply, name: "reply", caption: "Ornella · Sí. Y la próxima vez, vamos juntos.", description: "Ornella acepta. Los dos sonríen y sostienen una invitación de papel marfil." },
   { start: ceremony.invitation, name: "invitation", caption: "Ornella y Jeisson · Ahora, abre nuestro sobre.", description: "Los dos acercan hacia el público el sobre atado con cordón y sellado con lacre." },
@@ -66,7 +66,6 @@ export const drawStory = (screen, elapsed, reducedMotion) => {
   const shipOpacity = fade(time, 2.76, 0.39) * (1 - fade(time, 6.83, 0.63));
   const guardianEnters = fade(time, 7.86, 2.28);
   const guardianLeaves = fade(action, 18.62, 2.20);
-  const key = unit((action - 15.40) / (18.56 - 15.40));
   const unlocked = fade(action, 18.56, 0.65) * (1 - guardianLeaves);
   const gateArrives = fade(action, 20.22, 1.03);
   const gateOpens = fade(action, 21.66, 2.41);
@@ -89,9 +88,6 @@ export const drawStory = (screen, elapsed, reducedMotion) => {
     "--guardian-x": `${reducedMotion ? 54 : mix(99, 54, guardianEnters) - 103 * guardianLeaves}%`,
     "--guardian-opacity": guardianEnters * (1 - guardianLeaves),
     "--socket-glow": unlocked,
-    "--key-flight": reducedMotion ? 0 : key,
-    "--key-arc": reducedMotion ? 0 : Math.sin(Math.PI * key),
-    "--key-opacity": reducedMotion ? 0 : fade(action, 15.40, 0.25) * (1 - fade(action, 18.49, 0.14)),
     "--door-open": reducedMotion ? 0 : gateOpens,
     "--door-opacity": gateArrives * (1 - (reducedMotion ? gateOpens : fade(action, 23.8, 0.45))),
     "--gate-light": Math.sin(Math.PI * fade(action, 19.7, 4.7)) * 0.82
