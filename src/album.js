@@ -81,16 +81,20 @@ const createIndexLink = (chapter, index) => {
 export const mountAlbum = ({ onChapter, onOpen, tracks = {} }) => {
   const cover = document.getElementById("portada");
   const album = document.getElementById("historia");
+  const back = document.getElementById("celebracion");
   const coverLink = cover?.querySelector(".cover__entry");
   const stage = cover?.closest(".record-edition");
   const albumTitle = document.getElementById("album-title");
+  const backTitle = document.getElementById("celebration-title");
   const index = document.getElementById("chapter-index");
   const container = document.getElementById("chapters");
   const status = document.getElementById("chapter-status");
   const previous = document.getElementById("chapter-previous");
   const next = document.getElementById("chapter-next");
+  const turn = document.getElementById("chapter-back-cover");
 
-  if (!coverLink || !stage || !album || !albumTitle || !index || !container || !status || !previous || !next) return;
+  if (!coverLink || !stage || !album || !albumTitle || !back || !backTitle ||
+      !index || !container || !status || !previous || !next || !turn) return;
 
   const links = chapters.map(createIndexLink);
   const cards = chapters.map((chapter, cardIndex) => createChapter(chapter, cardIndex, tracks));
@@ -98,19 +102,21 @@ export const mountAlbum = ({ onChapter, onOpen, tracks = {} }) => {
   container.append(...cards);
 
   let activeIndex = -1;
-  let open = null;
+  let view = null;
+  const panels = { cover, album, back };
+  const entryPoints = { cover: coverLink, album: albumTitle, back: backTitle };
 
-  const setOpen = (value, { animate = false, focus = false } = {}) => {
-    if (value !== open) {
-      open = value;
-      cover.hidden = open;
-      album.hidden = !open;
-      coverLink.setAttribute("aria-expanded", String(open));
-      album.classList.toggle("is-unfolding", open && animate);
-      onOpen(open);
+  const show = (nextView, { focus = false, byGesture = false } = {}) => {
+    if (nextView !== view) {
+      view = nextView;
+      for (const [name, panel] of Object.entries(panels)) panel.hidden = name !== view;
+      coverLink.setAttribute("aria-expanded", String(view === "album"));
+      album.classList.toggle("is-unfolding", view === "album" && focus);
+      back.classList.toggle("is-turning", view === "back" && focus);
+      onOpen(view === "album", { byGesture });
     }
     if (focus) {
-      (open ? albumTitle : coverLink).focus({ preventScroll: true });
+      entryPoints[view].focus({ preventScroll: true });
       stage.scrollIntoView({ block: "start", behavior: "instant" });
     }
   };
@@ -152,6 +158,7 @@ export const mountAlbum = ({ onChapter, onOpen, tracks = {} }) => {
     previous.hidden = activeIndex === 0;
     next.href = `#capitulo-${Math.min(chapters.length, activeIndex + 2)}`;
     next.hidden = activeIndex === chapters.length - 1;
+    turn.hidden = !next.hidden;
 
     if (updateHash) history.pushState(null, "", `#capitulo-${activeIndex + 1}`);
     onChapter(chapter, activeIndex + 1);
@@ -166,7 +173,7 @@ export const mountAlbum = ({ onChapter, onOpen, tracks = {} }) => {
     event.preventDefault();
     activate(requestedIndex, { updateHash: true });
     cards[activeIndex].querySelector("h3").focus({ preventScroll: true });
-    if (index.contains(link)) status.scrollIntoView({ block: "start" });
+    status.scrollIntoView({ block: index.contains(link) ? "start" : "nearest" });
   };
 
   index.addEventListener("click", navigateFromLink);
@@ -195,28 +202,34 @@ export const mountAlbum = ({ onChapter, onOpen, tracks = {} }) => {
     const requestedIndex = Number(match?.[1]) - 1;
     if (Number.isInteger(requestedIndex) && requestedIndex >= 0 && requestedIndex < chapters.length) {
       activate(requestedIndex, { animate: false });
-      setOpen(true);
+      show("album");
     } else if (hash === "#historia") {
-      const savedPage = history.state?.albumPage ?? 0;
-      activate(savedPage, { animate: false });
-      setOpen(true);
-    } else if (!hash || hash === "#portada" || open === null) {
-      setOpen(false);
+      const savedPage = history.state?.albumPage;
+      activate(Number.isInteger(savedPage) ? savedPage : 0, { animate: false });
+      show("album");
+    } else if (["#celebracion", "#asistencia", "#regalos"].includes(hash)) {
+      show("back");
+    } else if (!hash || hash === "#portada" || view === null) {
+      show("cover");
     }
   };
 
   document.addEventListener("click", event => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
-    const link = event.target.closest('a[href="#historia"], a[href="#portada"]');
+    const link = event.target.closest('a[href="#historia"], a[href="#portada"], a[href="#celebracion"]');
     if (!link) return;
-    const opening = link.hash === "#historia";
     event.preventDefault();
     if (location.hash !== link.hash) history.pushState({ albumPage: activeIndex }, "", link.hash);
-    setOpen(opening, { animate: opening, focus: true });
+    const destination = { "#historia": "album", "#portada": "cover", "#celebracion": "back" }[link.hash];
+    show(destination, { focus: true, byGesture: true });
   });
 
   activate(0, { animate: false });
   openHash();
-  if (open) requestAnimationFrame(() => stage.scrollIntoView({ block: "start", behavior: "instant" }));
+  if (view !== "cover") requestAnimationFrame(() => {
+    const target = back.querySelector(location.hash === "#regalos" ? "#regalos" : "#asistencia");
+    const scrollTarget = ["#regalos", "#asistencia"].includes(location.hash) ? target : stage;
+    scrollTarget.scrollIntoView({ block: "start", behavior: "instant" });
+  });
   window.addEventListener("hashchange", openHash);
 };

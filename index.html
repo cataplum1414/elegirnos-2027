@@ -6,22 +6,24 @@
     <meta name="theme-color" content="#101012">
     <meta name="robots" content="noindex, nofollow">
     <meta name="description" content="Invitación de boda de Jeisson y Ornella.">
-    <title>Jeisson &amp; Ornella | Invitación de boda</title>
+    <title>Los muchachos se les casan | Jeisson &amp; Ornella</title>
     <script>
       const invitation = document.documentElement;
       const localPreview = ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname)
         && new URLSearchParams(location.search).has("previa");
       if (localPreview || invitation.dataset.invitationEdition === "private") {
         invitation.dataset.weddingMedia = "";
-        if (!location.hash) {
-          invitation.dataset.introPending = "";
-          setTimeout(() => invitation.removeAttribute("data-intro-pending"), 6000);
-        }
       }
     </script>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <link rel="stylesheet" href="./styles.css">
     <script type="module" src="./src/main.js"></script>
+    <noscript>
+      <style>
+        #celebracion[hidden] { display: block !important; }
+        .cover__entry, .back-cover__nav a[href="#historia"] { display: none; }
+      </style>
+    </noscript>
   </head>
   <body>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -45,27 +47,27 @@
           <div class="cover__object">
             <span class="cover__record" aria-hidden="true"></span>
             <div class="cover__copy">
-              <span class="cover__spine" aria-hidden="true">Elegirnos</span>
+              <span class="cover__spine" aria-hidden="true">Jeisson &amp; Ornella</span>
               <p class="cover__edition">Invitación de boda</p>
-              <h1 class="cover__title" id="cover-title">Jeisson <span>&amp;</span> Ornella</h1>
-              <p class="cover__dedication">Coincidir fue el comienzo.<br>Elegirnos, nuestra decisión.</p>
-              <a class="cover__entry" href="#historia" aria-controls="historia">Abrir el disco</a>
+              <h1 class="cover__title" id="cover-title">Los muchachos <span>se les casan</span></h1>
+              <p class="cover__duo">Jeisson <span>&amp;</span> Ornella</p>
               <p class="cover__date"><span>Fecha tentativa</span> Mayo o junio de 2027</p>
+              <div class="cover__actions">
+                <a class="cover__entry" href="#historia" aria-controls="historia">Abrir el disco</a>
+                <a class="cover__album-link" href="#celebracion">Detalles de la boda</a>
+              </div>
             </div>
-          </div>
-          <div class="cover__actions">
-            <a class="cover__album-link" href="#celebracion">Detalles de la boda</a>
           </div>
         </section>
 
-        <section class="album-section" id="historia" aria-labelledby="album-title">
+        <section class="album-section" id="historia" aria-labelledby="album-title" hidden>
           <div class="album-tools">
             <a href="#portada" id="close-album">Cerrar disco</a>
             <a href="#celebracion">Detalles de la boda</a>
           </div>
           <div class="album-layout">
             <div class="listening-station">
-              <p class="record-label">Elegirnos <span>Jeisson &amp; Ornella</span></p>
+              <p class="record-label">Los muchachos se les casan <span>Jeisson &amp; Ornella</span></p>
               <div class="turntable" id="turntable" aria-hidden="true">
                 <div class="turntable__plate">
                   <div class="turntable__disc">
@@ -98,78 +100,83 @@
                 <a class="chapter-control chapter-control--next" id="chapter-next" href="#capitulo-2" hidden>
                   Página siguiente <span aria-hidden="true">→</span>
                 </a>
+                <a class="chapter-control chapter-control--next" id="chapter-back-cover" href="#celebracion" hidden>
+                  Dar vuelta al disco <span aria-hidden="true">↻</span>
+                </a>
               </nav>
             </div>
-            <div class="album-flap" aria-hidden="true"><span>Elegirnos</span></div>
+            <div class="album-flap" aria-hidden="true"><span>Los muchachos se les casan</span></div>
           </div>
 
-          <noscript>
-            <p class="noscript-note">El recorrido de capítulos necesita JavaScript. La fecha y la información de la celebración están disponibles a continuación.</p>
-          </noscript>
+        </section>
+
+        <section class="back-cover" id="celebracion" aria-labelledby="celebration-title" hidden>
+          <nav class="album-tools back-cover__nav" aria-label="Navegación del disco">
+            <a href="#historia">Volver al cancionero</a>
+            <a href="#portada">Volver a la portada</a>
+          </nav>
+          <div class="celebration-section section-wrap">
+              <div class="section-heading">
+                <div>
+                  <p class="section-kicker">Contraportada</p>
+                  <h2 id="celebration-title" tabindex="-1">Nos casamos.</h2>
+                </div>
+                <p class="section-heading__note">Queremos compartir contigo el comienzo de esta nueva etapa.</p>
+              </div>
+
+              <dl class="event-details">
+                <div class="event-details__date">
+                  <dt>Fecha tentativa</dt>
+                  <dd>Mayo o junio<br>de 2027</dd>
+                </div>
+                <div>
+                  <dt>Fecha exacta</dt>
+                  <dd>Por confirmar</dd>
+                </div>
+                <div>
+                  <dt>Lugar y hora</dt>
+                  <dd>Por confirmar</dd>
+                </div>
+                <div>
+                  <dt>Vestimenta</dt>
+                  <dd>Por confirmar</dd>
+                </div>
+              </dl>
+              <div class="attendance-note" id="asistencia" tabindex="-1" aria-labelledby="attendance-title">
+                <h3 id="attendance-title">Confirmación de asistencia</h3>
+                <p>Se habilitará cuando tengamos los detalles definitivos.</p>
+              </div>
+          </div>
+
+          <section class="gifts-section section-wrap" id="regalos" aria-labelledby="gifts-title">
+            <div class="section-heading">
+              <div>
+                <p class="section-kicker">Epílogo</p>
+                <h2 id="gifts-title">Lo que viene.</h2>
+              </div>
+              <p class="section-heading__note">Una nueva aventura académica y de vida en España.</p>
+            </div>
+
+            <div class="gifts-copy">
+              <p>El mejor regalo será contar contigo en nuestra celebración. Si además deseas tener un detalle con nosotros, agradeceremos que sea en forma de lluvia de sobres.</p>
+              <p class="gifts-copy__aside">Nuestras maletas tienen un límite de peso.<br>Nuestros sueños, no.</p>
+              <p class="event-note">La lluvia de sobres es opcional. Compartiremos las opciones cuando estén definidas.</p>
+            </div>
+          </section>
+
+          <footer class="site-footer">
+            <a class="footer-mark" href="#portada">Jeisson <span>&amp;</span> Ornella</a>
+            <nav aria-label="Detalles de la boda" class="footer-nav">
+              <a href="#asistencia">Asistencia</a>
+              <a href="#regalos">Regalos</a>
+            </nav>
+            <details class="photo-credits">
+              <summary>Créditos de imágenes</summary>
+              <p><a href="https://commons.wikimedia.org/wiki/File:Lluvia_en_el_Centro_Internacional_de_Bogot%C3%A1_por_la_noche.JPG">Bogotá, Peter Angritt</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Recorte en pantalla.</p>
+            </details>
+          </footer>
         </section>
       </div>
-
-      <section class="celebration-section section-wrap" id="celebracion" aria-labelledby="celebration-title">
-        <div class="section-heading">
-          <div>
-            <p class="section-kicker">La invitación</p>
-            <h2 id="celebration-title">Nos casamos.</h2>
-          </div>
-          <p class="section-heading__note">Queremos compartir contigo el comienzo de esta nueva etapa.</p>
-        </div>
-
-        <dl class="event-details">
-          <div class="event-details__date">
-            <dt>Fecha tentativa</dt>
-            <dd>Mayo o junio<br>de 2027</dd>
-          </div>
-          <div>
-            <dt>Fecha exacta</dt>
-            <dd>Por confirmar</dd>
-          </div>
-          <div>
-            <dt>Lugar y hora</dt>
-            <dd>Por confirmar</dd>
-          </div>
-          <div>
-            <dt>Vestimenta</dt>
-            <dd>Por confirmar</dd>
-          </div>
-        </dl>
-        <div class="attendance-note" id="asistencia" tabindex="-1" aria-labelledby="attendance-title">
-          <h3 id="attendance-title">Confirmación de asistencia</h3>
-          <p>Se habilitará cuando tengamos los detalles definitivos.</p>
-        </div>
-      </section>
-
-      <section class="gifts-section section-wrap" id="regalos" aria-labelledby="gifts-title">
-        <div class="section-heading">
-          <div>
-            <p class="section-kicker">Epílogo</p>
-            <h2 id="gifts-title">Lo que viene.</h2>
-          </div>
-          <p class="section-heading__note">Una nueva aventura académica y de vida en España.</p>
-        </div>
-
-        <div class="gifts-copy">
-          <p>El mejor regalo será contar contigo en nuestra celebración. Si además deseas tener un detalle con nosotros, agradeceremos que sea en forma de lluvia de sobres.</p>
-          <p class="gifts-copy__aside">Nuestras maletas tienen un límite de peso.<br>Nuestros sueños, no.</p>
-          <p class="event-note">La lluvia de sobres es opcional. Compartiremos las opciones cuando estén definidas.</p>
-        </div>
-      </section>
     </main>
-
-    <footer class="site-footer">
-      <a class="footer-mark" href="#portada">Jeisson <span>&amp;</span> Ornella</a>
-      <nav aria-label="Detalles de la boda" class="footer-nav">
-        <a href="#asistencia">Asistencia</a>
-        <a href="#regalos">Regalos</a>
-      </nav>
-      <details class="photo-credits">
-        <summary>Créditos de imágenes</summary>
-        <p><a href="https://commons.wikimedia.org/wiki/File:Lluvia_en_el_Centro_Internacional_de_Bogot%C3%A1_por_la_noche.JPG">Bogotá, Peter Angritt</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Recorte en pantalla.</p>
-      </details>
-      <a class="footer-top" href="#portada">Volver a la portada <span aria-hidden="true">↑</span></a>
-    </footer>
   </body>
 </html>

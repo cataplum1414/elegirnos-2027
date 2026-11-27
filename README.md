@@ -1,10 +1,10 @@
-# ELEGIRNOS — Jeisson & Ornella
+# Los muchachos se les casan — Jeisson & Ornella
 
-Invitación de boda en español colombiano. Abre la funda de vinilo para desplegar el disco y hojear los ocho capítulos del cancionero, organizados en lados A y B.
+Invitación de boda en español colombiano. Abre la funda de vinilo para hojear los ocho capítulos del cancionero, organizados en lados A y B. Dale vuelta al disco para ver los detalles de la boda en la contraportada.
 
 ## Enlace público
 
-[Ver la invitación ELEGIRNOS](https://cataplum1414.github.io/elegirnos-2027/)
+[Ver Los muchachos se les casan](https://cataplum1414.github.io/elegirnos-2027/)
 
 ## Ejecutar en local
 

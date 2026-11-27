@@ -14,6 +14,7 @@ export const mountDeck = (tracks = {}, audio = new Audio()) => {
   let enabled = false;
   let intro = false;
   let bookOpen = false;
+  let openedWithGesture = false;
   let playing = false;
   let attempt = 0;
 
@@ -67,9 +68,13 @@ export const mountDeck = (tracks = {}, audio = new Audio()) => {
     if (!intro && bookOpen) loadSelected();
   };
 
-  const setBookOpen = value => {
+  const setBookOpen = (value, { byGesture = false } = {}) => {
     if (bookOpen === value) return;
     bookOpen = value;
+    if (bookOpen && byGesture && !openedWithGesture) {
+      openedWithGesture = true;
+      enabled = true;
+    }
     if (!intro && !controls.hidden) loadSelected();
   };
 
