@@ -11,12 +11,12 @@ Negro obsidiana #101012, borgoña #590F24, grafito, plata y marfil #F2EFE7. Tipo
 5. Cuando quieras llegar — Diamante Eléctrico: distancia.
 6. Creo en ti — Reik: promesa.
 7. Bailarás con alegría — Los Chichos: celebración.
-8. Suéltame, Bogotá — Diamante Eléctrico: futuro compartido en España.
+8. Suéltame, Bogotá — Diamante Eléctrico: el comienzo de un nuevo viaje juntos, con el destino abierto.
 Orden editorial propuesto; confirmar títulos/artistas y significado personal antes de publicación definitiva. Textos originales, no letras. Usar reproductores oficiales con activación voluntaria; no copiar audio protegido. Propuesta de primer baile: Antes de ti, no confirmado.
 ## Experiencia
 Portada, recorrido de ocho capítulos con fotografías y vídeos reales autorizados, transiciones accesibles, controles de música, acceso directo a logística sin obligar a recorrer capítulos. RSVP, acompañantes, restricciones alimentarias, invitaciones personalizadas y sugerencias musicales. Fecha tentativa visible. No inventar hechos biográficos ni datos del evento.
 ## Regalos
-Lluvia de sobres opcional, presencia como mejor regalo. Explicar nueva etapa académica y de vida en España. Opciones futuras: efectivo, Nequi, Daviplata, Bancolombia y transferencias internacionales en euros; no publicar datos bancarios sin aprobación. Sin mínimos ni cantidades sugeridas.
+Lluvia de sobres opcional, presencia como mejor regalo. Hablar de la nueva etapa juntos y reservar el destino. Opciones futuras: efectivo, Nequi, Daviplata, Bancolombia y transferencias; no publicar datos bancarios sin aprobación. Sin mínimos ni cantidades sugeridas.
 ## Arquitectura y seguridad
 V0.1: HTML/CSS/JS estático, responsive, enlaces de búsqueda Spotify, navegación y barra de progreso. GitHub Pages para frontend. Para RSVP y administración, backend autenticado con autorización por rol, almacenamiento privado y validación del servidor. Nunca incluir secretos, datos de invitados, pagos ni material de sorpresas en repositorio público o historial Git. noindex no es control de acceso. No implementar pagos hasta definir proveedor y consentimiento. No guardar información financiera sensible. Accesibilidad WCAG, reduced motion, navegación teclado, pruebas móvil/escritorio.
 ## Roadmap

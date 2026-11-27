@@ -54,6 +54,6 @@ export const chapters = Object.freeze([
     artist: "Diamante Eléctrico",
     chapter: "El próximo capítulo",
     side: "Lado B",
-    story: "Colombia siempre será parte de nosotros. No dejamos atrás nuestra historia: la llevamos con nosotros hacia España."
+    story: "Colombia siempre será parte de nosotros. Ahora empieza un nuevo viaje y nos ilusiona descubrir juntos adónde nos llevará."
   }
 ]);
