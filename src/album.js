@@ -29,7 +29,7 @@ const createSpotifyLink = ({ title, artist }) => {
   return link;
 };
 
-const createChapter = (chapter, index, tracks) => {
+const createChapter = (chapter, index) => {
   const number = index + 1;
   const article = createElement("article", "chapter-card");
   article.id = `capitulo-${number}`;
@@ -59,7 +59,7 @@ const createChapter = (chapter, index, tracks) => {
   story.append(title);
   story.append(createElement("p", "chapter-artist", chapter.artist));
   story.append(createElement("p", "chapter-copy", chapter.story));
-  if (!tracks[number]) story.append(createSpotifyLink(chapter));
+  story.append(createSpotifyLink(chapter));
 
   article.append(art, story);
   return article;
@@ -78,7 +78,7 @@ const createIndexLink = (chapter, index) => {
   return link;
 };
 
-export const mountAlbum = ({ onChapter, onOpen, tracks = {} }) => {
+export const mountAlbum = ({ onChapter, onOpen }) => {
   const cover = document.getElementById("portada");
   const album = document.getElementById("historia");
   const back = document.getElementById("celebracion");
@@ -97,7 +97,7 @@ export const mountAlbum = ({ onChapter, onOpen, tracks = {} }) => {
       !index || !container || !status || !previous || !next || !turn) return;
 
   const links = chapters.map(createIndexLink);
-  const cards = chapters.map((chapter, cardIndex) => createChapter(chapter, cardIndex, tracks));
+  const cards = chapters.map(createChapter);
   index.append(...links);
   container.append(...cards);
 
@@ -206,7 +206,7 @@ export const mountAlbum = ({ onChapter, onOpen, tracks = {} }) => {
     } else if (hash === "#historia") {
       const savedPage = history.state?.albumPage;
       activate(Number.isInteger(savedPage) ? savedPage : 0, { animate: false });
-      show("album");
+      show("album", { byGesture: view === null && navigator.userActivation?.hasBeenActive });
     } else if (["#celebracion", "#asistencia", "#regalos"].includes(hash)) {
       show("back");
     } else if (!hash || hash === "#portada" || view === null) {
@@ -232,4 +232,11 @@ export const mountAlbum = ({ onChapter, onOpen, tracks = {} }) => {
     scrollTarget.scrollIntoView({ block: "start", behavior: "instant" });
   });
   window.addEventListener("hashchange", openHash);
+  return {
+    updateTrackLinks(tracks) {
+      cards.forEach((card, index) => {
+        card.querySelector(".spotify-link").hidden = Boolean(tracks[index + 1]);
+      });
+    }
+  };
 };

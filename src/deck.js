@@ -11,6 +11,7 @@ export const mountDeck = (tracks = {}, audio = new Audio()) => {
 
   let source;
   let title;
+  let selectedNumber;
   let enabled = false;
   let intro = false;
   let bookOpen = false;
@@ -62,10 +63,16 @@ export const mountDeck = (tracks = {}, audio = new Audio()) => {
 
   const select = (chapter, number) => {
     side.textContent = chapter.side;
-    if (controls.hidden) return;
     title = chapter.title;
-    source = tracks[number];
-    if (!intro && bookOpen) loadSelected();
+    selectedNumber = number;
+    source = tracks[selectedNumber];
+    if (!controls.hidden && !intro && bookOpen) loadSelected();
+  };
+
+  const updateTracks = () => {
+    controls.hidden = Object.keys(tracks).length === 0;
+    source = tracks[selectedNumber];
+    if (!controls.hidden && !intro && bookOpen) loadSelected();
   };
 
   const setBookOpen = (value, { byGesture = false } = {}) => {
@@ -144,5 +151,5 @@ export const mountDeck = (tracks = {}, audio = new Audio()) => {
     render();
   });
 
-  return { select, setBookOpen, beginIntro, endIntro, disable };
+  return { select, setBookOpen, beginIntro, endIntro, disable, updateTracks };
 };
