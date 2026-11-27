@@ -1,12 +1,24 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-invitation-edition="standard">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#101012">
     <meta name="robots" content="noindex, nofollow">
-    <meta name="description" content="Una invitación en ocho canciones para celebrar la historia de Jeisson y Ornella.">
-    <title>Elegirnos — Jeisson &amp; Ornella</title>
+    <meta name="description" content="Invitación de boda de Jeisson y Ornella.">
+    <title>Jeisson &amp; Ornella | Invitación de boda</title>
+    <script>
+      const invitation = document.documentElement;
+      const localPreview = ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname)
+        && new URLSearchParams(location.search).has("previa");
+      if (localPreview || invitation.dataset.invitationEdition === "private") {
+        invitation.dataset.weddingMedia = "";
+        if (!location.hash) {
+          invitation.dataset.introPending = "";
+          setTimeout(() => invitation.removeAttribute("data-intro-pending"), 6000);
+        }
+      }
+    </script>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <link rel="stylesheet" href="./styles.css">
     <script type="module" src="./src/main.js"></script>
@@ -40,25 +52,26 @@
     <main id="contenido">
       <section class="cover" id="portada" aria-labelledby="cover-title">
         <div class="cover__copy">
+          <span class="cover__mark" aria-hidden="true">J<span>&amp;</span>O</span>
           <p class="cover__edition">Invitación de boda</p>
-          <h1 class="cover__title" id="cover-title">Elegirnos</h1>
-          <p class="cover__names">Jeisson &amp; Ornella</p>
-          <p class="cover__line">Coincidir fue el comienzo.<br>Elegirnos, nuestra decisión.</p>
-          <p class="cover__date">Fecha tentativa · mayo o junio de 2027</p>
-          <a class="cover__entry" href="#historia">Abrir el álbum <span aria-hidden="true">↘</span></a>
+          <h1 class="cover__title" id="cover-title">Jeisson <span>&amp;</span> Ornella</h1>
+          <p class="cover__line">Nos casamos y queremos celebrarlo contigo.</p>
+          <p class="cover__date">Mayo o junio de 2027 <span>Fecha tentativa</span></p>
+          <div class="cover__actions">
+            <a class="cover__entry" href="#celebracion">Detalles de la boda</a>
+            <a class="cover__album-link" href="#historia">Escuchar nuestro álbum</a>
+          </div>
+          <p class="cover__dedication">Coincidir fue el comienzo. Elegirnos, nuestra decisión.</p>
         </div>
-
-        <figure class="cover__artwork">
-          <img src="./assets/turntable.jpg" alt="Un disco de vinilo junto a un tocadiscos" width="4896" height="3264" fetchpriority="high">
-          <figcaption>Lados A y B <span>Edición 2027</span></figcaption>
-        </figure>
       </section>
 
       <section class="album-section section-wrap" id="historia" aria-labelledby="album-title">
-        <div class="section-heading">
+        <div class="section-heading album-heading">
           <div>
-            <h2 id="album-title">El álbum</h2>
+            <p class="section-kicker">Nuestro álbum</p>
+            <h2 id="album-title">Elegirnos</h2>
           </div>
+          <img class="album-photo" src="./assets/turntable.jpg" alt="Un disco de vinilo junto a un tocadiscos" width="4896" height="3264" loading="lazy">
         </div>
 
         <div class="album-layout">

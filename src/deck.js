@@ -1,4 +1,4 @@
-export const mountDeck = (tracks = {}) => {
+export const mountDeck = (tracks = {}, audio = new Audio()) => {
   const table = document.getElementById("turntable");
   const side = document.getElementById("record-side");
   const controls = document.getElementById("deck-controls");
@@ -6,25 +6,26 @@ export const mountDeck = (tracks = {}) => {
   const mute = document.getElementById("deck-mute");
   const range = document.getElementById("deck-position");
   const status = document.getElementById("deck-status");
-  const audio = new Audio();
   audio.preload = "none";
   controls.hidden = Object.keys(tracks).length === 0;
 
   let source;
   let title;
   let enabled = false;
+  let intro = false;
   let playing = false;
   let attempt = 0;
 
   const render = () => {
-    const hasDuration = Number.isFinite(audio.duration) && audio.duration > 0;
+    const hasDuration = !intro && Number.isFinite(audio.duration) && audio.duration > 0;
     const progress = hasDuration ? Math.min(1, audio.currentTime / audio.duration) : 0;
     range.disabled = !hasDuration || !audio.seekable.length || audio.seekable.end(audio.seekable.length - 1) === 0;
     range.value = String(Math.round(progress * 1000));
     range.setAttribute("aria-valuetext", `${Math.round(progress * 100)} % de la canción`);
     table.style.setProperty("--tracking", `${progress * 30}deg`);
     table.toggleAttribute("data-playing", playing);
-    table.toggleAttribute("data-cued", playing || (Boolean(source) && audio.currentTime > 0 && !audio.ended));
+    table.toggleAttribute("data-cued", !intro && (playing || (Boolean(source) && audio.currentTime > 0 && !audio.ended)));
+    mute.setAttribute("aria-pressed", String(audio.muted));
     play.textContent = !enabled ? "Activar música" : !source ? "Desactivar música" : playing ? "Pausar" : "Reproducir";
   };
 
@@ -47,12 +48,8 @@ export const mountDeck = (tracks = {}) => {
     render();
   };
 
-  const select = (chapter, number) => {
-    side.textContent = chapter.side;
-    if (controls.hidden) return;
+  const loadSelected = () => {
     pause();
-    title = chapter.title;
-    source = tracks[number];
     if (source) audio.src = source;
     else audio.removeAttribute("src");
     audio.load();
@@ -61,13 +58,42 @@ export const mountDeck = (tracks = {}) => {
     if (enabled && source) void start();
   };
 
+  const select = (chapter, number) => {
+    side.textContent = chapter.side;
+    if (controls.hidden) return;
+    title = chapter.title;
+    source = tracks[number];
+    if (!intro) loadSelected();
+  };
+
+  const beginIntro = () => {
+    intro = true;
+    enabled = true;
+    audio.muted = false;
+    pause();
+  };
+
+  const endIntro = ({ withSound = true } = {}) => {
+    intro = false;
+    enabled = withSound;
+    loadSelected();
+  };
+
+  const disable = () => {
+    enabled = false;
+    pause();
+    status.textContent = "Música desactivada.";
+  };
+
   audio.addEventListener("playing", () => {
+    if (intro) return;
     playing = true;
     status.textContent = `Sonando · ${title}`;
     render();
   });
   for (const event of ["pause", "waiting", "ended", "emptied", "error"]) {
     audio.addEventListener(event, () => {
+      if (intro) return;
       if (event === "pause" && !audio.paused) return;
       playing = false;
       if (event === "ended") status.textContent = `Terminó · ${title}`;
@@ -99,12 +125,12 @@ export const mountDeck = (tracks = {}) => {
   });
   mute.addEventListener("click", () => {
     audio.muted = !audio.muted;
-    mute.setAttribute("aria-pressed", String(audio.muted));
+    render();
   });
   range.addEventListener("input", () => {
     audio.currentTime = Number(range.value) * audio.duration / 1000;
     render();
   });
 
-  return { select, pause };
+  return { select, beginIntro, endIntro, disable };
 };
