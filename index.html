@@ -1,1 +1,158 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Elegirnos — Ornella & Jeisson</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#101012;color:#f2efe7;font:16px/1.65 system-ui,sans-serif}header{position:sticky;top:0;background:#101012ed;z-index:3;padding:14px 5vw;display:flex;justify-content:space-between;border-bottom:1px solid #343438}a{color:inherit}.btn{background:#590f24;color:#fff;border:1px solid #a35b70;padding:12px 20px;text-decoration:none}nav a{font-size:12px;margin-left:12px;text-decoration:none}main{max-width:1000px;margin:auto}.hero{min-height:85vh;display:grid;place-content:center;text-align:center;padding:40px 20px;background:radial-gradient(ellipse at 50% 65%,#401321 0%,#101012 65%)}.eyebrow{letter-spacing:.28em;font-size:11px;color:#c3a6af;text-transform:uppercase}h1,h2,h3{font-family:Georgia,serif;font-weight:normal;line-height:1.1}h1{font-size:clamp(64px,15vw,150px);letter-spacing:-.08em;margin:20px 0}h2{font-size:clamp(36px,7vw,68px);margin:12px 0}h3{font-size:30px;margin:8px 0}.names{font:italic 32px Georgia}.disc{width:100px;height:100px;margin:25px auto;border-radius:50%;background:repeating-radial-gradient(circle,#171719 0 2px,#29292d 3px 4px);display:grid;place-items:center;border:1px solid #555}.disc span{background:#590f24;border-radius:50%;width:36px;height:36px;display:grid;place-items:center;font-size:10px}.section{padding:70px 6vw;border-top:1px solid #343438}.track{display:grid;grid-template-columns:75px 1fr;gap:20px;padding:30px 0;border-bottom:1px solid #343438}.num{font:48px Georgia;color:#b98797}.muted{color:#b9b7bc}.track a{font-size:13px;color:#e4b7c6}.actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}details{padding:15px 0;border-bottom:1px solid #343438}summary{cursor:pointer}footer{text-align:center;padding:50px;color:#aaa}#progress{position:fixed;top:0;left:0;height:3px;background:#a35b70;z-index:5;width:0}@media(max-width:500px){.track{grid-template-columns:42px 1fr;gap:12px}.num{font-size:32px}nav a{margin-left:8px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}</style></head><body><div id="progress"></div><header><strong>O / J</strong><nav><a href="#historia">Historia</a><a href="#boda">La boda</a><a href="#regalos">Regalos</a></nav></header><main><section class="hero"><div class="eyebrow">Edición especial · 2027</div><div class="disc"><span>O&J</span></div><h1>Elegirnos.</h1><div class="names">Ornella & Jeisson</div><p>Coincidir fue el comienzo. Elegirnos, nuestra decisión.</p><p class="eyebrow">Mayo o junio de 2027</p><div class="actions"><a class="btn" href="#historia">Comenzar la historia</a><a class="btn" href="#boda">Ir a la invitación</a></div></section><section class="section" id="historia"><div class="eyebrow">Lado A / Lado B</div><h2>Una historia en ocho canciones.</h2><p class="muted">Escucha cada canción si lo deseas y descubre un capítulo de nuestra historia.</p><div id="tracks"></div></section><section class="section" id="boda"><h2>Nos casamos.</h2><p>Queremos compartir contigo el comienzo de esta nueva etapa.</p><h3>Mayo o junio de 2027</h3><p class="muted">Fecha exacta, lugar, horario y código de vestimenta: por confirmar.</p><details><summary>Confirmación de asistencia</summary><p>Se habilitará cuando tengamos la fecha definitiva.</p></details></section><section class="section" id="regalos"><div class="eyebrow">Epílogo</div><h2>Lo que viene.</h2><p>Queremos emprender una nueva aventura académica y de vida en España. El mejor regalo será contar contigo en nuestra celebración. Si además deseas tener un detalle con nosotros, agradeceremos que sea en forma de lluvia de sobres.</p><p><i>Nuestras maletas tienen un límite de peso. Nuestros sueños, no.</i></p><details><summary>¿Cómo participar?</summary><p>Podrás hacerlo presencialmente o mediante transferencia. Las opciones se confirmarán más adelante.</p></details></section><footer><h3>Ornella & Jeisson</h3><p>2027</p><a href="#">Volver al comienzo</a></footer></main><script>const tracks=[['Antes de ti','Diamante Eléctrico','El prólogo','Antes de ser nosotros, éramos dos personas construyendo sus propios caminos, sin saber que algún día terminaríamos compartiéndolos.'],['Coincidir','Macaco','El encuentro','Entre tantos caminos posibles, los nuestros se encontraron. Lo que pudo ser una casualidad se convirtió en una decisión.'],['Ahí estabas tú','Carín León','El descubrimiento','Encontramos a alguien con quien compartir la vida sin dejar de ser quienes somos.'],['Miel','Lauri García','La intimidad','Las conversaciones, las risas y los pequeños momentos cotidianos también cuentan nuestra historia.'],['Cuando quieras llegar','Diamante Eléctrico','La distancia','El Atlántico puede separar nuestros días, pero no nuestros proyectos ni nuestro futuro.'],['Creo en ti','Reik','La promesa','Elegimos creer el uno en el otro y seguir construyendo una vida juntos.'],['Bailarás con alegría','Diamante Eléctrico','La celebración','Queremos bailar, brindar y celebrar con las personas que forman parte de nuestras vidas.'],['Suéltame, Bogotá','Diamante Eléctrico','El próximo capítulo','Colombia siempre será parte de nosotros. No dejamos atrás nuestra historia: la llevamos con nosotros hacia España.']];document.getElementById('tracks').innerHTML=tracks.map((t,i)=>'<article class="track"><div class="num">'+String(i+1).padStart(2,'0')+'</div><div><div class="eyebrow">'+t[2]+'</div><h3>'+t[0]+'</h3><div class="muted">'+t[1]+'</div><p>'+t[3]+'</p><a target="_blank" rel="noopener" href="https://open.spotify.com/search/'+encodeURIComponent(t[0]+' '+t[1])+'">Escuchar en Spotify ↗</a></div></article>').join('');addEventListener('scroll',()=>{document.getElementById('progress').style.width=(100*scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight))+'%'});</script></body></html>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101012">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Una invitación en ocho canciones para celebrar la historia de Ornella y Jeisson.">
+    <title>Elegirnos — Ornella &amp; Jeisson</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <div
+      class="reading-progress"
+      id="reading-progress"
+      role="progressbar"
+      aria-label="Progreso de lectura"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+      aria-valuetext="0 % recorrido"
+    >
+      <span class="reading-progress__fill" id="reading-progress-fill"></span>
+    </div>
+
+    <header class="site-header">
+      <a class="monogram" href="#portada" aria-label="Elegirnos, volver a la portada">
+        <span>O</span><span class="monogram__slash" aria-hidden="true">/</span><span>J</span>
+      </a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="#historia">Historia</a>
+        <a href="#celebracion">Boda</a>
+        <a href="#asistencia">Asistencia</a>
+        <a href="#regalos">Regalos</a>
+      </nav>
+    </header>
+
+    <main id="contenido">
+      <section class="cover" id="portada" aria-labelledby="cover-title">
+        <div class="cover__copy">
+          <p class="cover__edition">Una invitación · 2027</p>
+          <h1 class="cover__title" id="cover-title">Elegirnos<span>.</span></h1>
+          <p class="cover__names">Ornella <span>&amp;</span> Jeisson</p>
+          <p class="cover__line">Coincidir fue el comienzo.<br>Elegirnos, nuestra decisión.</p>
+          <p class="cover__date">Fecha tentativa · mayo o junio de 2027</p>
+          <a class="text-link cover__entry" href="#historia">
+            Abrir el álbum
+            <svg aria-hidden="true" viewBox="0 0 20 12" width="20" height="12">
+              <path d="M1 6h17M13 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.3" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="cover__artwork">
+          <span class="cover__spine cover__spine--top" aria-hidden="true">O&amp;J</span>
+          <a class="record-link" href="#historia" aria-label="Abrir el álbum de ocho capítulos">
+            <span class="record" aria-hidden="true">
+              <span class="record__label"><span>O&amp;J</span></span>
+              <span class="record__hole"></span>
+            </span>
+            <span class="sr-only">Abrir el álbum</span>
+          </a>
+          <span class="cover__spine cover__spine--bottom" aria-hidden="true">LADO A — LADO B</span>
+        </div>
+        <p class="cover__edge-note" aria-hidden="true">Coincidir fue el comienzo</p>
+      </section>
+
+      <section class="album-section section-wrap" id="historia" aria-labelledby="album-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Lado A / Lado B</p>
+            <h2 id="album-title">Ocho canciones.<br>Una historia.</h2>
+          </div>
+          <p class="section-heading__note">Un recorrido por los capítulos que nos trajeron hasta aquí.</p>
+        </div>
+
+        <div class="album-layout">
+          <nav class="chapter-index" id="chapter-index" aria-label="Índice de los ocho capítulos"></nav>
+          <div class="album-reader">
+            <p class="chapter-status" id="chapter-status" role="status" aria-live="polite"></p>
+            <div class="chapters" id="chapters"></div>
+            <div class="chapter-controls" aria-label="Navegación entre capítulos">
+              <a class="chapter-control chapter-control--previous" id="chapter-previous" href="#capitulo-1">
+                <span aria-hidden="true">←</span> Anterior
+              </a>
+              <a class="chapter-control chapter-control--next" id="chapter-next" href="#capitulo-2">
+                Siguiente <span aria-hidden="true">→</span>
+              </a>
+            </div>
+            <p class="album-note">Cada canción se abre en Spotify solo si quieres escucharla.</p>
+          </div>
+        </div>
+
+        <noscript>
+          <p class="noscript-note">El recorrido de capítulos necesita JavaScript. La fecha y la información de la celebración están disponibles a continuación.</p>
+        </noscript>
+      </section>
+
+      <section class="celebration-section section-wrap" id="celebracion" aria-labelledby="celebration-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">La invitación</p>
+            <h2 id="celebration-title">Nos casamos.</h2>
+          </div>
+          <p class="section-heading__note">Queremos compartir contigo el comienzo de esta nueva etapa.</p>
+        </div>
+
+        <dl class="event-details">
+          <div class="event-details__date">
+            <dt>Fecha tentativa</dt>
+            <dd>Mayo o junio<br>de 2027</dd>
+          </div>
+          <div>
+            <dt>Fecha exacta</dt>
+            <dd>Por confirmar</dd>
+          </div>
+          <div>
+            <dt>Lugar y hora</dt>
+            <dd>Por confirmar</dd>
+          </div>
+          <div>
+            <dt>Vestimenta</dt>
+            <dd>Por confirmar</dd>
+          </div>
+        </dl>
+        <div class="attendance-note" id="asistencia" tabindex="-1" aria-labelledby="attendance-title">
+          <h3 id="attendance-title">Confirmación de asistencia</h3>
+          <p>Se habilitará cuando tengamos los detalles definitivos.</p>
+        </div>
+      </section>
+
+      <section class="gifts-section section-wrap" id="regalos" aria-labelledby="gifts-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Epílogo</p>
+            <h2 id="gifts-title">Lo que viene.</h2>
+          </div>
+          <p class="section-heading__note">Una nueva aventura académica y de vida en España.</p>
+        </div>
+
+        <div class="gifts-copy">
+          <p>El mejor regalo será contar contigo en nuestra celebración. Si además deseas tener un detalle con nosotros, agradeceremos que sea en forma de lluvia de sobres.</p>
+          <p class="gifts-copy__aside">Nuestras maletas tienen un límite de peso.<br>Nuestros sueños, no.</p>
+          <p class="event-note">La lluvia de sobres es opcional. Compartiremos las opciones cuando estén definidas.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="footer-mark" href="#portada">Ornella <span>&amp;</span> Jeisson</a>
+      <p>2027</p>
+      <a class="footer-top" href="#portada">Volver a la portada <span aria-hidden="true">↑</span></a>
+    </footer>
+  </body>
+</html>
