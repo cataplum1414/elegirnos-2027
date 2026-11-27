@@ -27,7 +27,10 @@ export const mountDeck = (tracks = {}, audio = new Audio(), onTrackEnd) => {
     range.setAttribute("aria-valuetext", `${Math.round(progress * 100)} % de la canción`);
     tray.toggleAttribute("data-playing", playing);
     mute.setAttribute("aria-pressed", String(audio.muted));
-    play.textContent = !enabled ? "Activar música" : !source ? "Desactivar música" : playing ? "Pausar" : "Reproducir";
+    const playLabel = !enabled ? "Activar música" : !source ? "Desactivar música" : playing ? "Pausar" : "Reproducir";
+    play.toggleAttribute("data-playing", playing);
+    play.setAttribute("aria-label", playLabel);
+    play.title = playLabel;
   };
 
   const start = async () => {

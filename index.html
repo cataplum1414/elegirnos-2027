@@ -94,10 +94,17 @@
               </div>
               <div class="deck-controls" id="deck-controls" hidden>
                 <nav class="deck-navigation" aria-label="Cambiar de canción">
-                  <button type="button" id="deck-previous" aria-disabled="true"><span aria-hidden="true">←</span> Canción anterior</button>
-                  <button type="button" id="deck-next">Canción siguiente <span aria-hidden="true">→</span></button>
+                  <button type="button" class="deck-transport" id="deck-previous" aria-label="Canción anterior" title="Canción anterior" aria-disabled="true">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="2.4" height="14" rx="1.2"/><path d="M19 5.5 8 12l11 6.5z"/></svg>
+                  </button>
+                  <button type="button" class="deck-transport" id="deck-next" aria-label="Canción siguiente" title="Canción siguiente">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="17.6" y="5" width="2.4" height="14" rx="1.2"/><path d="m5 5.5 11 6.5-11 6.5z"/></svg>
+                  </button>
                 </nav>
-                <button type="button" id="deck-play">Activar música</button>
+                <button type="button" class="deck-transport" id="deck-play" aria-label="Activar música" title="Activar música">
+                  <svg class="deck-icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4.5 20 12 8 19.5z"/></svg>
+                  <svg class="deck-icon--pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="3.5" height="14" rx="1.2"/><rect x="14" y="5" width="3.5" height="14" rx="1.2"/></svg>
+                </button>
                 <button type="button" id="deck-mute" aria-pressed="false">Silencio</button>
                 <input id="deck-position" type="range" min="0" max="1000" value="0" aria-label="Posición en la canción" disabled>
                 <p id="deck-status" class="deck-status" role="status"></p>
