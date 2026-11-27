@@ -2,6 +2,10 @@
 
 Invitación web estática en español colombiano, concebida como un álbum de ocho capítulos. Esta primera iteración prioriza la portada, la navegación narrativa y el acceso directo a la información del evento.
 
+## Enlace público
+
+[Ver la invitación ELEGIRNOS](https://cataplum1414.github.io/elegirnos-2027/)
+
 ## Ejecutar en local
 
 Sirve el directorio raíz con cualquier servidor estático. Por ejemplo:
