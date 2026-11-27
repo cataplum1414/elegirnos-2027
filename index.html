@@ -35,9 +35,17 @@
     </noscript>
   </head>
   <body>
-    <div class="opening-scene">
-      <p role="status">Preparando la escena de Jeisson y Ornella…</p>
-      <button type="button" id="opening-skip">Ir al sobre</button>
+    <div class="opening-scene" role="region" aria-labelledby="opening-title">
+      <div class="opening-scene__content">
+        <h1 id="opening-title" tabindex="-1">Jeisson <span>&amp;</span> Ornella</h1>
+        <p id="opening-guide">Ponte los audífonos o ajusta el volumen para disfrutar la historia.</p>
+        <div class="opening-scene__actions">
+          <button type="button" id="opening-start" aria-describedby="opening-guide" disabled>Estamos listos</button>
+          <button type="button" id="opening-skip">Ir al sobre</button>
+        </div>
+        <p id="opening-status" class="opening-scene__status" role="status">Preparando la escena…</p>
+        <button type="button" id="opening-silent" hidden>Ver sin música</button>
+      </div>
     </div>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
