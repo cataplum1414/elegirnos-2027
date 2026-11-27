@@ -14,22 +14,15 @@ mountReadingProgress();
 
 if (hasMedia) {
   const releaseOpening = () => invitation.removeAttribute("data-opening-scene");
-  const skipOpening = new Promise(resolve => {
-    if (invitation.hasAttribute("data-opening-skip")) {
-      resolve("skip");
-      return;
-    }
-    document.getElementById("opening-skip")?.addEventListener("click", () => resolve("skip"), { once: true });
-  });
   if (invitation.hasAttribute("data-opening-scene")) {
     window.addEventListener("hashchange", releaseOpening, { once: true });
   }
-  const preview = await import("../private-preview/preview.js").catch(() => null);
-  if (preview) {
-    Object.assign(tracks, preview.tracks);
+  const experience = await import("../experience/index.js").catch(() => null);
+  if (experience) {
+    Object.assign(tracks, experience.tracks);
     album?.updateTrackLinks(tracks);
     deck.updateTracks();
-    preview.mount({ audio, deck, skipOpening });
+    experience.mount({ audio, deck });
   } else {
     releaseOpening();
   }

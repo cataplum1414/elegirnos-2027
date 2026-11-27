@@ -1,0 +1,242 @@
+.cover[data-envelope] {
+  position: relative;
+  isolation: isolate;
+}
+
+.cover[data-envelope="sealed"] > .cover__object { visibility: hidden; }
+.cover[data-envelope="opening"] > .cover__object {
+  animation: disc-arrives 1900ms cubic-bezier(0.2, 0.65, 0.24, 1) both;
+}
+
+.invitation-envelope {
+  --envelope-paper: url("./sobre-papel.webp");
+  --envelope-wax: url("./sello-lacre.webp");
+  --envelope-disc: url("../assets/portada-boda-cd.webp");
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: clamp(1.65rem, 6vw, 3.4rem);
+  padding: 1.2rem clamp(1.2rem, 5vw, 3rem) 2rem;
+  color: #f6e9d5;
+  background: radial-gradient(ellipse at 50% 43%, #492e39, #27202b 47%, #17151c 82%);
+}
+
+.cover[data-envelope="sealed"] .invitation-envelope { animation: envelope-in 630ms ease-out both; }
+.cover[data-envelope="opening"] .invitation-envelope { animation: envelope-out 1900ms ease both; }
+
+.invitation-envelope__parcel {
+  position: relative;
+  width: min(100%, 42rem, 106svh);
+  aspect-ratio: 1.63;
+  isolation: isolate;
+  container-type: inline-size;
+  transform: rotate(-3.8deg);
+}
+
+.invitation-envelope__back,
+.invitation-envelope__flap,
+.invitation-envelope__pocket {
+  position: absolute;
+  border: 1px solid #dcc9a9;
+  background-color: #f1e3ca;
+  background-size: auto, 100% auto;
+}
+
+.invitation-envelope__back {
+  z-index: 0;
+  inset: 0;
+  border-radius: 0.12rem;
+  background-image: linear-gradient(160deg, #fff6df36, #90724c43), var(--envelope-paper);
+  box-shadow: 0 0.35rem 0.4rem #0f0a0f70, 0 1.4rem 2.6rem #0d090d9e;
+}
+
+.invitation-envelope__insert {
+  position: absolute;
+  z-index: 1;
+  inset: 11% 9% auto;
+  display: flex;
+  align-items: flex-end;
+  height: 83%;
+  border: 1px solid #c1b8af;
+  border-left: clamp(0.3rem, 1.3cqw, 0.65rem) solid #393439;
+  border-radius: 0.14rem;
+  padding: 5% 6%;
+  opacity: 0;
+  background:
+    linear-gradient(90deg, #181218ef, #23171e52 64%, #261d240d),
+    var(--envelope-disc) 65% 63% / cover #261c24;
+  box-shadow: 0 0.38rem 1rem #130b136a, inset 0 0 0 2px #e9e2d845;
+}
+
+.invitation-envelope__insert-title {
+  color: #f8e6ca;
+  font: 800 clamp(1.1rem, 5.4cqw, 2.9rem)/0.9 var(--display);
+  text-shadow: 0.06em 0.06em #1b111a;
+}
+
+.invitation-envelope__insert-title span { display: block; color: #f0c893; }
+
+.invitation-envelope__pocket {
+  z-index: 2;
+  inset: 43% 0 0;
+  border-radius: 0 0 0.12rem 0.12rem;
+  background-image: linear-gradient(150deg, #eee3cc38 4%, #c7a98233 96%), var(--envelope-paper);
+  box-shadow: inset 0 0.135rem 0.32rem #90704922, inset 0 -1px 0 #fff7df80;
+}
+
+.invitation-envelope__flap {
+  z-index: 3;
+  inset: 0 0 auto;
+  height: 55%;
+  border-radius: 0.12rem 0.12rem 2% 2% / 0.12rem 0.12rem 4% 4%;
+  background-image: linear-gradient(172deg, #fff7e767, #9d77592a 99%), var(--envelope-paper);
+  box-shadow: 0 0.33rem 0.36rem #50321c59, inset 0 -1px 0 #fff8e7ba;
+  transform-origin: center top;
+  transform-style: preserve-3d;
+}
+
+.invitation-envelope__flap p {
+  position: absolute;
+  inset: 40% 53% auto 8%;
+  color: #49352c;
+  font: italic 400 clamp(0.86rem, 3.25cqw, 1.63rem)/1.12 var(--serif);
+  text-wrap: balance;
+  backface-visibility: hidden;
+}
+
+.invitation-envelope__flap p span { color: #815936; }
+
+.invitation-envelope__cord {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  width: clamp(0.19rem, 0.83cqw, 0.4rem);
+  border-radius: 1rem;
+  background:
+    repeating-linear-gradient(145deg, #62472f41 0 0.7px, transparent 0.8px 2.2px),
+    linear-gradient(90deg, #a18a69, #fff2d4 43%, #dfc39b 73%, #735b42);
+  box-shadow: 0.08rem 0.04rem 0.16rem #57351e6b;
+  translate: -50% 0;
+}
+
+.invitation-envelope__cord--top { inset-block: -0.3% 44%; transform-origin: top; }
+.invitation-envelope__cord--bottom { inset-block: 55% -0.3%; transform-origin: bottom; }
+
+.invitation-envelope__open {
+  position: absolute;
+  z-index: 5;
+  top: 54.5%;
+  left: 50%;
+  width: clamp(3.65rem, 19cqw, 6.75rem);
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 50%;
+  padding: 0;
+  color: #6a401f;
+  background: transparent;
+  translate: -50% -50%;
+}
+
+.invitation-envelope__open:focus-visible {
+  outline: 2px solid #5c2632;
+  outline-offset: 0.1rem;
+}
+
+.invitation-envelope__seal,
+.invitation-envelope__wax {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #583416;
+  background:
+    var(--envelope-wax) center / contain no-repeat,
+    radial-gradient(circle closest-side, #c29a63 68%, #93602f 87%, #c6a16c 96%, transparent 100%) center / 84% 84% no-repeat;
+  filter: drop-shadow(0.03rem 0.2rem 0.2rem #542c1866);
+  font: italic 400 clamp(1.14rem, 5.4cqw, 2.15rem)/1 var(--serif);
+  letter-spacing: -0.075em;
+  text-shadow: 0 1px #efcc8c;
+}
+
+.invitation-envelope__seal { transition: transform 160ms ease; }
+.cover[data-envelope="sealed"] .invitation-envelope__open:hover .invitation-envelope__seal { transform: scale(1.04); }
+.invitation-envelope__wax { visibility: hidden; }
+.invitation-envelope__wax--left {
+  clip-path: polygon(0 0, 51% 0, 49% 29%, 54% 43%, 47% 59%, 51% 72%, 48% 100%, 0 100%);
+}
+.invitation-envelope__wax--right {
+  clip-path: polygon(51% 0, 100% 0, 100% 100%, 48% 100%, 51% 72%, 47% 59%, 54% 43%, 49% 29%);
+}
+
+.invitation-envelope__hint {
+  color: #f1d8b4;
+  font: 600 clamp(1.06rem, 2vw, 1.22rem)/1.2 var(--display);
+  letter-spacing: 0.016em;
+  text-align: center;
+}
+
+[data-envelope="opening"] .invitation-envelope__open { outline: none; pointer-events: none; }
+[data-envelope="opening"] .invitation-envelope__seal { visibility: hidden; }
+[data-envelope="opening"] .invitation-envelope__wax { visibility: visible; }
+[data-envelope="opening"] .invitation-envelope__wax--left { animation: wax-fall 530ms ease-in both; --wax-x: -44%; --wax-turn: -32deg; }
+[data-envelope="opening"] .invitation-envelope__wax--right { animation: wax-fall 590ms ease-in both; --wax-x: 49%; --wax-turn: 26deg; }
+[data-envelope="opening"] .invitation-envelope__cord { animation: cord-release 490ms 80ms ease-in both; }
+[data-envelope="opening"] .invitation-envelope__cord--top { --cord-turn: -18deg; }
+[data-envelope="opening"] .invitation-envelope__cord--bottom { --cord-turn: 21deg; }
+[data-envelope="opening"] .invitation-envelope__flap { animation: flap-lift 720ms 220ms cubic-bezier(0.29, 0.52, 0.34, 1) both; }
+[data-envelope="opening"] .invitation-envelope__insert { animation: disc-pull 1110ms 415ms cubic-bezier(0.24, 0.61, 0.31, 1) both; }
+[data-envelope="opening"] .invitation-envelope__parcel { animation: parcel-settle 1900ms ease both; }
+[data-envelope="opening"] .invitation-envelope__hint { animation: envelope-out 300ms ease both; }
+
+@keyframes envelope-in {
+  from { opacity: 0.38; }
+  to { opacity: 1; }
+}
+
+@keyframes envelope-out {
+  0%, 69% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes wax-fall {
+  22% { transform: translateX(calc(var(--wax-x) * 0.10)); }
+  76% { opacity: 1; }
+  to { opacity: 0; transform: translate(var(--wax-x), 46%) rotate(var(--wax-turn)); }
+}
+
+@keyframes cord-release {
+  from { transform: rotate(0deg); }
+  64% { opacity: 0.85; }
+  to { opacity: 0; transform: translateX(0.8rem) rotate(var(--cord-turn)); }
+}
+
+@keyframes flap-lift {
+  from { transform: perspective(55rem) rotateX(0deg); }
+  0%, 57% { z-index: 3; }
+  58%, 100% { z-index: 0; }
+  to { transform: perspective(55rem) rotateX(117deg); }
+}
+
+@keyframes disc-pull {
+  0% { opacity: 0; transform: translateY(8%); }
+  15% { opacity: 1; }
+  100% { opacity: 1; transform: translateY(-63%); }
+}
+
+@keyframes parcel-settle {
+  0%, 44% { transform: rotate(-3.8deg); }
+  to { transform: translateY(15%) rotate(-1deg); }
+}
+
+@keyframes disc-arrives {
+  0%, 66% { opacity: 0; transform: translateY(-4%) scale(0.92); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cover[data-envelope] :is(.cover__object, .invitation-envelope, .invitation-envelope *) { animation: none; }
+  .invitation-envelope__seal { transition: none; }
+}

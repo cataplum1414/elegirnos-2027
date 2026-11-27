@@ -1,0 +1,114 @@
+.record-edition:has(.back-cover:not([hidden])) {
+  padding-block: clamp(0.45rem, 2vw, 1.45rem);
+}
+
+.back-cover {
+  --back-cover-art: url("../assets/portada-boda-cd.webp");
+  width: min(calc(100% - 2 * var(--case-gutter)), 64rem);
+  margin-block: 0;
+  padding: 0.28rem 0.29rem 0.32rem clamp(0.62rem, 1.7vw, 1.4rem);
+  border-color: #8e7c83;
+  background: repeating-linear-gradient(90deg, #222026 0 2px, #6a5c61 2px 3px, #38323a 3px 5px);
+  box-shadow: 0 0 0 1px #151419, 0 0.23rem #51444b, 0 1.25rem 2.25rem #0b090ba3;
+}
+
+.back-cover__nav {
+  padding-inline: clamp(0.75rem, 3.4vw, 2.2rem);
+  background: #261e26;
+  border-bottom: 1px solid #ac929653;
+}
+
+.back-cover__nav a {
+  font-size: clamp(1rem, 2.2vw, 1.17rem);
+}
+
+.back-cover__insert {
+  display: block;
+  border-color: #978b86;
+  box-shadow: none;
+}
+
+.back-cover__hero {
+  min-height: clamp(14.75rem, 24vw, 19.75rem);
+  justify-content: center;
+  gap: clamp(0.5rem, 1.6vw, 0.85rem);
+  padding: clamp(1.15rem, 4.2vw, 2.8rem);
+  border-bottom: 0.24rem solid #70233b;
+  background:
+    linear-gradient(90deg, #1b151c 22%, #1b151cdd 44%, #20151c4d 73%, #29182316),
+    var(--back-cover-art) right 76% / 66% auto no-repeat #1b151c;
+}
+
+.back-cover__couple {
+  color: #efdfcb;
+  font-size: clamp(1.07rem, 2.35vw, 1.55rem);
+}
+
+.back-cover__hero h2 {
+  font-size: clamp(2.8rem, 8vw, 5.85rem);
+  letter-spacing: -0.025em;
+  text-shadow: none;
+}
+
+.back-cover__line {
+  color: #efc587;
+  font-size: clamp(1.08rem, 2.25vw, 1.4rem);
+  line-height: 1.22;
+}
+
+.back-cover__message {
+  max-width: 34ch;
+  color: #fff3e4;
+  font-size: clamp(0.96rem, 2vw, 1.1rem);
+  line-height: 1.34;
+}
+
+.back-cover__notes {
+  display: grid;
+  grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
+  gap: clamp(0.95rem, 3vw, 1.7rem) clamp(1.2rem, 4.4vw, 3.2rem);
+  padding: clamp(1.05rem, 4.2vw, 2.8rem);
+  background:
+    repeating-linear-gradient(119deg, #644c430c 0 1px, transparent 1px 4px),
+    linear-gradient(90deg, #e9dfcc, #f3ecde 18%, #eee4d3 95%, #e6dac6);
+}
+
+.back-cover__notes > :first-child {
+  grid-row: span 2;
+  padding-right: clamp(0.85rem, 3vw, 2.35rem);
+  border-right: 1px solid #9e7076;
+}
+
+.back-cover__notes h3 { font-size: clamp(1.5rem, 3.1vw, 2.15rem); }
+.back-cover__notes .event-details__date { grid-column: 1 / -1; padding-block: 0.75rem 0.95rem; }
+.back-cover__notes .event-details > :last-child { grid-column: 1 / -1; }
+.back-cover__notes .event-details__date dd { font-size: clamp(1.45rem, 3vw, 2rem); }
+.back-cover__notes .event-details > :not(.event-details__date) dd { font-weight: 600; }
+.back-cover__notes :is(.attendance-note, .gifts-section) { margin-top: 0; }
+.back-cover__notes .attendance-note { padding-top: 0; border-top: 0; }
+.back-cover__notes .gifts-section { padding-top: 0.9rem; border-top: 1px solid #9e7076; }
+.back-cover__notes section { scroll-margin-top: 1rem; }
+
+.back-cover .site-footer {
+  padding-inline: clamp(0.75rem, 4.2vw, 2.8rem);
+  border-top: 1px solid #ac929653;
+  background: #261e26;
+}
+
+@media (max-width: 620px) {
+  .back-cover__hero {
+    background:
+      linear-gradient(90deg, #1b151cf6 0%, #1b151ce8 35%, #1d131caf 70%, #29182359),
+      var(--back-cover-art) right 76% / 101% auto no-repeat #1b151c;
+  }
+
+  .back-cover__hero h2 { font-size: clamp(2.4rem, 11.9vw, 4rem); }
+  .back-cover__message { max-width: 28ch; }
+  .back-cover__notes { display: block; }
+  .back-cover__notes > :first-child { padding-right: 0; border-right: 0; }
+  .back-cover__notes :is(.attendance-note, .gifts-section) {
+    margin-top: 0.95rem;
+    padding-top: 0.95rem;
+    border-top: 1px solid #9e7076;
+  }
+}

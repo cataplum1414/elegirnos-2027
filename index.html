@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" data-invitation-edition="standard">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,19 +9,12 @@
     <title>Los muchachos se les casan | Jeisson &amp; Ornella</title>
     <script>
       const invitation = document.documentElement;
-      const localPreview = ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname)
-        && new URLSearchParams(location.search).has("previa");
-      if (localPreview || invitation.dataset.invitationEdition === "private") {
-        invitation.dataset.weddingMedia = "";
-        if (!location.hash || location.hash === "#portada") {
-          invitation.dataset.openingScene = "";
-          window.addEventListener("error", event => {
-            if (event.target?.id === "invitation-entry") invitation.removeAttribute("data-opening-scene");
-          }, true);
-          window.addEventListener("click", event => {
-            if (event.target?.id === "opening-skip") invitation.dataset.openingSkip = "";
-          }, true);
-        }
+      invitation.dataset.weddingMedia = "";
+      if (!location.hash || location.hash === "#portada") {
+        invitation.dataset.openingScene = "";
+        window.addEventListener("error", event => {
+          if (event.target?.id === "invitation-entry") invitation.removeAttribute("data-opening-scene");
+        }, true);
       }
     </script>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
@@ -41,7 +34,6 @@
         <p id="opening-guide">Ponte los audífonos o ajusta el volumen para disfrutar la historia.</p>
         <div class="opening-scene__actions">
           <button type="button" id="opening-start" aria-describedby="opening-guide" disabled>Estamos listos</button>
-          <button type="button" id="opening-skip">Ir al sobre</button>
         </div>
         <p id="opening-status" class="opening-scene__status" role="status">Preparando la escena…</p>
         <button type="button" id="opening-silent" hidden>Ver sin música</button>
