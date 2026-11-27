@@ -29,7 +29,7 @@ const createSpotifyLink = ({ title, artist }) => {
   return link;
 };
 
-const createChapter = (chapter, index) => {
+const createChapter = (chapter, index, tracks) => {
   const number = index + 1;
   const article = createElement("article", "chapter-card");
   article.id = `capitulo-${number}`;
@@ -59,7 +59,7 @@ const createChapter = (chapter, index) => {
   story.append(title);
   story.append(createElement("p", "chapter-artist", chapter.artist));
   story.append(createElement("p", "chapter-copy", chapter.story));
-  story.append(createSpotifyLink(chapter));
+  if (!tracks[number]) story.append(createSpotifyLink(chapter));
 
   article.append(art, story);
   return article;
@@ -78,34 +78,63 @@ const createIndexLink = (chapter, index) => {
   return link;
 };
 
-export const mountAlbum = ({ onChapter }) => {
+export const mountAlbum = ({ onChapter, onOpen, tracks = {} }) => {
+  const cover = document.getElementById("portada");
+  const album = document.getElementById("historia");
+  const coverLink = cover?.querySelector(".cover__entry");
+  const stage = cover?.closest(".record-edition");
+  const albumTitle = document.getElementById("album-title");
   const index = document.getElementById("chapter-index");
   const container = document.getElementById("chapters");
   const status = document.getElementById("chapter-status");
   const previous = document.getElementById("chapter-previous");
   const next = document.getElementById("chapter-next");
 
-  if (!index || !container || !status || !previous || !next) return;
+  if (!coverLink || !stage || !album || !albumTitle || !index || !container || !status || !previous || !next) return;
 
   const links = chapters.map(createIndexLink);
-  const cards = chapters.map(createChapter);
+  const cards = chapters.map((chapter, cardIndex) => createChapter(chapter, cardIndex, tracks));
   index.append(...links);
   container.append(...cards);
 
   let activeIndex = -1;
+  let open = null;
+
+  const setOpen = (value, { animate = false, focus = false } = {}) => {
+    if (value !== open) {
+      open = value;
+      cover.hidden = open;
+      album.hidden = !open;
+      coverLink.setAttribute("aria-expanded", String(open));
+      album.classList.toggle("is-unfolding", open && animate);
+      onOpen(open);
+    }
+    if (focus) {
+      (open ? albumTitle : coverLink).focus({ preventScroll: true });
+      stage.scrollIntoView({ block: "start", behavior: "instant" });
+    }
+  };
+
+  album.querySelector(".album-flap").addEventListener("animationend", () => {
+    album.classList.remove("is-unfolding");
+  });
 
   const activate = (requestedIndex, { updateHash = false, animate = true } = {}) => {
     const nextIndex = Math.max(0, Math.min(chapters.length - 1, requestedIndex));
     if (nextIndex === activeIndex) return;
+    const backwards = nextIndex < activeIndex;
     activeIndex = nextIndex;
 
     cards.forEach((card, cardIndex) => {
       card.hidden = cardIndex !== activeIndex;
-      card.classList.remove("is-entering");
+      card.classList.remove("is-entering", "is-entering-back");
     });
 
     const activeCard = cards[activeIndex];
-    if (animate) activeCard.classList.add("is-entering");
+    if (animate) {
+      activeCard.classList.add("is-entering");
+      activeCard.classList.toggle("is-entering-back", backwards);
+    }
 
     links.forEach((link, linkIndex) => {
       if (linkIndex === activeIndex) {
@@ -161,17 +190,33 @@ export const mountAlbum = ({ onChapter }) => {
   });
 
   const openHash = () => {
-    const match = location.hash.match(/^#capitulo-(\d+)$/);
+    const hash = location.hash;
+    const match = hash.match(/^#capitulo-(\d+)$/);
     const requestedIndex = Number(match?.[1]) - 1;
-    if (!Number.isInteger(requestedIndex) || requestedIndex < 0 || requestedIndex >= chapters.length) return false;
-    activate(requestedIndex, { animate: false });
-    return true;
+    if (Number.isInteger(requestedIndex) && requestedIndex >= 0 && requestedIndex < chapters.length) {
+      activate(requestedIndex, { animate: false });
+      setOpen(true);
+    } else if (hash === "#historia") {
+      const savedPage = history.state?.albumPage ?? 0;
+      activate(savedPage, { animate: false });
+      setOpen(true);
+    } else if (!hash || hash === "#portada" || open === null) {
+      setOpen(false);
+    }
   };
 
-  if (openHash()) {
-    requestAnimationFrame(() => status.scrollIntoView({ block: "start" }));
-  } else {
-    activate(0, { animate: false });
-  }
+  document.addEventListener("click", event => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
+    const link = event.target.closest('a[href="#historia"], a[href="#portada"]');
+    if (!link) return;
+    const opening = link.hash === "#historia";
+    event.preventDefault();
+    if (location.hash !== link.hash) history.pushState({ albumPage: activeIndex }, "", link.hash);
+    setOpen(opening, { animate: opening, focus: true });
+  });
+
+  activate(0, { animate: false });
+  openHash();
+  if (open) requestAnimationFrame(() => stage.scrollIntoView({ block: "start", behavior: "instant" }));
   window.addEventListener("hashchange", openHash);
 };

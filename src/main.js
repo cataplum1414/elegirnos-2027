@@ -10,7 +10,7 @@ const preview = invitation.hasAttribute("data-wedding-media")
 // Keep the same media element from the opening scene through the album.
 const audio = new Audio();
 const deck = mountDeck(preview?.tracks, audio);
-mountAlbum({ onChapter: deck.select });
+mountAlbum({ onChapter: deck.select, onOpen: deck.setBookOpen, tracks: preview?.tracks });
 mountReadingProgress();
 const initialIntro = invitation.hasAttribute("data-intro-pending");
 if (preview) preview.mount({ audio, deck, initialIntro });

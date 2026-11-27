@@ -1,6 +1,6 @@
 # ELEGIRNOS — Jeisson & Ornella
 
-Invitación web estática en español colombiano, concebida como un disco de dos lados con un libreto de ocho capítulos.
+Invitación de boda en español colombiano. Abre la funda de vinilo para desplegar el disco y hojear los ocho capítulos del cancionero, organizados en lados A y B.
 
 ## Enlace público
 
@@ -24,13 +24,13 @@ Si la copia contiene material de revisión, ejecuta `node private-preview/serve.
 - `favicon.svg`: monograma J&O para la pestaña del navegador.
 - `styles.css`: identidad visual, responsive, foco visible y movimiento reducido.
 - `src/data/chapters.js`: catálogo musical y textos narrativos.
-- `src/album.js`: generación y navegación accesible de capítulos.
-- `src/deck.js`: estado del tocadiscos y controles para las pistas disponibles en la vista local.
+- `src/album.js`: apertura de la funda y navegación accesible por el cancionero.
+- `src/deck.js`: estado del tocadiscos y controles de las pistas en la edición privada.
 - `src/progress.js`: progreso de lectura.
 - `src/main.js`: inicialización e interacción de portada.
 
-La fecha, el lugar, la hora y la vestimenta siguen pendientes de confirmación. Los enlaces musicales abren búsquedas voluntarias en Spotify; no se reproduce audio automáticamente. Las fotografías personales y los datos de regalos se incorporarán únicamente cuando estén autorizados y confirmados.
+La edición pública enlaza a búsquedas musicales en Spotify. En la edición privada, al activar el sonido se reproduce la canción de la página abierta. La fecha, el lugar, la hora y la vestimenta siguen pendientes de confirmación. Las fotografías personales y los datos de regalos se incorporarán únicamente cuando estén autorizados y confirmados.
 
 El orden musical y los textos narrativos son una propuesta editorial pendiente de validación por la pareja antes de la publicación definitiva.
 
-Las dos fotografías tienen sus créditos y licencias en el pie de página. Las fuentes Barlow Condensed y Source Serif 4 se sirven desde `assets/fonts/` con sus licencias OFL.
+La fotografía de Bogotá tiene sus créditos y licencia en el pie de página. Las fuentes Barlow Condensed y Source Serif 4 se sirven desde `assets/fonts/` con sus licencias OFL.

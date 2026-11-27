@@ -39,82 +39,75 @@
       <span class="reading-progress__fill" id="reading-progress-fill"></span>
     </div>
 
-    <header class="site-header">
-      <a class="monogram" href="#portada" aria-label="Elegirnos, volver a la portada">J&amp;O</a>
-      <nav class="site-nav" aria-label="Navegación principal">
-        <a href="#historia">Historia</a>
-        <a href="#celebracion">Boda</a>
-        <a href="#asistencia">Asistencia</a>
-        <a href="#regalos">Regalos</a>
-      </nav>
-    </header>
-
     <main id="contenido">
-      <section class="cover" id="portada" aria-labelledby="cover-title">
-        <div class="cover__copy">
-          <span class="cover__mark" aria-hidden="true">J<span>&amp;</span>O</span>
-          <p class="cover__edition">Invitación de boda</p>
-          <h1 class="cover__title" id="cover-title">Jeisson <span>&amp;</span> Ornella</h1>
-          <p class="cover__line">Nos casamos y queremos celebrarlo contigo.</p>
-          <p class="cover__date">Mayo o junio de 2027 <span>Fecha tentativa</span></p>
+      <div class="record-edition">
+        <section class="cover" id="portada" aria-labelledby="cover-title">
+          <div class="cover__object">
+            <span class="cover__record" aria-hidden="true"></span>
+            <div class="cover__copy">
+              <span class="cover__spine" aria-hidden="true">Elegirnos</span>
+              <p class="cover__edition">Invitación de boda</p>
+              <h1 class="cover__title" id="cover-title">Jeisson <span>&amp;</span> Ornella</h1>
+              <p class="cover__dedication">Coincidir fue el comienzo.<br>Elegirnos, nuestra decisión.</p>
+              <a class="cover__entry" href="#historia" aria-controls="historia">Abrir el disco</a>
+              <p class="cover__date"><span>Fecha tentativa</span> Mayo o junio de 2027</p>
+            </div>
+          </div>
           <div class="cover__actions">
-            <a class="cover__entry" href="#celebracion">Detalles de la boda</a>
-            <a class="cover__album-link" href="#historia">Escuchar nuestro álbum</a>
+            <a class="cover__album-link" href="#celebracion">Detalles de la boda</a>
           </div>
-          <p class="cover__dedication">Coincidir fue el comienzo. Elegirnos, nuestra decisión.</p>
-        </div>
-      </section>
+        </section>
 
-      <section class="album-section section-wrap" id="historia" aria-labelledby="album-title">
-        <div class="section-heading album-heading">
-          <div>
-            <p class="section-kicker">Nuestro álbum</p>
-            <h2 id="album-title">Elegirnos</h2>
+        <section class="album-section" id="historia" aria-labelledby="album-title">
+          <div class="album-tools">
+            <a href="#portada" id="close-album">Cerrar disco</a>
+            <a href="#celebracion">Detalles de la boda</a>
           </div>
-          <img class="album-photo" src="./assets/turntable.jpg" alt="Un disco de vinilo junto a un tocadiscos" width="4896" height="3264" loading="lazy">
-        </div>
-
-        <div class="album-layout">
-          <div class="listening-station">
-            <div class="turntable" id="turntable" aria-hidden="true">
-              <div class="turntable__plate">
-                <div class="turntable__disc">
-                  <span class="turntable__label">J&amp;O<small id="record-side">Lado A</small></span>
+          <div class="album-layout">
+            <div class="listening-station">
+              <p class="record-label">Elegirnos <span>Jeisson &amp; Ornella</span></p>
+              <div class="turntable" id="turntable" aria-hidden="true">
+                <div class="turntable__plate">
+                  <div class="turntable__disc">
+                    <span class="turntable__label">J&amp;O<small id="record-side">Lado A</small></span>
+                  </div>
                 </div>
+                <div class="turntable__pivot"></div>
+                <span class="turntable__arm"></span>
+                <span class="turntable__light"></span>
               </div>
-              <div class="turntable__pivot"></div>
-              <span class="turntable__arm"></span>
-              <span class="turntable__light"></span>
+              <div class="deck-controls" id="deck-controls" hidden>
+                <button type="button" id="deck-play">Activar música</button>
+                <button type="button" id="deck-mute" aria-pressed="false">Silencio</button>
+                <input id="deck-position" type="range" min="0" max="1000" value="0" aria-label="Posición en la canción" disabled>
+                <p id="deck-status" class="deck-status" role="status"></p>
+              </div>
+              <details class="tracklist" open>
+                <summary>Índice A / B</summary>
+                <nav class="chapter-index" id="chapter-index" aria-label="Índice de los ocho capítulos"></nav>
+              </details>
             </div>
-            <div class="deck-controls" id="deck-controls" hidden>
-              <button type="button" id="deck-play">Activar música</button>
-              <button type="button" id="deck-mute" aria-pressed="false">Silencio</button>
-              <input id="deck-position" type="range" min="0" max="1000" value="0" aria-label="Posición en la canción" disabled>
-              <p id="deck-status" class="deck-status" role="status"></p>
+            <div class="album-reader">
+              <h2 class="album-reader__title" id="album-title" tabindex="-1">Cancionero</h2>
+              <p class="chapter-status" id="chapter-status" role="status" aria-live="polite"></p>
+              <div class="chapters" id="chapters"></div>
+              <nav class="chapter-controls" aria-label="Páginas del libreto">
+                <a class="chapter-control" id="chapter-previous" href="#capitulo-1" hidden>
+                  <span aria-hidden="true">←</span> Página anterior
+                </a>
+                <a class="chapter-control chapter-control--next" id="chapter-next" href="#capitulo-2" hidden>
+                  Página siguiente <span aria-hidden="true">→</span>
+                </a>
+              </nav>
             </div>
-            <details class="tracklist" open>
-              <summary>Lista de canciones</summary>
-              <nav class="chapter-index" id="chapter-index" aria-label="Índice de los ocho capítulos"></nav>
-            </details>
+            <div class="album-flap" aria-hidden="true"><span>Elegirnos</span></div>
           </div>
-          <div class="album-reader">
-            <p class="chapter-status" id="chapter-status" role="status" aria-live="polite"></p>
-            <div class="chapters" id="chapters"></div>
-            <nav class="chapter-controls" aria-label="Páginas del libreto">
-              <a class="chapter-control" id="chapter-previous" href="#capitulo-1" hidden>
-                <span aria-hidden="true">←</span> Página anterior
-              </a>
-              <a class="chapter-control chapter-control--next" id="chapter-next" href="#capitulo-2" hidden>
-                Página siguiente <span aria-hidden="true">→</span>
-              </a>
-            </nav>
-          </div>
-        </div>
 
-        <noscript>
-          <p class="noscript-note">El recorrido de capítulos necesita JavaScript. La fecha y la información de la celebración están disponibles a continuación.</p>
-        </noscript>
-      </section>
+          <noscript>
+            <p class="noscript-note">El recorrido de capítulos necesita JavaScript. La fecha y la información de la celebración están disponibles a continuación.</p>
+          </noscript>
+        </section>
+      </div>
 
       <section class="celebration-section section-wrap" id="celebracion" aria-labelledby="celebration-title">
         <div class="section-heading">
@@ -168,9 +161,12 @@
 
     <footer class="site-footer">
       <a class="footer-mark" href="#portada">Jeisson <span>&amp;</span> Ornella</a>
+      <nav aria-label="Detalles de la boda" class="footer-nav">
+        <a href="#asistencia">Asistencia</a>
+        <a href="#regalos">Regalos</a>
+      </nav>
       <details class="photo-credits">
         <summary>Créditos de imágenes</summary>
-        <p><a href="https://commons.wikimedia.org/wiki/File:Top_view_of_a_turntable_(Unsplash).jpg">Tocadiscos, Mink Mingle</a> · <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
         <p><a href="https://commons.wikimedia.org/wiki/File:Lluvia_en_el_Centro_Internacional_de_Bogot%C3%A1_por_la_noche.JPG">Bogotá, Peter Angritt</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Recorte en pantalla.</p>
       </details>
       <a class="footer-top" href="#portada">Volver a la portada <span aria-hidden="true">↑</span></a>

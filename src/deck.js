@@ -13,6 +13,7 @@ export const mountDeck = (tracks = {}, audio = new Audio()) => {
   let title;
   let enabled = false;
   let intro = false;
+  let bookOpen = false;
   let playing = false;
   let attempt = 0;
 
@@ -50,12 +51,12 @@ export const mountDeck = (tracks = {}, audio = new Audio()) => {
 
   const loadSelected = () => {
     pause();
-    if (source) audio.src = source;
+    if (bookOpen && source) audio.src = source;
     else audio.removeAttribute("src");
     audio.load();
     status.textContent = source ? title : "Esta pista está disponible mediante el enlace a Spotify.";
     render();
-    if (enabled && source) void start();
+    if (bookOpen && enabled && source) void start();
   };
 
   const select = (chapter, number) => {
@@ -63,7 +64,13 @@ export const mountDeck = (tracks = {}, audio = new Audio()) => {
     if (controls.hidden) return;
     title = chapter.title;
     source = tracks[number];
-    if (!intro) loadSelected();
+    if (!intro && bookOpen) loadSelected();
+  };
+
+  const setBookOpen = value => {
+    if (bookOpen === value) return;
+    bookOpen = value;
+    if (!intro && !controls.hidden) loadSelected();
   };
 
   const beginIntro = () => {
@@ -132,5 +139,5 @@ export const mountDeck = (tracks = {}, audio = new Audio()) => {
     render();
   });
 
-  return { select, beginIntro, endIntro, disable };
+  return { select, setBookOpen, beginIntro, endIntro, disable };
 };
