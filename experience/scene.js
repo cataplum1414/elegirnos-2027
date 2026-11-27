@@ -74,7 +74,6 @@ const stage = `
 
 export const mount = ({ audio, deck }) => {
   const root = document.documentElement;
-  const envelope = mountEnvelope(document.getElementById("portada"));
   const style = document.createElement("link");
   style.rel = "stylesheet";
   style.href = asset("scene.css");
@@ -137,6 +136,9 @@ export const mount = ({ audio, deck }) => {
   let frameReady = false;
   let entryAttempt = 0;
   let audioNotice;
+  const envelope = mountEnvelope(document.getElementById("portada"), {
+    canPlaySound: () => musicWanted && heardMusic
+  });
 
   const updateSound = () => {
     sound.textContent = musicWanted ? "Silenciar música" : "Activar música";

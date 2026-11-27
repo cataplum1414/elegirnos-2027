@@ -1,11 +1,12 @@
 .cover[data-envelope] {
+  --envelope-reveal: 3300ms;
   position: relative;
   isolation: isolate;
 }
 
 .cover[data-envelope="sealed"] > .cover__object { visibility: hidden; }
 .cover[data-envelope="opening"] > .cover__object {
-  animation: disc-arrives 1900ms cubic-bezier(0.2, 0.65, 0.24, 1) both;
+  animation: disc-arrives var(--envelope-reveal) ease both;
 }
 
 .invitation-envelope {
@@ -25,7 +26,7 @@
 }
 
 .cover[data-envelope="sealed"] .invitation-envelope { animation: envelope-in 630ms ease-out both; }
-.cover[data-envelope="opening"] .invitation-envelope { animation: envelope-out 1900ms ease both; }
+.cover[data-envelope="opening"] .invitation-envelope { animation: envelope-out var(--envelope-reveal) ease both; }
 
 .invitation-envelope__parcel {
   position: relative;
@@ -65,10 +66,21 @@
   border-radius: 0.14rem;
   padding: 5% 6%;
   opacity: 0;
+  overflow: hidden;
   background:
     linear-gradient(90deg, #181218ef, #23171e52 64%, #261d240d),
     var(--envelope-disc) 65% 63% / cover #261c24;
   box-shadow: 0 0.38rem 1rem #130b136a, inset 0 0 0 2px #e9e2d845;
+}
+
+.invitation-envelope__insert::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(110deg, transparent 33%, #f3c68a45 45%, #fff1c0a0 50%, #bd77a336 55%, transparent 67%);
+  mix-blend-mode: screen;
+  transform: translateX(-100%);
+  pointer-events: none;
 }
 
 .invitation-envelope__insert-title {
@@ -163,13 +175,49 @@
 
 .invitation-envelope__seal { transition: transform 160ms ease; }
 .cover[data-envelope="sealed"] .invitation-envelope__open:hover .invitation-envelope__seal { transform: scale(1.04); }
-.invitation-envelope__wax { visibility: hidden; }
+.invitation-envelope__wax { opacity: 0; }
 .invitation-envelope__wax--left {
   clip-path: polygon(0 0, 51% 0, 49% 29%, 54% 43%, 47% 59%, 51% 72%, 48% 100%, 0 100%);
 }
 .invitation-envelope__wax--right {
   clip-path: polygon(51% 0, 100% 0, 100% 100%, 48% 100%, 51% 72%, 47% 59%, 54% 43%, 49% 29%);
 }
+
+.invitation-envelope__open::after {
+  position: absolute;
+  inset: 10%;
+  content: "";
+  opacity: 0;
+  background: linear-gradient(#fff0bd, #ffe4a3 36%, #ad632e 72%, #ffe2ac);
+  clip-path: polygon(50% 0, 48% 29%, 55% 43%, 48% 59%, 52% 72%, 48% 100%, 45% 100%, 49% 72%, 44% 59%, 51% 43%, 45% 29%, 48% 0);
+  transform-origin: top;
+  pointer-events: none;
+}
+
+.invitation-envelope__chips {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.invitation-envelope__chips i {
+  position: absolute;
+  top: var(--chip-top, 46%);
+  left: 49%;
+  width: var(--chip-size, 10%);
+  aspect-ratio: 1.4;
+  opacity: 0;
+  background: linear-gradient(145deg, #f6d6a2 5%, #b98142 42%, #603719);
+  clip-path: polygon(3% 25%, 59% 0, 100% 54%, 61% 100%, 19% 77%);
+}
+
+.invitation-envelope__chips i:nth-child(1) { --chip-x: -6em; --chip-y: -4em; --chip-spin: -170deg; --chip-top: 31%; }
+.invitation-envelope__chips i:nth-child(2) { --chip-x: 6em; --chip-y: -3em; --chip-spin: 230deg; --chip-size: 9%; }
+.invitation-envelope__chips i:nth-child(3) { --chip-x: -7em; --chip-y: -1em; --chip-spin: 100deg; --chip-size: 7%; }
+.invitation-envelope__chips i:nth-child(4) { --chip-x: 8em; --chip-y: 3em; --chip-spin: 180deg; --chip-top: 69%; }
+.invitation-envelope__chips i:nth-child(5) { --chip-x: -5em; --chip-y: 5em; --chip-spin: -130deg; --chip-top: 69%; }
+.invitation-envelope__chips i:nth-child(6) { --chip-x: 3em; --chip-y: 6em; --chip-spin: 270deg; --chip-size: 7%; }
+.invitation-envelope__chips i:nth-child(7) { --chip-x: 2em; --chip-y: -6em; --chip-spin: -250deg; --chip-top: 31%; --chip-size: 7%; }
 
 .invitation-envelope__hint {
   color: #f1d8b4;
@@ -179,17 +227,19 @@
 }
 
 [data-envelope="opening"] .invitation-envelope__open { outline: none; pointer-events: none; }
-[data-envelope="opening"] .invitation-envelope__seal { visibility: hidden; }
-[data-envelope="opening"] .invitation-envelope__wax { visibility: visible; }
-[data-envelope="opening"] .invitation-envelope__wax--left { animation: wax-fall 530ms ease-in both; --wax-x: -44%; --wax-turn: -32deg; }
-[data-envelope="opening"] .invitation-envelope__wax--right { animation: wax-fall 590ms ease-in both; --wax-x: 49%; --wax-turn: 26deg; }
-[data-envelope="opening"] .invitation-envelope__cord { animation: cord-release 490ms 80ms ease-in both; }
+[data-envelope="opening"] .invitation-envelope__seal { animation: seal-press 280ms ease-out forwards; }
+[data-envelope="opening"] .invitation-envelope__open::after { animation: seal-crack 235ms 215ms ease both; }
+[data-envelope="opening"] .invitation-envelope__chips i { animation: wax-chip 760ms 280ms cubic-bezier(0.17, 0.7, 0.43, 1) forwards; }
+[data-envelope="opening"] .invitation-envelope__wax--left { animation: wax-fall 760ms 280ms ease-out forwards; --wax-x: -91%; --wax-turn: -55deg; }
+[data-envelope="opening"] .invitation-envelope__wax--right { animation: wax-fall 820ms 280ms ease-out forwards; --wax-x: 105%; --wax-turn: 48deg; }
+[data-envelope="opening"] .invitation-envelope__cord { animation: cord-release 680ms 315ms ease-in both; }
 [data-envelope="opening"] .invitation-envelope__cord--top { --cord-turn: -18deg; }
 [data-envelope="opening"] .invitation-envelope__cord--bottom { --cord-turn: 21deg; }
-[data-envelope="opening"] .invitation-envelope__flap { animation: flap-lift 720ms 220ms cubic-bezier(0.29, 0.52, 0.34, 1) both; }
-[data-envelope="opening"] .invitation-envelope__insert { animation: disc-pull 1110ms 415ms cubic-bezier(0.24, 0.61, 0.31, 1) both; }
-[data-envelope="opening"] .invitation-envelope__parcel { animation: parcel-settle 1900ms ease both; }
-[data-envelope="opening"] .invitation-envelope__hint { animation: envelope-out 300ms ease both; }
+[data-envelope="opening"] .invitation-envelope__flap { animation: flap-lift 850ms 510ms cubic-bezier(0.29, 0.52, 0.34, 1) both; }
+[data-envelope="opening"] .invitation-envelope__insert { animation: disc-pull 1170ms 1000ms cubic-bezier(0.24, 0.61, 0.31, 1) both; }
+[data-envelope="opening"] .invitation-envelope__insert::after { animation: disc-glint 900ms 1630ms ease-out both; }
+[data-envelope="opening"] .invitation-envelope__parcel { animation: parcel-settle 2270ms ease both; }
+[data-envelope="opening"] .invitation-envelope__hint { animation: envelope-out 360ms ease both; }
 
 @keyframes envelope-in {
   from { opacity: 0.38; }
@@ -197,14 +247,37 @@
 }
 
 @keyframes envelope-out {
-  0%, 69% { opacity: 1; }
+  0%, 75% { opacity: 1; }
   100% { opacity: 0; }
 }
 
+@keyframes seal-press {
+  0% { transform: scale(1); }
+  61% { transform: scale(0.92) rotate(-5deg); }
+  99% { opacity: 1; }
+  to { opacity: 0; transform: scale(1); }
+}
+
+@keyframes seal-crack {
+  0% { opacity: 0; transform: scaleY(0.08); }
+  38%, 57% { opacity: 1; transform: scaleY(1); }
+  to { opacity: 0; }
+}
+
 @keyframes wax-fall {
-  22% { transform: translateX(calc(var(--wax-x) * 0.10)); }
-  76% { opacity: 1; }
-  to { opacity: 0; transform: translate(var(--wax-x), 46%) rotate(var(--wax-turn)); }
+  from { opacity: 1; }
+  31% { transform: translate(calc(var(--wax-x) * 0.53), -15%) rotate(calc(var(--wax-turn) * 0.55)); }
+  64% { opacity: 1; }
+  to { opacity: 0; transform: translate(var(--wax-x), 142%) rotate(var(--wax-turn)); }
+}
+
+@keyframes wax-chip {
+  from { opacity: 1; transform: rotate(0); }
+  49% {
+    opacity: 1;
+    transform: translate(calc(var(--chip-x) * 0.66), calc(var(--chip-y) * 0.55 - 1.2em)) rotate(calc(var(--chip-spin) * 0.65));
+  }
+  to { opacity: 0; transform: translate(var(--chip-x), calc(var(--chip-y) + 2.2em)) rotate(var(--chip-spin)); }
 }
 
 @keyframes cord-release {
@@ -221,18 +294,26 @@
 }
 
 @keyframes disc-pull {
-  0% { opacity: 0; transform: translateY(8%); }
+  0% { opacity: 0; transform: translateY(8%) rotate(-1deg); }
   15% { opacity: 1; }
-  100% { opacity: 1; transform: translateY(-63%); }
+  100% { opacity: 1; transform: translateY(-77%) rotate(3.2deg); }
+}
+
+@keyframes disc-glint {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
 }
 
 @keyframes parcel-settle {
-  0%, 44% { transform: rotate(-3.8deg); }
-  to { transform: translateY(15%) rotate(-1deg); }
+  0%, 9% { transform: rotate(-3.8deg); }
+  16% { transform: translateY(1.5%) rotate(-5deg); }
+  27% { transform: rotate(-3.4deg); }
+  52% { transform: translateY(4%) rotate(-3deg); }
+  to { transform: translateY(23%) rotate(-2deg); }
 }
 
 @keyframes disc-arrives {
-  0%, 66% { opacity: 0; transform: translateY(-4%) scale(0.92); }
+  0%, 75% { opacity: 0; transform: translateY(-3%) scale(0.96); }
   to { opacity: 1; transform: none; }
 }
 

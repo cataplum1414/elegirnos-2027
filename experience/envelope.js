@@ -1,4 +1,4 @@
-export const mountEnvelope = cover => {
+export const mountEnvelope = (cover, { canPlaySound }) => {
   const disc = cover.querySelector(".cover__object");
   const title = cover.querySelector(".cover__title");
   const envelope = document.createElement("section");
@@ -19,6 +19,9 @@ export const mountEnvelope = cover => {
         <span class="invitation-envelope__seal" aria-hidden="true">J&amp;O</span>
         <span class="invitation-envelope__wax invitation-envelope__wax--left" aria-hidden="true">J&amp;O</span>
         <span class="invitation-envelope__wax invitation-envelope__wax--right" aria-hidden="true">J&amp;O</span>
+        <span class="invitation-envelope__chips" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </span>
       </button>
     </div>
     <p class="invitation-envelope__hint" aria-hidden="true">Rompe el sello para abrir</p>`;
@@ -34,11 +37,16 @@ export const mountEnvelope = cover => {
 
   const seal = envelope.querySelector(".invitation-envelope__open");
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const effect = document.createElement("audio");
+  effect.preload = "none";
+  effect.src = new URL("./apertura-lacre.wav", import.meta.url).href;
+  effect.volume = 0.72;
   let finishTimer;
 
   const finish = ({ focus = true } = {}) => {
     if (envelope.hidden) return;
     clearTimeout(finishTimer);
+    effect.pause();
     envelope.hidden = true;
     delete cover.dataset.envelope;
     seal.removeAttribute("aria-disabled");
@@ -57,7 +65,12 @@ export const mountEnvelope = cover => {
     }
     cover.dataset.envelope = "opening";
     seal.setAttribute("aria-disabled", "true");
-    finishTimer = setTimeout(finish, 2160);
+    if (canPlaySound()) {
+      effect.currentTime = 0;
+      void effect.play().catch(() => {});
+    }
+    // Backstop in case the browser doesn't dispatch the reveal's animationend.
+    finishTimer = setTimeout(finish, 3600);
   });
 
   envelope.addEventListener("animationend", event => {
@@ -77,6 +90,7 @@ export const mountEnvelope = cover => {
         disc.inert = true;
         cover.dataset.envelope = "sealed";
         envelope.hidden = false;
+        if (canPlaySound() && !reducedMotion.matches) effect.preload = "auto";
         window.scrollTo({ top: 0, behavior: "instant" });
       }
       if (focus) seal.focus({ preventScroll: true });
