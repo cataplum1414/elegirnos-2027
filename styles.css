@@ -366,6 +366,7 @@ html[data-opening-scene] .opening-scene {
 .chapter-index__number { white-space: nowrap; color: #e1c0cd; }
 .chapter-index__link[aria-current="step"] { color: var(--paper); background: var(--wine); }
 .chapter-index__link:hover { text-decoration: underline; }
+.chapter-index__link[aria-disabled="true"] { opacity: 0.57; cursor: default; text-decoration: none; }
 
 .album-reader {
   position: relative;

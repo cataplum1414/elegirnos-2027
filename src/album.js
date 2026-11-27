@@ -104,6 +104,7 @@ export const mountAlbum = ({ onChapter, onOpen }) => {
   container.append(...cards);
 
   let activeIndex = -1;
+  let furthestIndex = -1;
   let view = null;
   const panels = { cover, album, back };
   const entryPoints = { cover: coverLink, album: albumTitle, back: backTitle };
@@ -129,9 +130,10 @@ export const mountAlbum = ({ onChapter, onOpen }) => {
 
   const activate = (requestedIndex, { updateHash = false, animate = true } = {}) => {
     const nextIndex = Math.max(0, Math.min(chapters.length - 1, requestedIndex));
-    if (nextIndex === activeIndex) return;
+    if (nextIndex === activeIndex || nextIndex > furthestIndex + 1) return;
     const backwards = nextIndex < activeIndex;
     activeIndex = nextIndex;
+    furthestIndex = Math.max(furthestIndex, activeIndex);
 
     cards.forEach((card, cardIndex) => {
       card.hidden = cardIndex !== activeIndex;
@@ -145,6 +147,7 @@ export const mountAlbum = ({ onChapter, onOpen }) => {
     }
 
     links.forEach((link, linkIndex) => {
+      link.setAttribute("aria-disabled", String(linkIndex > furthestIndex + 1));
       if (linkIndex === activeIndex) {
         link.setAttribute("aria-current", "step");
       } else {
@@ -175,6 +178,7 @@ export const mountAlbum = ({ onChapter, onOpen }) => {
     const requestedIndex = Number(link.getAttribute("href").slice("#capitulo-".length)) - 1;
     if (!Number.isInteger(requestedIndex) || requestedIndex < 0 || requestedIndex >= chapters.length) return;
     event.preventDefault();
+    if (requestedIndex > furthestIndex + 1) return;
     activate(requestedIndex, { updateHash: true });
     cards[activeIndex].querySelector("h3").focus({ preventScroll: true });
     status.scrollIntoView({ block: "nearest" });
@@ -190,11 +194,12 @@ export const mountAlbum = ({ onChapter, onOpen }) => {
     const current = links.indexOf(document.activeElement);
     if (current < 0) return;
 
+    const lastAvailable = Math.min(links.length - 1, furthestIndex + 1);
     let destination = null;
-    if (event.key === "ArrowRight" || event.key === "ArrowDown") destination = Math.min(links.length - 1, current + 1);
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") destination = Math.min(lastAvailable, current + 1);
     if (event.key === "ArrowLeft" || event.key === "ArrowUp") destination = Math.max(0, current - 1);
     if (event.key === "Home") destination = 0;
-    if (event.key === "End") destination = links.length - 1;
+    if (event.key === "End") destination = lastAvailable;
     if (destination === null) return;
 
     event.preventDefault();
@@ -207,14 +212,21 @@ export const mountAlbum = ({ onChapter, onOpen }) => {
     const match = hash.match(/^#capitulo-(\d+)$/);
     const requestedIndex = Number(match?.[1]) - 1;
     if (Number.isInteger(requestedIndex) && requestedIndex >= 0 && requestedIndex < chapters.length) {
-      activate(requestedIndex, { animate: false });
+      const target = Math.min(requestedIndex, furthestIndex);
+      if (target !== requestedIndex) history.replaceState(null, "", `#capitulo-${target + 1}`);
+      activate(target, { animate: false });
       show("album");
     } else if (hash === "#historia") {
       const savedPage = history.state?.albumPage;
-      activate(Number.isInteger(savedPage) ? savedPage : 0, { animate: false });
+      activate(Number.isInteger(savedPage) ? Math.min(savedPage, furthestIndex) : 0, { animate: false });
       show("album", { byGesture: view === null && navigator.userActivation?.hasBeenActive });
     } else if (["#celebracion", "#asistencia", "#regalos"].includes(hash)) {
-      show("back");
+      if (furthestIndex === chapters.length - 1) show("back");
+      else {
+        history.replaceState(null, "", `#capitulo-${furthestIndex + 1}`);
+        activate(furthestIndex, { animate: false });
+        show("album");
+      }
     } else if (!hash || hash === "#portada" || view === null) {
       show("cover");
     }
@@ -225,6 +237,7 @@ export const mountAlbum = ({ onChapter, onOpen }) => {
     const link = event.target.closest('a[href="#historia"], a[href="#portada"], a[href="#celebracion"]');
     if (!link) return;
     event.preventDefault();
+    if (link === turn && activeIndex !== chapters.length - 1) return;
     if (location.hash !== link.hash) history.pushState({ albumPage: activeIndex }, "", link.hash);
     const destination = { "#historia": "album", "#portada": "cover", "#celebracion": "back" }[link.hash];
     show(destination, { focus: true, byGesture: true });
