@@ -29,7 +29,7 @@ Si la copia contiene material de revisión, ejecuta `node private-preview/serve.
 - `src/progress.js`: progreso de lectura.
 - `src/main.js`: inicialización e interacción de portada.
 
-La edición pública enlaza a búsquedas musicales en Spotify. En la edición privada, al activar el sonido se reproduce la canción de la página abierta. La fecha, el lugar, la hora y la vestimenta siguen pendientes de confirmación. Las fotografías personales y los datos de regalos se incorporarán únicamente cuando estén autorizados y confirmados.
+La edición pública enlaza a búsquedas musicales en Spotify. En la edición privada, al activar el sonido se reproduce la canción de la página abierta. Al terminar una pista, el cancionero pasa a la página siguiente y reproduce su canción. La fecha, el lugar, la hora y la vestimenta siguen pendientes de confirmación. Las fotografías personales y los datos de regalos se incorporarán únicamente cuando estén autorizados y confirmados.
 
 El orden musical y los textos narrativos son una propuesta editorial pendiente de validación por la pareja antes de la publicación definitiva.
 

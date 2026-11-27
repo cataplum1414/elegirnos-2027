@@ -1,4 +1,4 @@
-export const mountDeck = (tracks = {}, audio = new Audio()) => {
+export const mountDeck = (tracks = {}, audio = new Audio(), onTrackEnd) => {
   const tray = document.getElementById("disc-tray");
   const side = document.getElementById("record-side");
   const controls = document.getElementById("deck-controls");
@@ -108,12 +108,18 @@ export const mountDeck = (tracks = {}, audio = new Audio()) => {
     status.textContent = `Sonando · ${title}`;
     render();
   });
-  for (const event of ["pause", "waiting", "ended", "emptied", "error"]) {
+  audio.addEventListener("ended", () => {
+    if (intro || !bookOpen || !source || !audio.ended || audio.currentSrc !== audio.src) return;
+    if (enabled && onTrackEnd?.(selectedNumber)) return;
+    playing = false;
+    status.textContent = `Terminó · ${title}`;
+    render();
+  });
+  for (const event of ["pause", "waiting", "emptied", "error"]) {
     audio.addEventListener(event, () => {
       if (intro) return;
       if (event === "pause" && !audio.paused) return;
       playing = false;
-      if (event === "ended") status.textContent = `Terminó · ${title}`;
       if (event === "error" && source) status.textContent = "El navegador no pudo leer esta pista.";
       render();
     });

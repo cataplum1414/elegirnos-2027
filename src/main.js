@@ -8,7 +8,7 @@ const tracks = {};
 
 // Keep the same media element from the opening scene through the album.
 const audio = new Audio();
-const deck = mountDeck(tracks, audio);
+const deck = mountDeck(tracks, audio, number => album?.advanceAfter(number));
 const album = mountAlbum({ onChapter: deck.select, onOpen: deck.setBookOpen });
 mountReadingProgress();
 

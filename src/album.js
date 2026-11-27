@@ -233,6 +233,16 @@ export const mountAlbum = ({ onChapter, onOpen }) => {
   });
   window.addEventListener("hashchange", openHash);
   return {
+    advanceAfter(number) {
+      if (view !== "album" || number !== activeIndex + 1 || number >= chapters.length) return false;
+      const focused = document.activeElement;
+      const focusInsidePage = cards[activeIndex].contains(focused);
+      activate(activeIndex + 1, { updateHash: true });
+      if (focusInsidePage || (focused === next && next.hidden)) {
+        cards[activeIndex].querySelector("h3").focus({ preventScroll: true });
+      }
+      return true;
+    },
     updateTrackLinks(tracks) {
       cards.forEach((card, index) => {
         card.querySelector(".spotify-link").hidden = Boolean(tracks[index + 1]);
