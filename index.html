@@ -93,6 +93,10 @@
                 </div>
               </div>
               <div class="deck-controls" id="deck-controls" hidden>
+                <nav class="deck-navigation" aria-label="Cambiar de canción">
+                  <button type="button" id="deck-previous" aria-disabled="true"><span aria-hidden="true">←</span> Canción anterior</button>
+                  <button type="button" id="deck-next">Canción siguiente <span aria-hidden="true">→</span></button>
+                </nav>
                 <button type="button" id="deck-play">Activar música</button>
                 <button type="button" id="deck-mute" aria-pressed="false">Silencio</button>
                 <input id="deck-position" type="range" min="0" max="1000" value="0" aria-label="Posición en la canción" disabled>

@@ -92,6 +92,8 @@ export const mountAlbum = ({ onChapter, onOpen }) => {
   const previous = document.getElementById("chapter-previous");
   const next = document.getElementById("chapter-next");
   const turn = document.getElementById("chapter-back-cover");
+  const deckPrevious = document.getElementById("deck-previous");
+  const deckNext = document.getElementById("deck-next");
 
   if (!coverLink || !stage || !album || !albumTitle || !back || !backTitle ||
       !index || !container || !status || !previous || !next || !turn) return;
@@ -159,6 +161,8 @@ export const mountAlbum = ({ onChapter, onOpen }) => {
     next.href = `#capitulo-${Math.min(chapters.length, activeIndex + 2)}`;
     next.hidden = activeIndex === chapters.length - 1;
     turn.hidden = !next.hidden;
+    deckPrevious?.setAttribute("aria-disabled", String(previous.hidden));
+    deckNext?.setAttribute("aria-disabled", String(next.hidden));
 
     if (updateHash) history.pushState(null, "", `#capitulo-${activeIndex + 1}`);
     onChapter(chapter, activeIndex + 1);
@@ -179,6 +183,8 @@ export const mountAlbum = ({ onChapter, onOpen }) => {
   index.addEventListener("click", navigateFromLink);
   previous.addEventListener("click", navigateFromLink);
   next.addEventListener("click", navigateFromLink);
+  deckPrevious?.addEventListener("click", () => activate(activeIndex - 1, { updateHash: true }));
+  deckNext?.addEventListener("click", () => activate(activeIndex + 1, { updateHash: true }));
 
   index.addEventListener("keydown", (event) => {
     const current = links.indexOf(document.activeElement);

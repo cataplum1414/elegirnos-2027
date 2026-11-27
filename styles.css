@@ -329,6 +329,17 @@ html[data-opening-scene] .opening-scene {
 }
 .deck-controls button[aria-pressed="true"], .deck-controls button:hover { background: var(--wine); color: var(--paper); }
 .deck-controls button:focus-visible { outline-color: var(--paper); }
+.deck-navigation {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+.deck-navigation button[aria-disabled="true"] {
+  opacity: 0.55;
+  background: #201c21;
+  cursor: default;
+}
 .deck-controls input { width: 100%; margin: 0; accent-color: #e3a1b2; }
 .deck-status { grid-column: 1 / -1; font: 600 1.02rem/1.25 var(--display); }
 .deck-status:empty { display: none; }
