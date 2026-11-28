@@ -1,6 +1,6 @@
 # ELEGIRNOS — Jeisson & Ornella
 ## Objetivo
-Invitación web matrimonial interactiva, mayo o junio de 2027 (fecha exacta, lugar, hora y vestimenta pendientes). Español colombiano. Experiencia de álbum conceptual, no plantilla matrimonial convencional.
+Invitación web matrimonial interactiva, 2 de julio de 2027 (hora y vestimenta pendientes; lugar provisional sujeto a cambios). Español colombiano. Experiencia de álbum conceptual, no plantilla matrimonial convencional.
 ## Dirección artística
 Negro obsidiana #101012, borgoña #590F24, grafito, plata y marfil #F2EFE7. Tipografía editorial, fotografía real analógica 35 mm, estética cinematográfica urbana y alternativa. Sin pastel, flores ni corazones decorativos. Monograma J&O, vinilo, lados A/B. Frase: Coincidir fue el comienzo. Elegirnos, nuestra decisión.
 ## Narrativa y orden musical
@@ -14,7 +14,7 @@ Negro obsidiana #101012, borgoña #590F24, grafito, plata y marfil #F2EFE7. Tipo
 8. Suéltame, Bogotá — Diamante Eléctrico: el comienzo de un nuevo viaje juntos, con el destino abierto.
 Orden editorial propuesto; confirmar títulos/artistas y significado personal antes de publicación definitiva. Textos originales, no letras. Usar reproductores oficiales con activación voluntaria; no copiar audio protegido. Propuesta de primer baile: Antes de ti, no confirmado.
 ## Experiencia
-Portada, recorrido de ocho capítulos con fotografías y vídeos reales autorizados, transiciones accesibles, controles de música, acceso directo a logística sin obligar a recorrer capítulos. RSVP, acompañantes, restricciones alimentarias, invitaciones personalizadas y sugerencias musicales. Fecha tentativa visible. No inventar hechos biográficos ni datos del evento.
+Portada, recorrido de ocho capítulos con fotografías y vídeos reales autorizados, transiciones accesibles, controles de música, acceso directo a logística sin obligar a recorrer capítulos. RSVP, acompañantes, restricciones alimentarias, invitaciones personalizadas y sugerencias musicales. Fecha confirmada visible. No inventar hechos biográficos ni datos del evento.
 ## Regalos
 Lluvia de sobres opcional, presencia como mejor regalo. Hablar de la nueva etapa juntos y reservar el destino. Opciones futuras: efectivo, Nequi, Daviplata, Bancolombia y transferencias; no publicar datos bancarios sin aprobación. Sin mínimos ni cantidades sugeridas.
 ## Arquitectura y seguridad

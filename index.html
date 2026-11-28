@@ -29,7 +29,7 @@
     </script>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <link rel="stylesheet" href="./styles.css?v=20261128-3">
-    <script type="module" id="invitation-entry" src="./src/main.js?v=20261128-2"></script>
+    <script type="module" id="invitation-entry" src="./src/main.js?v=20261128-4"></script>
     <noscript>
       <style>
         .cover__entry, .back-cover__nav a[href="#historia"] { display: none; }
@@ -71,12 +71,25 @@
               <p class="cover__edition">Invitación de boda</p>
               <h1 class="cover__title" id="cover-title">Los muchachos <span>se les casan</span></h1>
               <p class="cover__couple">Jeisson <span>&amp;</span> Ornella</p>
-              <p class="cover__date"><span>Fecha tentativa</span> Mayo o junio de 2027</p>
+              <p class="cover__date"><span>Fecha</span> <time datetime="2027-07-02">2 de julio de 2027</time></p>
               <a class="cover__entry" href="#historia" aria-controls="historia">Ve nuestro disco</a>
               <noscript><p>Activa JavaScript para recorrer nuestro disco.</p></noscript>
             </div>
             <span class="cover__spine" aria-hidden="true">Los muchachos se les casan</span>
           </div>
+          <section class="release-countdown" data-countdown="2027-07-02T00:00:00-05:00" aria-labelledby="countdown-title">
+            <div class="release-countdown__heading">
+              <h2 id="countdown-title">Cuenta regresiva</h2>
+              <time datetime="2027-07-02">2 de julio de 2027</time>
+            </div>
+            <div class="release-countdown__digits" role="timer" aria-live="off" aria-label="Tiempo restante para el 2 de julio de 2027">
+              <span><strong data-countdown-days>000</strong><small>Días</small></span>
+              <span><strong data-countdown-hours>00</strong><small>Horas</small></span>
+              <span><strong data-countdown-minutes>00</strong><small>Minutos</small></span>
+              <span><strong data-countdown-seconds>00</strong><small>Segundos</small></span>
+            </div>
+            <p class="release-countdown__finished" hidden>Hoy comienza nuestro próximo capítulo.</p>
+          </section>
           <p class="cover__note">Te invitamos a recorrer nuestra historia canción por canción y a celebrar con nosotros todo lo que aún nos queda por vivir juntos.</p>
         </section>
 
@@ -155,12 +168,8 @@
                 <h3 id="event-title">La celebración</h3>
                 <dl class="event-details">
                   <div class="event-details__date">
-                    <dt>Fecha tentativa</dt>
-                    <dd>Mayo o junio de 2027</dd>
-                  </div>
-                  <div>
-                    <dt>Fecha exacta</dt>
-                    <dd>Por confirmar</dd>
+                    <dt>Fecha</dt>
+                    <dd><time datetime="2027-07-02">2 de julio de 2027</time></dd>
                   </div>
                   <div>
                     <dt>Lugar provisional</dt>
