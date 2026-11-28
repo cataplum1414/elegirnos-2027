@@ -91,6 +91,11 @@ export const mountSingles = ({ audio: albumAudio } = {}) => {
   for (const event of ["play", "pause", "ended", "timeupdate", "durationchange", "loadedmetadata", "progress", "emptied"]) {
     player.addEventListener(event, render);
   }
+  // Al terminar un sencillo empieza solo el siguiente de la misma sección.
+  player.addEventListener("ended", () => {
+    const following = active?.nextElementSibling;
+    if (following?.matches("[data-single]")) void toggle(following, { auto: true });
+  });
   player.addEventListener("error", () => {
     if (!active) return;
     parts.get(active).status.textContent = "El navegador no pudo leer esta canción.";

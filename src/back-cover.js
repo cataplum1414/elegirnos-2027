@@ -21,12 +21,20 @@ export const mountBackCover = () => {
 
   let current = -1;
 
+  const updateMore = () => {
+    for (const page of pages) {
+      page.toggleAttribute("data-more", page.scrollHeight - page.clientHeight - page.scrollTop > 6);
+    }
+  };
+
   const show = (index, { focus = false, push = false } = {}) => {
     const target = Math.max(0, Math.min(pages.length - 1, index));
     const changed = target !== current;
     current = target;
 
     pages.forEach((page, pageIndex) => { page.hidden = pageIndex !== current; });
+    pages[current].scrollTop = 0;
+    requestAnimationFrame(updateMore);
     tabs.forEach((tab, tabIndex) => {
       if (tabIndex === current) tab.setAttribute("aria-current", "page");
       else tab.removeAttribute("aria-current");
@@ -58,7 +66,10 @@ export const mountBackCover = () => {
   previous.addEventListener("click", go(() => current - 1));
   next.addEventListener("click", go(() => current + 1));
 
+  pages.forEach(page => page.addEventListener("scroll", updateMore, { passive: true }));
+  window.addEventListener("resize", updateMore);
   book.classList.add("is-paged");
+  back.classList.add("is-booklet");
   show(routeFor(location.hash));
 
   // Atrás/adelante del navegador y enlaces directos a #asistencia, #regalos, etc.

@@ -33,6 +33,19 @@ export const mountDeck = (tracks = {}, audio = new Audio(), onTrackEnd) => {
     play.title = playLabel;
   };
 
+  // Si el navegador no deja arrancar la música sola, el siguiente toque en cualquier parte la inicia.
+  let retryArmed = false;
+  const armRetry = () => {
+    if (retryArmed) return;
+    retryArmed = true;
+    const retry = () => {
+      retryArmed = false;
+      if (enabled && bookOpen && source && !intro && audio.paused) void start();
+    };
+    document.addEventListener("pointerdown", retry, { once: true });
+    document.addEventListener("keydown", retry, { once: true });
+  };
+
   const start = async () => {
     const pending = ++attempt;
     status.textContent = "";
@@ -40,7 +53,8 @@ export const mountDeck = (tracks = {}, audio = new Audio(), onTrackEnd) => {
       await audio.play();
     } catch {
       if (pending !== attempt) return;
-      status.textContent = "Toca Reproducir para intentar de nuevo.";
+      status.textContent = "Toca la pantalla para escuchar la música.";
+      armRetry();
       render();
     }
   };
@@ -59,7 +73,14 @@ export const mountDeck = (tracks = {}, audio = new Audio(), onTrackEnd) => {
     audio.load();
     status.textContent = source ? title : "Esta pista está disponible mediante el enlace a Spotify.";
     render();
-    if (bookOpen && enabled && source) void start();
+    if (bookOpen && enabled && source) {
+      void start();
+      // Vigilante: si pasados unos segundos no suena nada, se prepara el reintento con un toque.
+      const watched = attempt;
+      setTimeout(() => {
+        if (watched === attempt && bookOpen && enabled && source && !intro && audio.paused) armRetry();
+      }, 2500);
+    }
   };
 
   const select = (chapter, number) => {

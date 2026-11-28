@@ -1,10 +1,10 @@
 import { mountAlbum } from "./album.js";
 import { mountReadingProgress } from "./progress.js";
-import { mountDeck } from "./deck.js";
+import { mountDeck } from "./deck.js?v=20261128-2";
 import { mountCountdown } from "./countdown.js?v=20261128-5";
 import { mountVipClub } from "./vip-club.js?v=20261128-10";
-import { mountSingles } from "./singles.js?v=20261128-3";
-import { mountBackCover } from "./back-cover.js?v=20261128-1";
+import { mountSingles } from "./singles.js?v=20261128-4";
+import { mountBackCover } from "./back-cover.js?v=20261128-3";
 
 const invitation = document.documentElement;
 const hasMedia = invitation.hasAttribute("data-wedding-media");
