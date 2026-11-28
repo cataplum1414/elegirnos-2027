@@ -330,7 +330,6 @@ html:has(.chase[open]) { overflow: hidden; }
 .chase__run-frame--orne, .chase__runner--orne {
   --relative-height: calc(165 / 185);
   left: var(--orne-x, 22%);
-  z-index: 3;
 }
 
 .chase__run-frame--orne, .chase__idle.chase__runner--orne {
