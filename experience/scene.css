@@ -131,6 +131,7 @@ html:has(.chase[open]) { overflow: hidden; }
 }
 
 .chase__cut-in--key {
+  z-index: 4;
   object-position: 50% 48%;
   opacity: var(--key-portrait, 0);
   transform: scale(calc(1 + var(--key-portrait-time, 0) * 0.036));
@@ -321,6 +322,7 @@ html:has(.chase[open]) { overflow: hidden; }
 .chase__run-frame--orne, .chase__runner--orne {
   --relative-height: calc(165 / 185);
   left: var(--orne-x, 22%);
+  z-index: 3;
 }
 
 .chase__run-frame--orne, .chase__idle.chase__runner--orne {

@@ -69,8 +69,10 @@ export const drawStory = (screen, elapsed, reducedMotion) => {
   const unlocked = fade(action, 18.56, 0.65) * (1 - guardianLeaves);
   const gateArrives = fade(action, 20.22, 1.03);
   const gateOpens = fade(action, 21.66, 2.41);
+  const keyPlanPortrait = fade(time, keyPlan - 0.11, 0.37) * (1 - fade(action, 14.99, 0.36));
+  const keyInsertionPortrait = fade(action, 15.18, 0.32) * (1 - fade(action, 18.20, 0.45));
   const values = {
-    "--key-portrait": fade(time, keyPlan - 0.11, 0.37) * (1 - fade(action, 14.99, 0.36)),
+    "--key-portrait": Math.max(keyPlanPortrait, keyInsertionPortrait),
     "--key-portrait-time": unit((time - keyPlan) / 3.4),
     "--proposal-plate": fade(elapsed, ceremony.court - 0.20, 0.64),
     "--premiere-opacity": 1 - fade(elapsed, consoleCue - 0.25, 0.50),
