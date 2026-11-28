@@ -1,0 +1,76 @@
+.vip-page {
+  min-height: 100svh;
+  color: #f4e8da;
+  background:
+    radial-gradient(circle at 18% 5%, #5a243b55, transparent 27rem),
+    repeating-linear-gradient(135deg, #ffffff05 0 1px, transparent 1px 6px),
+    #151318;
+}
+.vip-page main { width: min(100% - 1rem, 66rem); margin-inline: auto; padding-block: clamp(0.5rem, 3vw, 2rem); }
+.vip-page :is(.vip-gate, .vip-booklet) { border: 1px solid #8e7b82; box-shadow: 0 1rem 2.5rem #0008; }
+.vip-page :is(.vip-gate, .vip-booklet)[hidden] { display: none; }
+
+.vip-gate {
+  display: grid;
+  width: min(100%, 34rem);
+  min-height: calc(100svh - clamp(1rem, 6vw, 4rem));
+  margin-inline: auto;
+  place-content: center;
+  gap: 1rem;
+  padding: clamp(1.2rem, 6vw, 3rem);
+  background: linear-gradient(145deg, #312632, #17151a 68%);
+}
+.vip-gate > p:first-child { color: #e3b978; font: 600 0.92rem/1 var(--display); letter-spacing: 0.06em; }
+.vip-gate h1 { max-width: 11ch; color: #fff0de; font: 800 clamp(2.8rem, 11vw, 5.2rem)/0.86 var(--display); letter-spacing: -0.04em; }
+.vip-gate > p { max-width: 38ch; color: #dac9cf; }
+.vip-gate form { margin-top: 0.5rem; }
+.vip-gate label { display: block; margin-bottom: 0.35rem; color: #e9cfaa; font: 600 1rem/1 var(--display); }
+.vip-gate form > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.5rem; }
+.vip-gate :is(input, button) { min-height: 3rem; border: 1px solid #bea3a8; padding: 0.55rem 0.75rem; font: 700 1rem/1 var(--display); }
+.vip-gate input { min-width: 0; background: #f2e9da; letter-spacing: 0.1em; }
+.vip-gate button { color: #fff1df; background: #66132f; }
+.vip-gate [role="status"] { min-height: 1.4em; margin-top: 0.45rem; color: #efbd9c; font: 600 0.9rem/1.2 var(--display); }
+.vip-gate > a { width: fit-content; color: #e5c28d; text-underline-offset: 0.22em; }
+
+.vip-booklet { overflow: hidden; background: #eee4d3; color: #261920; }
+.vip-booklet__cover {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+  min-height: clamp(15rem, 42vw, 24rem);
+  padding: clamp(1.2rem, 5vw, 3rem);
+  color: #f8ecdf;
+  background:
+    linear-gradient(90deg, #1b151cf4 8%, #1b151cb8 57%, #28172248),
+    url("./assets/portada-boda-cd.webp") 74% 65% / cover;
+  border-bottom: 0.3rem solid #762541;
+}
+.vip-booklet__cover > div > p:first-child { color: #e4bb7f; font: 600 0.9rem/1 var(--display); }
+.vip-booklet__cover h1 { max-width: 12ch; margin-top: 0.5rem; font: 800 clamp(2.7rem, 8vw, 5.6rem)/0.87 var(--display); letter-spacing: -0.04em; }
+.vip-booklet__cover > div > p:last-child { margin-top: 0.75rem; color: #efdbcb; }
+.vip-booklet__cover button { min-height: 2.8rem; border: 1px solid #d3b78f; padding: 0.55rem 0.75rem; color: #fff0df; background: #241a23c9; font: 700 0.95rem/1 var(--display); }
+.vip-booklet__guide { padding: 1rem clamp(1rem, 4vw, 2.5rem); border-bottom: 1px solid #9d777d; color: #66203b; font-weight: 600; }
+
+.vip-side { padding: clamp(1rem, 4vw, 2.5rem); border-bottom: 1px solid #9d777d; }
+.vip-side > header { display: flex; align-items: baseline; gap: 0.8rem; padding-bottom: 0.65rem; border-bottom: 2px solid #762541; }
+.vip-side > header span { color: #762541; font: 800 0.95rem/1 var(--display); }
+.vip-side h2 { font: 800 clamp(1.7rem, 4.4vw, 2.8rem)/1 var(--display); }
+.vip-side article { display: grid; grid-template-columns: 2.8rem minmax(0, 1fr) auto; gap: 0.75rem; align-items: start; padding-block: 1rem; border-bottom: 1px solid #b49a99; }
+.vip-side article:last-child { border-bottom: 0; }
+.vip-side article > span { color: #762541; font: 800 1.05rem/1 var(--display); }
+.vip-side h3 { font: 800 clamp(1.2rem, 3vw, 1.65rem)/1 var(--display); }
+.vip-side article p { margin-top: 0.35rem; color: #554249; }
+.vip-side article strong { border: 1px solid #876b72; padding: 0.35rem 0.5rem; color: #6c2740; font: 700 0.78rem/1 var(--display); }
+.vip-booklet footer { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem clamp(1rem, 4vw, 2.5rem); color: #e8d8ca; background: #251c24; }
+.vip-booklet footer p { max-width: 55ch; }
+.vip-booklet footer a { color: #efc68c; }
+
+@media (max-width: 560px) {
+  .vip-gate form > div { grid-template-columns: minmax(0, 1fr); }
+  .vip-booklet__cover { display: grid; align-content: end; }
+  .vip-booklet__cover button { width: fit-content; }
+  .vip-side article { grid-template-columns: 2.25rem minmax(0, 1fr); }
+  .vip-side article strong { grid-column: 2; width: fit-content; }
+  .vip-booklet footer { display: grid; }
+}

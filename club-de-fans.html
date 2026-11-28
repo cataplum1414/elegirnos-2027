@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#171419">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Backstage VIP | Los muchachos se les casan</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="stylesheet" href="./styles.css?v=20261128-10">
+    <link rel="stylesheet" href="./club-de-fans.css?v=20261128-10">
+    <script type="module" src="./src/vip-page.js?v=20261128-10"></script>
+  </head>
+  <body class="vip-page">
+    <main>
+      <section class="vip-gate" id="vip-gate" aria-labelledby="vip-gate-title">
+        <p>Jeisson &amp; Ornella presentan</p>
+        <h1 id="vip-gate-title">Backstage del Club de Fans</h1>
+        <p>Esta edición especial solo se abre con el código incluido en tu invitación.</p>
+        <form id="vip-page-form" novalidate>
+          <label for="vip-page-code">Código VIP</label>
+          <div>
+            <input id="vip-page-code" type="password" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="24" required>
+            <button type="submit">Abrir backstage</button>
+          </div>
+          <p id="vip-page-status" role="status"></p>
+        </form>
+        <a href="./">Volver a la invitación</a>
+      </section>
+
+      <section class="vip-booklet" id="vip-booklet" aria-labelledby="vip-booklet-title" hidden>
+        <header class="vip-booklet__cover">
+          <div>
+            <p>Edición de prueba · acceso maestro</p>
+            <h1 id="vip-booklet-title">El libreto secreto de la banda</h1>
+            <p>Los muchachos se les casan · Jeisson &amp; Ornella · 2027</p>
+          </div>
+          <button type="button" id="vip-exit">Cerrar backstage</button>
+        </header>
+        <p class="vip-booklet__guide">En la versión definitiva, cada código mostrará solamente la pista asignada a esa persona.</p>
+
+        <section class="vip-side" aria-labelledby="vip-side-a">
+          <header><span>Lado A</span><h2 id="vip-side-a">Las despedidas</h2></header>
+          <article><span>A1</span><div><h3>Despedida de Ornella</h3><p>Fecha, lugar y plan por confirmar.</p></div><strong>Pendiente</strong></article>
+          <article><span>A2</span><div><h3>Despedida de Jeisson</h3><p>Fecha, lugar y plan por confirmar.</p></div><strong>Pendiente</strong></article>
+        </section>
+
+        <section class="vip-side" aria-labelledby="vip-side-b">
+          <header><span>Lado B</span><h2 id="vip-side-b">El cortejo</h2></header>
+          <article><span>B1</span><div><h3>Damas de honor</h3><p>Funciones e instrucciones por confirmar.</p></div><strong>Pendiente</strong></article>
+          <article><span>B2</span><div><h3>Caballeros de honor</h3><p>Funciones e instrucciones por confirmar.</p></div><strong>Pendiente</strong></article>
+        </section>
+
+        <section class="vip-side" aria-labelledby="vip-side-c">
+          <header><span>Lado C</span><h2 id="vip-side-c">La entrada al escenario</h2></header>
+          <article><span>C1</span><div><h3>Entrada de Jeisson</h3><p>Su mamá lo acompañará al altar.</p></div><strong>Asignado</strong></article>
+          <article><span>C2</span><div><h3>Entrada de Ornella</h3><p>La acompañará su papá o, si él no puede, su mamá.</p></div><strong>Por definir</strong></article>
+        </section>
+
+        <footer>
+          <p>Prototipo sin información privada. El acceso definitivo se validará en el servidor.</p>
+          <a href="./">Volver a la invitación</a>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>

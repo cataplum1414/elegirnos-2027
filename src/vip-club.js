@@ -6,6 +6,8 @@ const hash = async value => {
   return [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, "0")).join("");
 };
 
+export const validateVipCode = async value => await hash(value.trim().toUpperCase()) === testCodeHash;
+
 export const mountVipClub = () => {
   const form = document.getElementById("vip-form");
   const input = document.getElementById("vip-code");
@@ -22,7 +24,7 @@ export const mountVipClub = () => {
       return;
     }
 
-    const valid = await hash(code) === testCodeHash;
+    const valid = await validateVipCode(code);
     if (!valid) {
       status.textContent = "Ese código no pertenece a la lista de la banda.";
       input.select();
@@ -30,6 +32,7 @@ export const mountVipClub = () => {
     }
 
     status.textContent = "";
+    sessionStorage.setItem("elegirnos-vip-demo", "unlocked");
     form.hidden = true;
     pass.hidden = false;
     pass.focus();

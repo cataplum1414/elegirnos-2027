@@ -2,7 +2,7 @@ import { mountAlbum } from "./album.js";
 import { mountReadingProgress } from "./progress.js";
 import { mountDeck } from "./deck.js";
 import { mountCountdown } from "./countdown.js?v=20261128-5";
-import { mountVipClub } from "./vip-club.js?v=20261128-6";
+import { mountVipClub } from "./vip-club.js?v=20261128-10";
 
 const invitation = document.documentElement;
 const hasMedia = invitation.hasAttribute("data-wedding-media");
