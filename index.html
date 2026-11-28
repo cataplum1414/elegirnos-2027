@@ -28,8 +28,10 @@
       }
     </script>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-    <link rel="stylesheet" href="./styles.css?v=20261128-11">
-    <script type="module" id="invitation-entry" src="./src/main.js?v=20261128-10"></script>
+    <link rel="stylesheet" href="./styles.css?v=20261128-12">
+    <link rel="stylesheet" href="./singles.css?v=20261128-1">
+    <link rel="stylesheet" href="./back-cover.css?v=20261128-1">
+    <script type="module" id="invitation-entry" src="./src/main.js?v=20261128-11"></script>
     <noscript>
       <style>
         .cover__entry, .back-cover__nav a[href="#historia"] { display: none; }
@@ -79,6 +81,19 @@
     <main id="contenido">
       <div class="record-edition">
         <section class="cover" id="portada" aria-labelledby="cover-title">
+          <div class="single single--cover" data-single data-src="./experience/chapinero-nos-encontro.m4a" data-duration="196" hidden>
+            <button type="button" class="single__play" data-single-play aria-pressed="false" aria-label="Reproducir Chapinero nos encontró">
+              <svg class="single__icon single__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4.5 20 12 8 19.5z"/></svg>
+              <svg class="single__icon single__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="3.5" height="14" rx="1.2"/><rect x="14" y="5" width="3.5" height="14" rx="1.2"/></svg>
+            </button>
+            <div class="single__meta">
+              <p class="single__kicker">Tema de apertura</p>
+              <p class="single__title">Chapinero nos encontró</p>
+            </div>
+            <span class="single__time" aria-hidden="true" data-single-time></span>
+            <input class="single__seek" type="range" min="0" max="1000" value="0" aria-label="Posición en Chapinero nos encontró" data-single-seek disabled>
+            <p class="single__status" role="status" data-single-status></p>
+          </div>
           <div class="cover__object">
             <div class="cover__copy">
               <p class="cover__edition">Invitación de boda</p>
@@ -174,90 +189,130 @@
               <p class="back-cover__couple">Jeisson <span>&amp;</span> Ornella</p>
               <h2 id="celebration-title" tabindex="-1">Los muchachos se les casan.</h2>
               <p class="back-cover__line">Coincidir fue el comienzo.<br>Elegirnos, nuestra decisión.</p>
-              <p class="back-cover__message">Queremos que estés con nosotros en esta nueva parte de la historia.</p>
             </header>
-            <div class="back-cover__notes">
-              <section aria-labelledby="event-title">
-                <h3 id="event-title">La celebración</h3>
-                <dl class="event-details">
-                  <div class="event-details__date">
-                    <dt>Fecha</dt>
-                    <dd><time datetime="2027-07-02">2 de julio de 2027</time></dd>
-                  </div>
-                  <div>
-                    <dt>Lugar provisional</dt>
-                    <dd>
-                      <a href="https://share.google/x8e0HDxwTwzDNIrai" target="_blank" rel="noopener noreferrer">Parroquia Santa Mónica</a>
-                      <small>Sujeto a cambios</small>
-                    </dd>
-                  </div>
-                  <div>
-                    <dt>Hora</dt>
-                    <dd>Por confirmar</dd>
-                  </div>
-                  <div>
-                    <dt>Vestimenta</dt>
-                    <dd>Por confirmar</dd>
-                  </div>
-                </dl>
-              </section>
-              <section class="attendance-note" id="asistencia" tabindex="-1" aria-labelledby="attendance-title">
-                <h3 id="attendance-title">Confirmación de asistencia</h3>
-                <p>Se habilitará cuando tengamos los detalles definitivos.</p>
-              </section>
-              <section class="gifts-section" id="regalos" aria-labelledby="gifts-title">
-                <h3 id="gifts-title">Lo que viene</h3>
-                <p>Nos espera un nuevo lugar y una vida por construir juntos.</p>
-                <div class="gifts-copy">
-                  <p>El mejor regalo será contar contigo en nuestra celebración. Si además deseas tener un detalle con nosotros, agradeceremos que sea en forma de lluvia de sobres.</p>
-                  <p class="gifts-copy__aside">Nuestras maletas tienen un límite de peso.<br>Nuestros sueños, no.</p>
-                  <p>La lluvia de sobres es opcional. Compartiremos las opciones cuando estén definidas.</p>
-                </div>
-              </section>
-              <section class="tour-note" id="solo-adultos" aria-labelledby="tour-note-title">
-                <span class="tour-note__stamp" aria-hidden="true">+18</span>
-                <div>
-                  <p class="tour-note__eyebrow">Aviso de la banda</p>
-                  <h3 id="tour-note-title">Este lanzamiento es solo para fans mayores de edad</h3>
-                  <p>Adoramos a nuestros pequeños fans, pero esta función fue pensada para adultos. Déjenlos en un lugar seguro y al cuidado de alguien de confianza: esa noche subiremos el volumen, encenderemos la pista y queremos que ustedes se queden con nosotros hasta el último acorde.</p>
-                </div>
-              </section>
-              <section class="vip-club" id="club-de-fans" aria-labelledby="vip-title">
-                <p class="vip-club__eyebrow">Pase de backstage</p>
-                <h3 id="vip-title">Club de Fans de nuestra banda</h3>
-                <p>Si recibiste un código VIP, colócalo aquí para comprobar tu acceso como miembro del club.</p>
-                <form class="vip-club__form" id="vip-form" novalidate>
-                  <label for="vip-code">Código VIP</label>
-                  <div class="vip-club__entry">
-                    <input id="vip-code" name="vip-code" type="password" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="24" required>
-                    <button type="submit">Entrar al backstage</button>
-                  </div>
-                  <p class="vip-club__status" id="vip-status" role="status"></p>
-                </form>
-                <div class="vip-access" id="vip-pass" tabindex="-1" hidden>
-                  <div class="vip-pass">
-                    <span class="vip-pass__side">Acceso VIP</span>
-                    <div>
-                      <p>Prueba de acceso</p>
-                      <h4>Miembro oficial del Club de Fans</h4>
-                      <p>Jeisson &amp; Ornella · Los muchachos se les casan · 2027</p>
+            <div class="single single--release" data-single data-src="./experience/seis-cuadras-mas-alla.m4a" data-duration="207" hidden>
+            <button type="button" class="single__play" data-single-play aria-pressed="false" aria-label="Reproducir Seis cuadras más allá">
+              <svg class="single__icon single__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4.5 20 12 8 19.5z"/></svg>
+              <svg class="single__icon single__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="3.5" height="14" rx="1.2"/><rect x="14" y="5" width="3.5" height="14" rx="1.2"/></svg>
+            </button>
+            <div class="single__meta">
+              <p class="single__kicker">Sencillo de lanzamiento</p>
+              <p class="single__title">Seis cuadras más allá</p>
+            </div>
+            <span class="single__time" aria-hidden="true" data-single-time></span>
+            <input class="single__seek" type="range" min="0" max="1000" value="0" aria-label="Posición en Seis cuadras más allá" data-single-seek disabled>
+            <p class="single__status" role="status" data-single-status></p>
+          </div>
+            <div class="back-book" data-pages>
+              <nav class="page-index" aria-labelledby="page-index-title">
+                <p class="page-index__label" id="page-index-title">Contraportada · 4 páginas</p>
+                <ol>
+                  <li><a href="#fecha-y-lugar" data-page-link><span class="page-index__no">01</span><span>Fecha y lugar</span></a></li>
+                  <li><a href="#asistencia" data-page-link><span class="page-index__no">02</span><span>Asistencia</span></a></li>
+                  <li><a href="#regalos" data-page-link><span class="page-index__no">03</span><span>Lo que viene</span></a></li>
+                  <li><a href="#club-de-fans" data-page-link><span class="page-index__no">04</span><span>Backstage</span></a></li>
+                </ol>
+              </nav>
+              <div class="back-book__pages">
+                <p class="back-book__status" role="status" aria-live="polite" data-page-status></p>
+
+                <article class="back-page" id="fecha-y-lugar" data-page data-hashes="#fecha-y-lugar #celebracion" aria-labelledby="event-title">
+                  <p class="back-page__kicker">Lo esencial</p>
+                  <h3 id="event-title" tabindex="-1">La celebración</h3>
+                  <p class="back-page__lead">Queremos que estés con nosotros en esta nueva parte de la historia.</p>
+                  <dl class="event-details">
+                    <div class="event-details__date">
+                      <dt>Fecha</dt>
+                      <dd>
+                        <span class="event-details__weekday">Viernes</span>
+                        <time datetime="2027-07-02">2 de julio de 2027</time>
+                      </dd>
                     </div>
+                    <div>
+                      <dt>Lugar provisional</dt>
+                      <dd>
+                        <a href="https://share.google/x8e0HDxwTwzDNIrai" target="_blank" rel="noopener noreferrer">Parroquia Santa Mónica</a>
+                        <small>Sujeto a cambios</small>
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Hora</dt>
+                      <dd class="is-pending">Por confirmar</dd>
+                    </div>
+                    <div>
+                      <dt>Vestimenta</dt>
+                      <dd class="is-pending">Por confirmar</dd>
+                    </div>
+                  </dl>
+                </article>
+
+                <article class="back-page" id="asistencia" data-page data-hashes="#asistencia #solo-adultos" aria-labelledby="attendance-title" hidden>
+                  <p class="back-page__kicker">Tu lugar en la función</p>
+                  <h3 id="attendance-title" tabindex="-1">Confirmación de asistencia</h3>
+                  <div class="back-status">
+                    <span class="back-status__chip">Próximamente</span>
+                    <p>Se habilitará cuando tengamos los detalles definitivos.</p>
                   </div>
-                  <a class="vip-pass__open" href="./club-de-fans.html">Abrir la interfaz VIP</a>
-                </div>
-                <p class="vip-club__notice">Acceso de prueba. La versión definitiva tendrá validación privada.</p>
-              </section>
+                  <section class="tour-note" id="solo-adultos" aria-labelledby="tour-note-title">
+                    <span class="tour-note__stamp" aria-hidden="true">+18</span>
+                    <div>
+                      <p class="tour-note__eyebrow">Aviso de la banda</p>
+                      <h4 id="tour-note-title">Este lanzamiento es solo para fans mayores de edad</h4>
+                      <p>Adoramos a nuestros pequeños fans, pero esta función fue pensada para adultos. Déjenlos en un lugar seguro y al cuidado de alguien de confianza: esa noche subiremos el volumen, encenderemos la pista y queremos que ustedes se queden con nosotros hasta el último acorde.</p>
+                    </div>
+                  </section>
+                </article>
+
+                <article class="back-page" id="regalos" data-page data-hashes="#regalos" aria-labelledby="gifts-title" hidden>
+                  <p class="back-page__kicker">Un detalle, si quieres</p>
+                  <h3 id="gifts-title" tabindex="-1">Lo que viene</h3>
+                  <p class="back-page__lead">Nos espera un nuevo lugar y una vida por construir juntos.</p>
+                  <div class="gifts-copy">
+                    <p>El mejor regalo será contar contigo en nuestra celebración. Si además deseas tener un detalle con nosotros, agradeceremos que sea en forma de lluvia de sobres.</p>
+                    <p class="gifts-copy__aside">Nuestras maletas tienen un límite de peso.<br>Nuestros sueños, no.</p>
+                    <p>La lluvia de sobres es opcional. Compartiremos las opciones cuando estén definidas.</p>
+                  </div>
+                </article>
+
+                <article class="back-page" id="club-de-fans" data-page data-hashes="#club-de-fans" aria-labelledby="vip-title" hidden>
+                  <p class="back-page__kicker">Pase de backstage</p>
+                  <h3 id="vip-title" tabindex="-1">Club de Fans de nuestra banda</h3>
+                  <p class="back-page__lead">Si recibiste un código VIP, colócalo aquí para comprobar tu acceso como miembro del club.</p>
+                  <section class="vip-club" aria-label="Acceso al Club de Fans">
+                    <form class="vip-club__form" id="vip-form" novalidate>
+                      <label for="vip-code">Código VIP</label>
+                      <div class="vip-club__entry">
+                        <input id="vip-code" name="vip-code" type="password" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="24" required>
+                        <button type="submit">Entrar al backstage</button>
+                      </div>
+                      <p class="vip-club__status" id="vip-status" role="status"></p>
+                    </form>
+                    <div class="vip-access" id="vip-pass" tabindex="-1" hidden>
+                      <div class="vip-pass">
+                        <span class="vip-pass__side">Acceso VIP</span>
+                        <div>
+                          <p>Prueba de acceso</p>
+                          <h4>Miembro oficial del Club de Fans</h4>
+                          <p>Jeisson &amp; Ornella · Los muchachos se les casan · 2027</p>
+                        </div>
+                      </div>
+                      <a class="vip-pass__open" href="./club-de-fans.html">Abrir la interfaz VIP</a>
+                    </div>
+                    <p class="vip-club__notice">Acceso de prueba. La versión definitiva tendrá validación privada.</p>
+                  </section>
+                </article>
+
+                <nav class="back-book__controls" aria-label="Pasar de página">
+                  <a class="back-book__control" href="#fecha-y-lugar" data-page-previous hidden><span aria-hidden="true">←</span> Página anterior</a>
+                  <a class="back-book__control back-book__control--next" href="#asistencia" data-page-next hidden>Página siguiente <span aria-hidden="true">→</span></a>
+                  <a class="back-book__control back-book__control--next" href="#portada" data-page-end hidden>Volver a la portada <span aria-hidden="true">↻</span></a>
+                </nav>
+              </div>
             </div>
           </div>
 
           <footer class="site-footer">
             <a class="footer-mark" href="#portada">Los muchachos se les casan</a>
-            <nav aria-label="Detalles de la boda" class="footer-nav">
-              <a href="#asistencia">Asistencia</a>
-              <a href="#regalos">Regalos</a>
-              <a href="#solo-adultos">Solo adultos</a>
-              <a href="#club-de-fans">Club de Fans</a>
-            </nav>
             <details class="photo-credits">
               <summary>Créditos de imágenes</summary>
               <p><a href="https://commons.wikimedia.org/wiki/File:Lluvia_en_el_Centro_Internacional_de_Bogot%C3%A1_por_la_noche.JPG">Bogotá, Peter Angritt</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Recorte en pantalla.</p>

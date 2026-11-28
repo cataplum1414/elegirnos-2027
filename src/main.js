@@ -3,6 +3,8 @@ import { mountReadingProgress } from "./progress.js";
 import { mountDeck } from "./deck.js";
 import { mountCountdown } from "./countdown.js?v=20261128-5";
 import { mountVipClub } from "./vip-club.js?v=20261128-10";
+import { mountSingles } from "./singles.js?v=20261128-1";
+import { mountBackCover } from "./back-cover.js?v=20261128-1";
 
 const invitation = document.documentElement;
 const hasMedia = invitation.hasAttribute("data-wedding-media");
@@ -15,13 +17,15 @@ const album = mountAlbum({ onChapter: deck.select, onOpen: deck.setBookOpen });
 mountReadingProgress();
 mountCountdown();
 mountVipClub();
+mountBackCover();
+mountSingles({ audio });
 
 if (hasMedia) {
   const releaseOpening = () => invitation.removeAttribute("data-opening-scene");
   if (invitation.hasAttribute("data-opening-scene")) {
     window.addEventListener("hashchange", releaseOpening, { once: true });
   }
-  const experience = await import("../experience/index.js?v=20261128-2").catch(() => null);
+  const experience = await import("../experience/index.js?v=20261128-3").catch(() => null);
   if (experience) {
     Object.assign(tracks, experience.tracks);
     album?.updateTrackLinks(tracks);

@@ -4,8 +4,8 @@
   isolation: isolate;
 }
 
-.cover[data-envelope="sealed"] > :is(.cover__object, .cover__note) { visibility: hidden; }
-.cover[data-envelope="opening"] > :is(.cover__object, .cover__note) {
+.cover[data-envelope="sealed"] > :is(.cover__object, .cover__note, .single--cover) { visibility: hidden; }
+.cover[data-envelope="opening"] > :is(.cover__object, .cover__note, .single--cover) {
   animation: disc-arrives var(--envelope-reveal) ease both;
 }
 

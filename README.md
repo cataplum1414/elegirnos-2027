@@ -1,6 +1,6 @@
 # Los muchachos se les casan — Jeisson & Ornella
 
-Invitación de boda en español colombiano, diseñada como un estuche de CD de los años noventa. Pulsa **Estamos listos** para ver la escena animada con música. Al final aparece el sobre con sello de lacre. Al abrir el disco se pueden hojear y escuchar los ocho capítulos del cancionero, organizados en lados A y B. La contraportada contiene los detalles de la boda.
+Invitación de boda en español colombiano, diseñada como un estuche de CD de los años noventa. Pulsa **Estamos listos** para ver la escena animada con música. Al final aparece el sobre con sello de lacre. Al abrir el disco se pueden hojear y escuchar los ocho capítulos del cancionero, organizados en lados A y B. La contraportada es un libreto de cuatro páginas (fecha y lugar, asistencia, lo que viene y backstage) con los detalles de la boda y el sencillo de lanzamiento. La portada abre con el tema «Chapinero nos encontró».
 
 ## Enlace público
 
@@ -21,10 +21,14 @@ Abre `http://localhost:8000`. El servidor es necesario para cargar los módulos 
 - `index.html`: estructura y contenido de portada, capítulos, celebración y regalos.
 - `favicon.svg`: monograma J&O para la pestaña del navegador.
 - `styles.css`: identidad visual, responsive, foco visible y movimiento reducido.
+- `back-cover.css`: contraportada paginada (índice, páginas, aviso +18 y backstage).
+- `singles.css`: reproductor de una sola canción (portada y contraportada).
 - `src/data/chapters.js`: catálogo musical y textos narrativos.
 - `src/album.js`: apertura de la funda y navegación accesible por el cancionero.
 - `src/deck.js`: animación del CD y controles de reproducción.
 - `experience/`: escena animada, sobre, viñetas del cancionero y archivos de audio.
+- `src/back-cover.js`: paginación de la contraportada con enlaces directos (`#asistencia`, `#regalos`, `#club-de-fans`).
+- `src/singles.js`: reproductores de «Chapinero nos encontró» y «Seis cuadras más allá»; suenan solo al pulsar Reproducir y ceden el turno al cancionero.
 - `src/progress.js`: progreso de lectura.
 - `src/main.js`: inicialización e interacción de portada.
 

@@ -220,7 +220,7 @@ export const mountAlbum = ({ onChapter, onOpen }) => {
       const savedPage = history.state?.albumPage;
       activate(Number.isInteger(savedPage) ? Math.min(savedPage, furthestIndex) : 0, { animate: false });
       show("album", { byGesture: view === null && navigator.userActivation?.hasBeenActive });
-    } else if (["#celebracion", "#asistencia", "#regalos"].includes(hash)) {
+    } else if (["#celebracion", "#fecha-y-lugar", "#asistencia", "#solo-adultos", "#regalos", "#club-de-fans"].includes(hash)) {
       if (furthestIndex === chapters.length - 1) show("back");
       else {
         history.replaceState(null, "", `#capitulo-${furthestIndex + 1}`);

@@ -1,4 +1,4 @@
-import { mount as mountScene } from "./scene.js?v=20261128-2";
+import { mount as mountScene } from "./scene.js?v=20261128-3";
 import { mountVignettes } from "./booklet-vignettes.js";
 
 const asset = (file) => new URL(file, import.meta.url).href;
