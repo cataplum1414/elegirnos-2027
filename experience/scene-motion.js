@@ -31,7 +31,7 @@ export const mountMotion = (screen, reducedMotion) => {
     const caught = elapsed >= ceremony.meet;
     const travel = fade(seconds, 2.46, 11.48);
     const brake = fade(seconds, brakeStart, brakeLength);
-    const guardianReaction = fade(seconds, 12.94, 0.28) * (1 - fade(seconds, 14.38, 0.34));
+    const guardianReaction = fade(seconds, 7.70, 0.30) * (1 - fade(seconds, 10.08, 0.40));
     const consolePortrait = fade(elapsed, consoleCue - 0.53, 0.43) * (1 - fade(elapsed, openingLead + 2.33, 0.34));
     const jeiPortrait = Math.max(consolePortrait, guardianReaction);
     const fairyPortrait = fade(elapsed, ceremony.portrait - 0.18, 0.92);

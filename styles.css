@@ -111,6 +111,7 @@ html[data-opening-scene] .opening-scene {
 
 /* Portrait plates must always cover the running layers, including after a cached scene stylesheet. */
 .chase__run-frame--orne, .chase__runner--orne { z-index: auto !important; }
+.chase__cut-in { z-index: 5 !important; }
 
 .record-edition {
   --case-gutter: clamp(0.5rem, 2.6vw, 2.4rem);
