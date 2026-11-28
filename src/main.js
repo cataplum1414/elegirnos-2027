@@ -2,6 +2,7 @@ import { mountAlbum } from "./album.js";
 import { mountReadingProgress } from "./progress.js";
 import { mountDeck } from "./deck.js";
 import { mountCountdown } from "./countdown.js?v=20261128-5";
+import { mountVipClub } from "./vip-club.js?v=20261128-6";
 
 const invitation = document.documentElement;
 const hasMedia = invitation.hasAttribute("data-wedding-media");
@@ -13,6 +14,7 @@ const deck = mountDeck(tracks, audio, number => album?.advanceAfter(number));
 const album = mountAlbum({ onChapter: deck.select, onOpen: deck.setBookOpen });
 mountReadingProgress();
 mountCountdown();
+mountVipClub();
 
 if (hasMedia) {
   const releaseOpening = () => invitation.removeAttribute("data-opening-scene");

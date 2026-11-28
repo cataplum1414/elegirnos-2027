@@ -28,8 +28,8 @@
       }
     </script>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-    <link rel="stylesheet" href="./styles.css?v=20261128-5">
-    <script type="module" id="invitation-entry" src="./src/main.js?v=20261128-5"></script>
+    <link rel="stylesheet" href="./styles.css?v=20261128-6">
+    <script type="module" id="invitation-entry" src="./src/main.js?v=20261128-6"></script>
     <noscript>
       <style>
         .cover__entry, .back-cover__nav a[href="#historia"] { display: none; }
@@ -214,6 +214,28 @@
                   <p>La lluvia de sobres es opcional. Compartiremos las opciones cuando estén definidas.</p>
                 </div>
               </section>
+              <section class="vip-club" id="club-de-fans" aria-labelledby="vip-title">
+                <p class="vip-club__eyebrow">Pase de backstage</p>
+                <h3 id="vip-title">Club de Fans de nuestra banda</h3>
+                <p>Si recibiste un código VIP, colócalo aquí para comprobar tu acceso como miembro del club.</p>
+                <form class="vip-club__form" id="vip-form" novalidate>
+                  <label for="vip-code">Código VIP</label>
+                  <div class="vip-club__entry">
+                    <input id="vip-code" name="vip-code" type="password" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="24" required>
+                    <button type="submit">Entrar al backstage</button>
+                  </div>
+                  <p class="vip-club__status" id="vip-status" role="status"></p>
+                </form>
+                <div class="vip-pass" id="vip-pass" tabindex="-1" hidden>
+                  <span class="vip-pass__side">Acceso VIP</span>
+                  <div>
+                    <p>Prueba de acceso</p>
+                    <h4>Miembro oficial del Club de Fans</h4>
+                    <p>Jeisson &amp; Ornella · Los muchachos se les casan · 2027</p>
+                  </div>
+                </div>
+                <p class="vip-club__notice">Acceso de prueba. La versión definitiva tendrá validación privada.</p>
+              </section>
             </div>
           </div>
 
@@ -222,6 +244,7 @@
             <nav aria-label="Detalles de la boda" class="footer-nav">
               <a href="#asistencia">Asistencia</a>
               <a href="#regalos">Regalos</a>
+              <a href="#club-de-fans">Club de Fans</a>
             </nav>
             <details class="photo-credits">
               <summary>Créditos de imágenes</summary>
