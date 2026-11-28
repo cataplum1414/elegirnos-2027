@@ -38,6 +38,7 @@ const stage = `
       <img src="${art.guardian}" alt="">
       <span class="chase__socket"></span>
     </div>
+    <span class="chase__key-flight"></span>
     <div class="chase__speed"></div>
     <div class="chase__dust"><i></i><i></i><i></i></div>
     <img class="chase__runner chase__runner--orne chase__idle" src="${art.orne}" alt="">

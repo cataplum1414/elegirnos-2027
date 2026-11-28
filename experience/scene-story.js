@@ -66,7 +66,9 @@ export const drawStory = (screen, elapsed, reducedMotion) => {
   const shipOpacity = fade(time, 2.76, 0.39) * (1 - fade(time, 6.83, 0.63));
   const guardianEnters = fade(time, 7.86, 2.28);
   const guardianLeaves = fade(action, 20.10, 1.40);
-  const unlocked = fade(action, 18.56, 0.65) * (1 - guardianLeaves);
+  const keyFlight = reducedMotion ? Number(action >= 19.62) : fade(action, 18.74, 0.88);
+  const keyFlightOpacity = fade(action, 18.66, 0.18) * (1 - fade(action, 19.60, 0.18));
+  const unlocked = fade(action, 19.62, 0.32) * (1 - guardianLeaves);
   const gateArrives = fade(action, 20.22, 1.03);
   const gateOpens = fade(action, 21.66, 2.41);
   const keyPlanPortrait = fade(time, keyPlan - 0.11, 0.37) * (1 - fade(action, 14.99, 0.36));
@@ -89,6 +91,10 @@ export const drawStory = (screen, elapsed, reducedMotion) => {
     "--ship-dip": reducedMotion ? 0 : Math.sin(Math.PI * ship),
     "--guardian-x": `${reducedMotion ? 54 : mix(99, 54, guardianEnters) - 103 * guardianLeaves}%`,
     "--guardian-opacity": guardianEnters * (1 - guardianLeaves),
+    "--key-flight-x": `${mix(55.5, 58.1, keyFlight)}%`,
+    "--key-flight-y": `${mix(61, 47.6, keyFlight)}%`,
+    "--key-flight-spin": `${mix(-18, 342, keyFlight)}deg`,
+    "--key-flight-opacity": keyFlightOpacity,
     "--socket-glow": unlocked,
     "--door-open": reducedMotion ? 0 : gateOpens,
     "--door-opacity": gateArrives * (1 - (reducedMotion ? gateOpens : fade(action, 23.8, 0.45))),

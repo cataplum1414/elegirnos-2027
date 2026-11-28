@@ -203,6 +203,21 @@ html:has(.chase[open]) { overflow: hidden; }
   filter: drop-shadow(0 0 0.24rem #fff0a9);
   content: "";
 }
+.chase__key-flight {
+  position: absolute;
+  z-index: 4;
+  top: var(--key-flight-y, 61%);
+  left: var(--key-flight-x, 55.5%);
+  width: clamp(1.8rem, 7.2cqw, 3.2rem);
+  aspect-ratio: 1;
+  opacity: var(--key-flight-opacity, 0);
+  translate: -50% -50%;
+  rotate: var(--key-flight-spin, -18deg);
+  clip-path: polygon(50% 0, 62% 34%, 100% 38%, 70% 63%, 81% 100%, 50% 78%, 18% 100%, 29% 63%, 0 38%, 38% 34%);
+  background: linear-gradient(135deg, #fff5bd, #f3ad3d 58%, #9a451f);
+  filter: drop-shadow(0 0 0.42rem #fff0a9);
+  pointer-events: none;
+}
 
 .chase__fallen-key::before {
   position: absolute;
