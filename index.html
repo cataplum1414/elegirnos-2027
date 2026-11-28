@@ -28,8 +28,8 @@
       }
     </script>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-    <link rel="stylesheet" href="./styles.css?v=20261128-3">
-    <script type="module" id="invitation-entry" src="./src/main.js?v=20261128-4"></script>
+    <link rel="stylesheet" href="./styles.css?v=20261128-5">
+    <script type="module" id="invitation-entry" src="./src/main.js?v=20261128-5"></script>
     <noscript>
       <style>
         .cover__entry, .back-cover__nav a[href="#historia"] { display: none; }
@@ -41,6 +41,19 @@
       <div class="opening-scene__content">
         <h1 id="opening-title" tabindex="-1">Jeisson <span>&amp;</span> Ornella</h1>
         <p id="opening-guide">Ponte los audífonos o ajusta el volumen para disfrutar la historia.</p>
+        <section class="release-countdown release-countdown--opening" data-countdown="2027-07-02T00:00:00-05:00" aria-labelledby="opening-countdown-title">
+          <div class="release-countdown__heading">
+            <h2 id="opening-countdown-title">Cuenta regresiva</h2>
+            <time datetime="2027-07-02">2 de julio de 2027</time>
+          </div>
+          <div class="release-countdown__digits" role="timer" aria-live="off" aria-label="Tiempo restante para el 2 de julio de 2027">
+            <span><strong data-countdown-days>000</strong><small>Días</small></span>
+            <span><strong data-countdown-hours>00</strong><small>Horas</small></span>
+            <span><strong data-countdown-minutes>00</strong><small>Minutos</small></span>
+            <span><strong data-countdown-seconds>00</strong><small>Segundos</small></span>
+          </div>
+          <p class="release-countdown__finished" hidden>Hoy comienza nuestro próximo capítulo.</p>
+        </section>
         <div class="opening-scene__actions">
           <button type="button" id="opening-start" aria-describedby="opening-guide" disabled>Estamos listos</button>
         </div>
