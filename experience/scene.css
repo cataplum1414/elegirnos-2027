@@ -195,6 +195,14 @@ html:has(.chase[open]) { overflow: hidden; }
   background: radial-gradient(circle, #fff3be 8%, #ecae52 40%, #83391e 65%, #2d1716 76%);
   box-shadow: 0 0 1.85rem #f0ad583c, 0 0 0 2px #db9f5d91;
 }
+.chase__socket::before {
+  position: absolute;
+  inset: 24%;
+  clip-path: polygon(50% 0, 62% 34%, 100% 38%, 70% 63%, 81% 100%, 50% 78%, 18% 100%, 29% 63%, 0 38%, 38% 34%);
+  background: linear-gradient(135deg, #fff5bd, #f3ad3d 58%, #9a451f);
+  filter: drop-shadow(0 0 0.24rem #fff0a9);
+  content: "";
+}
 
 .chase__fallen-key::before {
   position: absolute;

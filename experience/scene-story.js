@@ -65,7 +65,7 @@ export const drawStory = (screen, elapsed, reducedMotion) => {
   const ship = unit((time - 2.76) / 4.7);
   const shipOpacity = fade(time, 2.76, 0.39) * (1 - fade(time, 6.83, 0.63));
   const guardianEnters = fade(time, 7.86, 2.28);
-  const guardianLeaves = fade(action, 18.62, 2.20);
+  const guardianLeaves = fade(action, 20.10, 1.40);
   const unlocked = fade(action, 18.56, 0.65) * (1 - guardianLeaves);
   const gateArrives = fade(action, 20.22, 1.03);
   const gateOpens = fade(action, 21.66, 2.41);

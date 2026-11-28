@@ -49,11 +49,11 @@ export const mountMotion = (screen, reducedMotion) => {
     const ornePhase = still ? 1 : 4 + stride * 13.6;
     const rest = still ? Number(seconds >= brakeStart + brakeLength) : fade(seconds, 13.32, 0.65);
     const duckPose = still ? 0 : fade(seconds, 4.42, 0.15) * (1 - fade(seconds, 5.12, 0.18));
-    const reach = fade(afterKey, 17.20, 0.43) * (1 - fade(afterKey, 19.21, 0.38));
+    const reach = fade(afterKey, 17.20, 0.43) * (1 - fade(afterKey, 20.18, 0.38));
     const approach = fade(afterKey, 15.33, 0.25) * (1 - fade(afterKey, 17.20, 0.35));
     // Open the composition while Ornella places the key in the guardian.
     // The extra separation keeps her full silhouette readable on narrow screens.
-    const keyAction = fade(afterKey, 15.08, 0.32) * (1 - fade(afterKey, 18.48, 0.42));
+    const keyAction = fade(afterKey, 15.08, 0.32) * (1 - fade(afterKey, 20.24, 0.42));
 
     screen.style.setProperty("--jei-x", `${lead + 4 * keyAction + 1.5 * jump + (gag?.action === "skid" ? 3 * reaction : 0)}%`);
     screen.style.setProperty("--orne-x", `${pursuit - 9 * keyAction}%`);
