@@ -655,6 +655,34 @@ html[data-opening-scene] .opening-scene {
 .gifts-copy { max-width: 60ch; }
 .gifts-copy p { margin-top: 0.65rem; }
 .gifts-copy__aside { border-left: 2px solid #76354a; padding-left: 0.75rem; color: #6a213d; }
+.tour-note {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(0.85rem, 3vw, 1.4rem);
+  align-items: center;
+  padding: clamp(1rem, 3.4vw, 1.7rem);
+  border-block: 0.28rem solid #2a1b24;
+  color: #f7eadd;
+  background:
+    linear-gradient(90deg, #65142f, #421225 72%, #2a1722),
+    #52132a;
+  box-shadow: inset 0 1px #ffffff1f, inset 0 -1px #0007;
+}
+.tour-note__stamp {
+  display: grid;
+  width: clamp(4.2rem, 11vw, 6.4rem);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 0.18rem solid #efc98f;
+  border-radius: 50%;
+  color: #efc98f;
+  font: 800 clamp(1.7rem, 5vw, 3rem)/1 var(--display);
+  rotate: -7deg;
+}
+.tour-note__eyebrow { color: #efc98f; font: 600 0.88rem/1 var(--display); letter-spacing: 0.06em; }
+.tour-note h3 { margin-top: 0.28rem; color: #fff1df; font-size: clamp(1.55rem, 3.8vw, 2.35rem); }
+.tour-note h3 + p { max-width: 66ch; margin-top: 0.5rem; line-height: 1.45; }
 .vip-club {
   grid-column: 1 / -1;
   margin-top: 0.4rem;
@@ -723,6 +751,8 @@ html[data-opening-scene] .opening-scene {
 }
 .vip-pass__open:hover { background: #781735; }
 @media (max-width: 430px) {
+  .tour-note { grid-template-columns: minmax(0, 1fr); }
+  .tour-note__stamp { width: 4.5rem; }
   .vip-club__entry { grid-template-columns: minmax(0, 1fr); }
   .vip-club__entry button { width: 100%; }
 }
