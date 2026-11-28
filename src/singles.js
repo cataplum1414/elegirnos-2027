@@ -42,10 +42,10 @@ export const mountSingles = ({ audio: albumAudio } = {}) => {
     }
   };
 
-  const toggle = async single => {
+  const toggle = async (single, { auto = false } = {}) => {
     const ui = parts.get(single);
     if (active === single && !player.paused) {
-      player.pause();
+      if (!auto) player.pause();
       return;
     }
     if (active !== single) {
@@ -59,7 +59,8 @@ export const mountSingles = ({ audio: albumAudio } = {}) => {
     try {
       await player.play();
     } catch {
-      if (active === single) ui.status.textContent = "No pudimos reproducir la canción. Inténtalo de nuevo.";
+      // Si el navegador bloquea el arranque automático, queda el botón Reproducir.
+      if (active === single && !auto) ui.status.textContent = "No pudimos reproducir la canción. Inténtalo de nuevo.";
     }
     render();
   };
@@ -77,7 +78,12 @@ export const mountSingles = ({ audio: albumAudio } = {}) => {
     const scope = single.closest("section");
     if (scope) {
       new MutationObserver(() => {
-        if (scope.hidden && active === single) player.pause();
+        if (scope.hidden) {
+          if (active === single) player.pause();
+        // Al abrir la sección con un clic (volver a la portada, dar vuelta al disco) suena sola.
+        } else if (navigator.userActivation?.isActive && !albumAudio?.muted) {
+          void toggle(single, { auto: true });
+        }
       }).observe(scope, { attributes: true, attributeFilter: ["hidden"] });
     }
   }
@@ -93,6 +99,14 @@ export const mountSingles = ({ audio: albumAudio } = {}) => {
   albumAudio?.addEventListener("playing", () => {
     if (!player.paused) player.pause();
   });
+
+  // Al romper el sello del sobre se revela la portada y empieza «Chapinero nos encontró».
+  const cover = singles.find(single => single.classList.contains("single--cover"));
+  if (cover) {
+    document.addEventListener("click", event => {
+      if (event.target.closest(".invitation-envelope__open") && !albumAudio?.muted) void toggle(cover, { auto: true });
+    });
+  }
 
   render();
 };
