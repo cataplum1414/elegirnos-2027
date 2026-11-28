@@ -1,5 +1,5 @@
 import { createRunner } from "./run-frames.js";
-import { ceremony, consoleCue, drawStory, fade, mix, openingLead, pursuitDelay, keyDelay, unit } from "./scene-story.js";
+import { ceremony, consoleCue, drawStory, fade, mix, openingLead, pursuitDelay, keyDelay, unit } from "./scene-story.js?v=20261128-2";
 
 // Timing relative to the start of the pursuit.
 const gags = [

@@ -1,5 +1,5 @@
-import { mountMotion } from "./scene-motion.js";
-import { ceremony, fade, sceneAt, sceneStep } from "./scene-story.js";
+import { mountMotion } from "./scene-motion.js?v=20261128-2";
+import { ceremony, fade, sceneAt, sceneStep } from "./scene-story.js?v=20261128-2";
 import { mountEnvelope } from "./envelope.js";
 
 const asset = file => new URL(file, import.meta.url).href;

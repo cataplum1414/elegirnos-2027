@@ -17,7 +17,7 @@ if (hasMedia) {
   if (invitation.hasAttribute("data-opening-scene")) {
     window.addEventListener("hashchange", releaseOpening, { once: true });
   }
-  const experience = await import("../experience/index.js").catch(() => null);
+  const experience = await import("../experience/index.js?v=20261128-2").catch(() => null);
   if (experience) {
     Object.assign(tracks, experience.tracks);
     album?.updateTrackLinks(tracks);
