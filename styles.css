@@ -109,6 +109,9 @@ html[data-opening-scene] .opening-scene {
 .opening-scene__status { max-width: 36ch; color: #ead0aa; font: 600 1.05rem/1.22 var(--display); }
 .opening-scene__status:empty { display: none; }
 
+/* Portrait plates must always cover the running layers, including after a cached scene stylesheet. */
+.chase__run-frame--orne, .chase__runner--orne { z-index: auto !important; }
+
 .record-edition {
   --case-gutter: clamp(0.5rem, 2.6vw, 2.4rem);
   --case-rim: #8c8e92;

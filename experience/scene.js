@@ -75,7 +75,7 @@ export const mount = ({ audio, deck }) => {
   const root = document.documentElement;
   const style = document.createElement("link");
   style.rel = "stylesheet";
-  style.href = asset("scene.css");
+  style.href = asset("scene.css?v=20261128-1");
 
   const dialog = document.createElement("dialog");
   dialog.className = "chase";
