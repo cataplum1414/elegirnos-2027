@@ -81,7 +81,7 @@ export const mountSingles = ({ audio: albumAudio } = {}) => {
         if (scope.hidden) {
           if (active === single) player.pause();
         // Al abrir la sección con un clic (volver a la portada, dar vuelta al disco) suena sola.
-        } else if (navigator.userActivation?.isActive && !albumAudio?.muted) {
+        } else if (navigator.userActivation?.isActive && !albumAudio?.muted && scope.querySelector("[data-single]") === single) {
           void toggle(single, { auto: true });
         }
       }).observe(scope, { attributes: true, attributeFilter: ["hidden"] });
