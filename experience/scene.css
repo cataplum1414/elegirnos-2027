@@ -6,7 +6,7 @@
 }
 
 @media (max-width: 720px), (pointer: coarse) and (max-aspect-ratio: 4/5) {
-  .album-section { --edge-walk-height: clamp(2rem, 9vw, 3.5rem); }
+  .album-section { --edge-walk-height: clamp(5.25rem, 24vw, 7rem); }
 }
 
 .album-reader .chapter-status {
